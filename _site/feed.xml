@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Roko&#39;s Basilisk</title>
+    <description></description>
+    <link>http://rokosbasilisk.github.io/</link>
+    <atom:link href="http://rokosbasilisk.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Sun, 09 May 2021 21:49:38 +0530</pubDate>
+    <lastBuildDate>Sun, 09 May 2021 21:49:38 +0530</lastBuildDate>
+    <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>cultural evolution and neural networks</title>
+        <description>&lt;p&gt;This post is inspired by yoshua bengio’s paper “&lt;a href=&quot;https://arxiv.org/abs/1203.2990&quot;&gt;Evolving Culture vs Local Minima&lt;/a&gt;”, which relates several aspects of difficulty in learning of deep neural-network architectures to culture and language.&lt;/p&gt;
+
+&lt;p&gt;Assume that there exists an isomorphism between configuration of weights in deep neural-networks to the configuration of a biological-brains. Training neural networks towards some &lt;strong&gt;“goal”&lt;/strong&gt; is finding a better local-minima which minimises some objective function, therefore learning in humans can be considered as reaching a better brain-state configuration.&lt;/p&gt;
+
+&lt;p&gt;Experiments show that there are huge-number of local minima, and it is near impossible to reach desired a weight-configuration purely out of chance, even for smaller cases. I.e, random initialization of weights can never reach a desired local-minima. Theerefore the &lt;a href=&quot;https://en.wikipedia.org/wiki/Boltzmann_brain&quot;&gt;Boltzmann-Brain&lt;/a&gt; argument can then be considered false.&lt;/p&gt;
+
+&lt;p&gt;But humans can exchange information without changing the synaptic strength of all neurons of their brains by a simple noisy medium which is called &lt;strong&gt;“language”&lt;/strong&gt;. Is there a way in which two deep neural-network models say, &lt;strong&gt;Na&lt;/strong&gt; and &lt;strong&gt;Nb&lt;/strong&gt; can communicate through an auxilliary network &lt;strong&gt;Rab&lt;/strong&gt; about the locations of their local minima? instead of finetuning all the layers (or some) on all the training-examples required?&lt;/p&gt;
+
+&lt;p&gt;Can a deep neural-network &lt;strong&gt;Na&lt;/strong&gt; generate a training-example &lt;strong&gt;Sa&lt;/strong&gt; which when chosen along with a proper learning rate for &lt;strong&gt;Nb&lt;/strong&gt; make it reach the configuration of &lt;strong&gt;Na&lt;/strong&gt; with minimal training-steps using some sort of noisy channel?&lt;/p&gt;
+</description>
+        <pubDate>Sun, 11 Apr 2021 00:00:00 +0530</pubDate>
+        <link>http://rokosbasilisk.github.io/2021/04/11/cultural/</link>
+        <guid isPermaLink="true">http://rokosbasilisk.github.io/2021/04/11/cultural/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>on human brains and turing-completeness</title>
+        <description>&lt;p&gt;I recently got to read a whitepaper on &lt;a href=&quot;/assets/docs/non_turing.pdf&quot;&gt;neuromorphic computing&lt;/a&gt;, The core-thesis of the paper that the current “Turing-machine” formulation could’nt explain the cognitive capabilities human-brains, due to which computers cannot exhibit human-level learning ability. The following sections are my opinions on why this may be false and how human-like learning can be possible with turing-machines.&lt;/p&gt;
+
+&lt;div class=&quot;imgcap&quot;&gt;
+&lt;img src=&quot;/assets/turing_machine.jpeg&quot; /&gt;
+&lt;div class=&quot;thecap&quot;&gt;An Artistic illustration of a turing-machine&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;A quick intro to turing-machines:&lt;/strong&gt; “Turing Machine” is hypothetical model of a computer, it is fundamental for understanding what a computer can and cannot do. Although the computers we use today do not entirely behave in the way an ideal turing machine is supposed to (“&lt;em&gt;infinite memory, single input tape etc..&lt;/em&gt;”). They are found to be pretty useful especially in formalizing computer-science.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What is neuromorphic signal processing?&lt;/strong&gt;  It is a model of computing which is non-algorithmic  in nature. I.e, There is no concept of clear symbolic-arithmetic which is what makes human-brains “superior” when compared to turing machines. According to the paper key reasons for taking a departure from turing-computability are given as follows:-&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;In neural dynamics there are no clear candidates for symbols in the first place. This is
+due to the unclocked, parallel, distributed, high-dimensional, non-stationary and
+stochastic nature of neural dynamics which makes it hard to identify phenomena
+which could be called symbols. While a number of neurodynamical mechanisms have
+been suggested as carriers for symbols, they are disconcertingly different from each
+other and each of them lacks some of the properties of platonic symbols (discrete
+identifiability, unchangeability, addressability by name, finite alphabet.&lt;/p&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Virtually all neural “processing rules” that have been suggested are formulated in
+non-symbolic terms using tools from dynamical systems theory or stochastic
+processes.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;why Neuromorphic signal processing may not be necessary&lt;/strong&gt; These are some reasons i can think of why neuromorphic-signal-processing is not necessary for building machines that can learn like humans.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;It is found out that all the electrical-activity in neurons are via ionic currents through neuronal-membranes. These transmembranic currents involve four ionic species (sodium (Na+), potassium (K+), calcium (Ca2+ ), or chloride (Cl−)) . The electrical signals are propagated by changing the concentrations of these ions on both sides of the membranes of the cell which creates “electrochemical gradient”. It is clear that to create a current it requires varying of concentration of Anion/Cations. A complete description of this can be given by assigning symbols to each ion and formulating the transport equations in terms of these variables without loss of information.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Even if all the processes in the brain are purely stochastic in nature, all these can be &lt;strong&gt;efficiently&lt;/strong&gt; simulated on a turing-machine. No evidence is found out that the class of problems that can be solved using randomness (&lt;a href=&quot;https://en.wikipedia.org/wiki/BPP_(complexity)&quot;&gt;BPP&lt;/a&gt;) is more powerful than those which can be solved without using randomness (&lt;a href=&quot;https://en.wikipedia.org/wiki/Time_complexity#Polynomial_time&quot;&gt;P&lt;/a&gt;).&lt;/p&gt;
+
+    &lt;p&gt;​&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;In order to empirically establish that biological-brains are superior than turing-machines, we have to find a class of functions that can be solved by brains which are undecidable, of which there is no evidence so far.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Mon, 21 Dec 2020 15:30:00 +0530</pubDate>
+        <link>http://rokosbasilisk.github.io/2020/12/21/non-turing/</link>
+        <guid isPermaLink="true">http://rokosbasilisk.github.io/2020/12/21/non-turing/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>alexander the god</title>
+        <description>&lt;p&gt;Alexander Hoskins grew seriously interested in computers at the age of fourteen and quickly realized that he was interested in nothing much else.&lt;/p&gt;
+
+&lt;p&gt;His teachers encouraged him and excused him from classes in order that he might concentrate on this hobby of his. His father, who worked for IBM, encouraged him, too, got him some necessary equipment and explained some knotty points to him.&lt;/p&gt;
+
+&lt;p&gt;Alexander built his own computer in a room above the garage, programmed and reprogrammed it and, at the age of sixteen, could no longer find a book that told him anything he didn’t know about computers. Nor could he find a book that dealt with some of the things he had found out entirely on his own.&lt;/p&gt;
+
+&lt;p&gt;He thought about it deeply and decided not to tell his father of some of the things his computer could do. Already, the boy had become aware that the greatest conqueror of ancient times had been Alexander the Great, and Alexander felt his own name was no accident.&lt;/p&gt;
+
+&lt;p&gt;Alexander was particularly interested in computer memory and worked out systems for cramming data into volume-much data into little volume. With each improvement, he squeezed more and more data into less and less volume.&lt;/p&gt;
+
+&lt;p&gt;Solemnly, he then named his computer Bucephalus, after the faithful horse of Alexander the Great, the horse who had carried him through all his triumphant battles.&lt;/p&gt;
+
+&lt;p&gt;There were computers that could accept spoken commands and give spoken responses, but none could do it as well as Bucephalus. There were also computers that could scan and store the written word, but none could do it as well as Bucephalus. Alexander tested this by having Bucephalus scan the Encyclopedia Britannica and store it all in its memory.&lt;/p&gt;
+
+&lt;p&gt;By the time he was eighteen, Alexander had established an information-handling business for students and small businessmen and had become self-supporting. He moved into his own apartment in the city and was from that point on independent of his parents.&lt;/p&gt;
+
+&lt;p&gt;In his own apartment he could remove the earphone attachment. With privacy, he could speak to Bucephalus openly, though he carefully adjusted the computer’s voice to low intensity. He did not want neighbors to wonder who was in the apartment with him.&lt;/p&gt;
+
+&lt;p&gt;He said, “Bucephalus, Alexander the Great had conquered the ancient world by the time he was thirty. I want to do the same thing. That gives me twelve more years.”&lt;/p&gt;
+
+&lt;p&gt;Bucephalus knew all about Alexander the Great, since the Encyclopedia had given him all the details.&lt;/p&gt;
+
+&lt;p&gt;He said, “ Alexander the Great was the son of the King of Macedon and by the time he was your age, he had led his father’s cavalry to victory at the great battle at Chaeronea.”&lt;/p&gt;
+
+&lt;p&gt;Alexander said, “No, no. I’m not talking about battles and phalanxes and things like that. I want to conquer the world by coming to own it.”&lt;/p&gt;
+
+&lt;p&gt;“How could you own it, Alexander?”&lt;/p&gt;
+
+&lt;p&gt;“You and I, Bucephalus,” said Alexander, “are going to study the stock market.”&lt;/p&gt;
+
+&lt;p&gt;The New York Times had long since put all its microfilmed records into computerized form and for
+Alexander it was not at all a difficult task to tap into that information.&lt;/p&gt;
+
+&lt;p&gt;For days, weeks, months, Bucephalus transferred over a century of data on the stock market into its own memory banks-all the stocks listed, all the shares sold for each on each day, the ups and downs, even the applicable news on the financial pages. Alexander was forced to extend the computer’s memory circuits and to work out a daring new system for information retrieval. Reluctantly, he sold a simplified version of one of the circuits he had developed to IBM and in this way became quite well-to-do. He bought a neighboring apartment in which he might eat and sleep. The first apartment was now given over entirely to Bucephalus.&lt;/p&gt;
+
+&lt;p&gt;When he was twenty, Alexander felt he was ready to start his campaign.&lt;/p&gt;
+
+&lt;p&gt;“Bucephalus,” he said, “I am ready, and so are you. You know everything there is to know about the stock market. You have in your memory every transaction and every event, and you keep it all up to date to the very second because you are hooked into the computer at the New York Stock Exchange, and you will soon be hooked into the exchanges in London, Tokyo, and elsewhere.”&lt;/p&gt;
+
+&lt;p&gt;“Yes, Alexander,” said Bucephalus, “but what is it you wish me to do with all the information?”&lt;/p&gt;
+
+&lt;p&gt;“I am certain,” said Alexander, his eyes gleaming in steely, determined fashion, “that the values and fluctuations of the Market are not random. I feel that nothing is. You must go through all the data, studying all the values and all the changes in the values and all the rates of changes of the values, until you can analyze them into cycles and combinations of cycles.”&lt;/p&gt;
+
+&lt;p&gt;“Are you referring to a Fourier analysis?” asked Bucephalus. “Explain that to me.”&lt;/p&gt;
+
+&lt;p&gt;Bucephalus presented him with a printout from the Encyclopedia together with supplements from other information in his memory banks.&lt;/p&gt;
+
+&lt;p&gt;Alexander glanced at it briefly, and said, “Yes, that’s the sort of thing.” “To what end, Alexander?”&lt;/p&gt;
+
+&lt;p&gt;“Once you have the cycles, Bucephalus, you will be able to predict the course of the stock market in the following day, week, month, according to the swing of the cycles, and you will be able to direct me in my investments. I will quickly grow rich. You will also direct me how to obscure my own involvement so that the world will not know how rich I am, or who it is who has such an influential finger on world events.”&lt;/p&gt;
+
+&lt;p&gt;“To what end, Alexander?”&lt;/p&gt;
+
+&lt;p&gt;“So that when I am rich enough, when I control the Earth’s financial institutions, its commerce, its business, its resources, I will have done in reality what Alexander the Great did only in part. I will be Alexander the Really Great. “ His eyes glittered with delight at the thought.&lt;/p&gt;
+
+&lt;p&gt;By the time Alexander was twenty-two, he was satisfied that Bucephalus had worked out the complicated set of cycles that would serve to predict the behavior of the stock market.&lt;/p&gt;
+
+&lt;p&gt;Bucephalus was less certain. He said, “In addition to the natural cycles that control such things, there are also unpredictable events in the world of politics and international affairs. There are unpredictable turns of weather, disease, and scientific advance.”&lt;/p&gt;
+
+&lt;p&gt;Alexander said, “Not at all, Bucephalus. All such things also go in cycles. You will study the general news columns of the New York Times and absorb it all in order to allow for these supposedly unpredictable events. You will then find they are predictable. Other great newspapers, here and abroad, will be yours to study. They are all microfilmed and computerized and we can go back for a century or more. Besides, you do not have to be totally accurate. If you are right eighty-five percent of the time, that will do, for now.”&lt;/p&gt;
+
+&lt;p&gt;It did do. When Bucephalus felt that the stock market would go up or that it would go down, he was invariably right. When he pointed to particular stocks that were headed for long-term rises or declines, he was almost always right.&lt;/p&gt;
+
+&lt;p&gt;By the time Alexander was twenty-four he was worth five million dollars and his income had risen to tens of thousands of dollars per day. What’s more, his books were so complicated and the money so laundered that it would have taken another computer just like Bucephalus to track it all down and force Alexander to pay more than a pittance to the I.R.S.&lt;/p&gt;
+
+&lt;p&gt;It was not even difficult. Bucephalus had entered all the tax statutes into its memory as well as a score of textbooks on corporation management. Thanks to Bucephalus, Alexander controlled a dozen corporations without any sign of that control being visible.&lt;/p&gt;
+
+&lt;p&gt;Bucephalus said, “ Are you rich enough, Alexander?”&lt;/p&gt;
+
+&lt;p&gt;“Surely you jest,” said Alexander. “I am as yet a financial pipsqueak, a batboy in the minor leagues. When I am a billionaire, I will be a power in the financial set, but I will still be only one among a handful. It is only when I am a mult-itrillionaire that I will be able to control governments and force my will upon the world. And I have only six years left.”&lt;/p&gt;
+
+&lt;p&gt;Bucephalus’s understanding of the stock market, and of the ways of the world, grew each year.&lt;/p&gt;
+
+&lt;p&gt;His advice remained always useful and his deviousness in threading financial tentacles through the centers of world power remained always skillful.&lt;/p&gt;
+
+&lt;p&gt;Yet he grew doubtful, too. “There may be trouble, Alexander,” he said. “Nonsense,” said Alexander. “ Alexander the Really Great cannot be stopped.”&lt;/p&gt;
+
+&lt;p&gt;By the time Alexander was twenty-six, he was a billionaire. The entire apartment building was now his and all of it was given over to Bucephalus, and to all the offshoots of its enormous memory. The tentacles of Bucephalus now stretched invisibly outward to all the computers in the world. Softly, gently, all of them responded to Alexander’s will as expressed through Bucephalus.&lt;/p&gt;
+
+&lt;p&gt;Bucephalus said, “It grows more difficult somehow, Alexander. My estimates of future development are not as good as they have been.”&lt;/p&gt;
+
+&lt;p&gt;Alexander said impatiently, “You are dealing with more and more variables. There is nothing to worry about. I shall double your complexity, then double it again.”&lt;/p&gt;
+
+&lt;p&gt;“It is not complexity that is needed,” said Bucephalus. “ All the cycles that I have worked out in ever-increasing complexity predict the future in fine detail only because things that now take place are the same as have taken place in the past, so that the response is the same. If something entirely new happens, then all the cycles will fail-“&lt;/p&gt;
+
+&lt;p&gt;Alexander said, peremptorily, “There is nothing new under the sun. Go through history and you’ll find that there are only changes in detail. I will conquer the world, but I am only one more conqueror in a long line stretching back to Sargon of Agade. The development of a high-tech society repeats certain advances in medieval China and in the ancient Hellenistic kingdoms. The Black Death was a repetition of the earlier plagues in the times of Marcus Aurelius and of Pericles. Even the devastation of the wars of nations in the twentieth century repeats the devastation of the wars of religion in the sixteenth and,seventeenth centuries. The differences in detail can be allowed for and, in any case, I order you to continue, and you must obey my orders.”&lt;/p&gt;
+
+&lt;p&gt;“I must,” agreed Bucephalus.&lt;/p&gt;
+
+&lt;p&gt;By the time Alexander was twenty-eight, he was the richest man who had ever lived, with assets that even Bucephalus could not estimate closely. Certainly it was over a hundred billion and his income was in the tens of millions a day.&lt;/p&gt;
+
+&lt;p&gt;No nation was any longer truly independent and nowhere could any sizable group of human beings take any action that would seriously discommode Alexander.&lt;/p&gt;
+
+&lt;p&gt;There was peace in the world because Alexander did not wish any of his property destroyed. There was firm order in the world because Alexander did not wish to be disturbed. For the same reason, there was no freedom. All must do exactly as Alexander willed.&lt;/p&gt;
+
+&lt;p&gt;“I am almost there, Bucephalus,” said Alexander. “In two more years, it will be completely beyond the power of any human being to discommode me. I will then reveal myself, and all of human science will be bent to one task, and one task only, that of making me immortal. I will no longer be even Alexander the Really Great. I will become Alexander the God and all human beings will worship me.”&lt;/p&gt;
+
+&lt;p&gt;Bucephalus said, “But I have gone as far as I can go. I may no longer be able to protect you from the vicissitudes of chance.”&lt;/p&gt;
+
+&lt;p&gt;“That can’t be so, Bucephalus,” said Alexander, impatiently. “Do not quail. Weigh all the variables and arrange to pour into my hands whatever of Earth’s wealth still exists outside it.”&lt;/p&gt;
+
+&lt;p&gt;“I don’t think I can, Alexander,” said Bucephalus. “I have discovered a factor in human history that I cannot weigh. It is something completely new that does not fit into any of the cycles.”&lt;/p&gt;
+
+&lt;p&gt;“There can be nothing new,” said Alexander, now in a fury. “Do not hang back. I order you to proceed.”&lt;/p&gt;
+
+&lt;p&gt;“Very well, then,” said Bucephalus, with a remarkably human sigh.&lt;/p&gt;
+
+&lt;p&gt;Alexander knew that Bucephalus was straining at this one last, greatest task, and he was confident that at any moment, it would be accomplished. The world would then be his entirely and through all eternity. “What is this something new?” he asked with a flicker of curiosity.&lt;/p&gt;
+
+&lt;p&gt;“Myself,” said Bucephalus, in a whisper. “Nothing like me has ever before exis-“&lt;/p&gt;
+
+&lt;p&gt;And before the last syllable could be expressed, Bucephalus went dark as every last chip and circuit within itself fused as a result of his mighty effort to encompass himself as part of history. In the economic and financial chaos that followed, Alexander was wiped out.&lt;/p&gt;
+
+&lt;p&gt;Earth regained its liberty-which meant, of course, that there was a certain amount of disorder here and there, but most people considered that a small price to pay.&lt;/p&gt;
+
+</description>
+        <pubDate>Thu, 02 Apr 2020 15:30:00 +0530</pubDate>
+        <link>http://rokosbasilisk.github.io/2020/04/02/alexander/</link>
+        <guid isPermaLink="true">http://rokosbasilisk.github.io/2020/04/02/alexander/</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

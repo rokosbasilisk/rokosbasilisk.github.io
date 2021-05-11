@@ -1,0 +1,35 @@
+I"U	<!-- 
+<svg width="800" height="200">
+	<rect width="800" height="200" style="fill:rgb(98,51,20)" />
+	<rect width="20" height="50" x="20" y="100" style="fill:rgb(189,106,53)" />
+	<rect width="20" height="50" x="760" y="30" style="fill:rgb(77,175,75)" />
+	<rect width="10" height="10" x="400" y="60" style="fill:rgb(225,229,224)" />
+</svg>
+ -->
+
+<p>This is the part where you introdue the topic  <a href="http://www.nature.com/nature/journal/v518/n7540/abs/nature14236.html">learn to play ATARI games</a>.</p>
+
+<div class="imgcap">
+<img src="/assets/rl/preview.jpeg" />
+<div class="thecap">Example image<b>From left to right</b>:some long description</div>
+</div>
+
+<p>This is how you give points</p>
+
+<ol>
+  <li>One</li>
+  <li>Two</li>
+</ol>
+
+<p><strong>Example heading</strong>. Describe things here and give the code below.</p>
+
+<p>The code looks something like this:-</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="c1"># compute hidden layer neuron activations
+</span><span class="n">h</span><span class="p">[</span><span class="n">h</span><span class="o">&lt;</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># ReLU nonlinearity: threshold at zero
+</span><span class="n">logp</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W2</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="c1"># compute log probability of going up
+</span><span class="n">p</span> <span class="o">=</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">+</span> <span class="n">np</span><span class="p">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">logp</span><span class="p">))</span> <span class="c1"># sigmoid function (gives probability of going up)
+</span></code></pre></div></div>
+
+<p><em>italic things: look like this.</em> somethings like note.</p>
+
+:ET

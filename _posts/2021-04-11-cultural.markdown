@@ -1,0 +1,16 @@
+---
+layout: post
+comments: true
+title:  "cultural evolution and neural networks"
+excerpt: "everything is optimization"
+mathjax: false
+---
+This post is inspired by yoshua bengio's paper "[Evolving Culture vs Local Minima](https://arxiv.org/abs/1203.2990)", which relates several aspects of difficulty in learning of deep neural-network architectures to culture and language.
+
+Assume that there exists an isomorphism between configuration of weights in deep neural-networks to the configuration of a biological-brains. Training neural networks towards some **"goal"** is finding a better local-minima which minimises some objective function, therefore learning in humans can be considered as reaching a better brain-state configuration.
+
+Experiments show that there are huge-number of local minima, and it is near impossible to reach desired a weight-configuration purely out of chance, even for smaller cases. I.e, random initialization of weights can never reach a desired local-minima. Theerefore the [Boltzmann-Brain](https://en.wikipedia.org/wiki/Boltzmann_brain) argument can then be considered false.
+
+But humans can exchange information without changing the synaptic strength of all neurons of their brains by a simple noisy medium which is called **"language"**. Is there a way in which two deep neural-network models say, **Na** and **Nb** can communicate through an auxilliary network **Rab** about the locations of their local minima? instead of finetuning all the layers (or some) on all the training-examples required?
+
+Can a deep neural-network **Na** generate a training-example **Sa** which when chosen along with a proper learning rate for **Nb** make it reach the configuration of **Na** with minimal training-steps using some sort of noisy channel? 

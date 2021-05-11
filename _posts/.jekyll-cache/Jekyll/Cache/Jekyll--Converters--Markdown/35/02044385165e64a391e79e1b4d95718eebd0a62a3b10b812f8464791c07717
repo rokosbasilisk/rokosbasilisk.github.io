@@ -1,0 +1,51 @@
+I"*<p>I recently got to read a whitepaper on <a href="/assets/docs/non_turing.pdf">neuromorphic computing</a>. The paper goes on to describe why the current “Turing-machine” formulation doesn’t explain the cognitive capabilities human-brains, especially in the context of learning . As an ardent follower of theoretical computer science, this is my take on the paper.</p>
+
+<div class="imgcap">
+<img src="/assets/turing_machine.jpeg" />
+<div class="thecap">An Artistic illustration of a turing-machine</div>
+</div>
+<p><strong>A quick intro to turing-machines:</strong> “Turing Machine” is hypothetical model of a computer, it is fundamental for understanding what in principle a computer can and cannot do.Although the computers we use today do  not entirely behave in the way an ideal turing machine is supposed to (“<em>infinite memory, single input tape etc..</em>”). They  are found to be pretty helpful especially in formalizing computer-science.</p>
+
+<p>Think of turing-machine as a device built to solve a specific problem, then the class of  problems that can be solved by the turing-machine are called “<a href="https://en.wikipedia.org/wiki/Computable_function">computable</a>” and those which cannot be solved are un-computable   or “<a href="https://en.wikipedia.org/wiki/Undecidable_problem">Undecidable</a>”. Examples of such problems are “<a href="https://en.wikipedia.org/wiki/Halting_problem">the halting problem</a>” or deciding whether a  “<a href="https://en.wikipedia.org/wiki/Diophantine_equation">Diophantine equation</a>” has solutions.</p>
+
+<p><strong>Neuromorphic computing/neuromorphic signal processing:</strong>  It is a model of computing which is non-algorithmic  in nature. I.e, There is no concept of clear symbolic-arithmetic which is what makes human-brains “superior” when compared to turing machines. According to the paper key reasons for taking a departure from turing-computability are given as follows:-</p>
+
+<ol>
+  <li>
+    <p>In neural dynamics there are no clear candidates for symbols in the first place. This is
+due to the unclocked, parallel, distributed, high-dimensional, non-stationary and
+stochastic nature of neural dynamics which makes it hard to identify phenomena
+which could be called symbols. While a number of neurodynamical mechanisms have
+been suggested as carriers for symbols, they are disconcertingly different from each
+other and each of them lacks some of the properties of platonic symbols (discrete
+identifiability, unchangeability, addressability by name, finite alphabet.</p>
+
+    <p>​</p>
+  </li>
+  <li>
+    <p>Virtually all neural “processing rules” that have been suggested are formulated in
+non-symbolic terms using tools from dynamical systems theory or stochastic
+processes.</p>
+  </li>
+</ol>
+
+<p><strong>Against Neuromorphic signal processing:</strong> These are plausible reasons i can think of why neuromorphic-signal-processing can’t be a solution for understanding human-brains:</p>
+
+<ol>
+  <li>
+    <p>It is found out that all the electrical-activity in neurons are via ionic currents through neuronal-membranes. These transmembranic currents involve four ionic species (sodium (Na+), potassium (K+), calcium (Ca2+ ), or chloride (Cl−)) . The electrical signals are propagated by changing the concentrations of these ions on both sides of the membranes of the cell which creates “electrochemical gradient”. It is clear that to create a current it requires varying of concentration of Anion/Cations. Here these ions play the role of symbols, if in a hypothetical model of brain, there are only two types of ions which can be used to to create a concentration gradient say A+ and B- we can assign symbols to both these ions (0,1).                                                                                                       and simulate the workings of the transport the ions.</p>
+
+    <p>​</p>
+  </li>
+  <li>
+    <p>Even if all the processes in the brain are purely stochastic in nature, all these can be efficiently simulated on a turing-machine. No evidence is found out that the class of problems that can be solved using randomness (<a href="https://en.wikipedia.org/wiki/BPP_(complexity)">BPP</a>) is powerful than those which can be solved without using randomness (<a href="https://en.wikipedia.org/wiki/Time_complexity#Polynomial_time">P</a>).</p>
+
+    <p>​</p>
+  </li>
+  <li>
+    <p>In order to empirically establish that biological-brains are superior than turing-machines, we have to find a class of functions that can be solved by  brains which are undecidable. We can in efficiently work out the factors of a polynomial expression ,multiply long integers or even find (with some difficulty) find if two graphs are isomorphic. However we have not found a method which allows us to easily check whether a certain mathematical-proof is correct, or if a given computer-program halts. This is where creativity kicks in. Almost all fields of  research are about finding ways to approximate these kinds of problems in a specific ad-hoc setting.</p>
+  </li>
+</ol>
+
+<p><strong>Summary:</strong> Even if all the processes in the brain are turing-complete there are still a lot of mysteries surrounding the workings of a brain from both data and energy efficiency perspectives. Studying brains lets us to build better mathematical models of brain which may or may not lead us towards <a href="https://en.wikipedia.org/wiki/Artificial_general_intelligence">AGI</a>. But progress towards AGI surely requires combination both bottom-up and top-down <a href="http://www.hbcse.tifr.res.in/jrmcont/notespart1/node45.html">approaches</a></p>
+:ET
