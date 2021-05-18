@@ -2,7 +2,6 @@
 layout: post
 comments: true
 title:  "alexander the god"
-excerpt: "A short story by isaac asimov"
 date:   2020-04-02 10:00:00
 mathjax: false
 ---

@@ -1,15 +1,14 @@
 ---
 layout: post
 comments: true
-title:  "on human brains and turing-completeness"
-excerpt: "My views on why human-brains can be turing-complete"
+title:  "human brains are turing-complete"
 date:   2020-12-21 10:00:00
 mathjax: false
 ---
 
 
 
-I recently got to read a whitepaper on [neuromorphic computing](/assets/docs/non_turing.pdf), The core-thesis of the paper that the current "Turing-machine" formulation could'nt explain the cognitive capabilities human-brains, due to which computers cannot exhibit human-level learning ability. The following sections are my opinions on why this may be false and how human-like learning can be possible with turing-machines.
+I recently got to read a whitepaper on [neuromorphic computing](/assets/docs/non_turing.pdf), The core-thesis of the paper that the current "Turing-machine" formulation could'nt explain the cognitive capabilities human-brains, due to which computers cannot exhibit human-level learning ability. The post is my opinion about why this may be false.
 
 <div class="imgcap">
 <img src="/assets/turing_machine.jpeg">
@@ -39,5 +38,4 @@ I recently got to read a whitepaper on [neuromorphic computing](/assets/docs/non
 
 2. Even if all the processes in the brain are purely stochastic in nature, all these can be **efficiently** simulated on a turing-machine. No evidence is found out that the class of problems that can be solved using randomness ([BPP](https://en.wikipedia.org/wiki/BPP_(complexity))) is more powerful than those which can be solved without using randomness ([P](https://en.wikipedia.org/wiki/Time_complexity#Polynomial_time)).
 
-   ​
 3. In order to empirically establish that biological-brains are superior than turing-machines, we have to find a class of functions that can be solved by brains which are undecidable, of which there is no evidence so far.
