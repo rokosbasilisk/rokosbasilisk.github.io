@@ -8,7 +8,7 @@ mathjax: false
 
 
 
-I recently got to read a whitepaper on [neuromorphic computing](/assets/docs/non_turing.pdf), The core-thesis of the paper that the current "Turing-machine" formulation could'nt explain the cognitive capabilities human-brains, due to which computers cannot exhibit human-level learning ability. The post is my opinion about why this may be false.
+I recently got to read a whitepaper on [neuromorphic computing](/assets/docs/non_turing.pdf), The thesis of that paper is that, the "Turing-machine" formulation could'nt explain the cognitive capabilities human-brains, due to which computers cannot exhibit human-level learning ability. The post is my opinion about why this may be false.
 
 <div class="imgcap">
 <img src="/assets/turing_machine.jpeg">
