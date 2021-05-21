@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>on human brains and turing-completeness</title>
+    <title>human brains are turing-complete</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="">
     <link rel="canonical" href="http://rokosbasilisk.github.io/2020/12/21/non-turing/">
@@ -34,7 +34,7 @@
 
     <div style="float:left; margin-top:10px; margin-right:10px;">
     <a href="/feed.xml">
-      <img src="/assets/rssicon.svg" width="40">
+      <img src="/assets/b.svg" width="40">
     </a>
     </div>
 
@@ -72,17 +72,20 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>on human brains and turing-completeness</h1>
+    <h1>human brains are turing-complete</h1>
     <p class="meta">Dec 21, 2020</p>
   </header>
 
   <article class="post-content">
-  <p>I recently got to read a whitepaper on <a href="/assets/docs/non_turing.pdf">neuromorphic computing</a>, The core-thesis of the paper that the current “Turing-machine” formulation could’nt explain the cognitive capabilities human-brains, due to which computers cannot exhibit human-level learning ability. The following sections are my opinions on why this may be false and how human-like learning can be possible with turing-machines.</p>
+  <p>I recently got to read a whitepaper on <a href="/assets/docs/non_turing.pdf">neuromorphic computing</a>, The core-thesis of the paper that the current “Turing-machine” formulation could’nt explain the cognitive capabilities human-brains, due to which computers cannot exhibit human-level learning ability. The post is my opinion about why this may be false.</p>
 
 <div class="imgcap">
 <img src="/assets/turing_machine.jpeg" />
 <div class="thecap">An Artistic illustration of a turing-machine</div>
 </div>
+
+<p><img src="/assets/turing_machine.jpeg" alt="alt text" title="Title" /></p>
+
 <p><strong>A quick intro to turing-machines:</strong> “Turing Machine” is hypothetical model of a computer, it is fundamental for understanding what a computer can and cannot do. Although the computers we use today do not entirely behave in the way an ideal turing machine is supposed to (“<em>infinite memory, single input tape etc..</em>”). They are found to be pretty useful especially in formalizing computer-science.</p>
 
 <p><strong>What is neuromorphic signal processing?</strong>  It is a model of computing which is non-algorithmic  in nature. I.e, There is no concept of clear symbolic-arithmetic which is what makes human-brains “superior” when compared to turing machines. According to the paper key reasons for taking a departure from turing-computability are given as follows:-</p>
@@ -114,8 +117,6 @@ processes.</p>
   </li>
   <li>
     <p>Even if all the processes in the brain are purely stochastic in nature, all these can be <strong>efficiently</strong> simulated on a turing-machine. No evidence is found out that the class of problems that can be solved using randomness (<a href="https://en.wikipedia.org/wiki/BPP_(complexity)">BPP</a>) is more powerful than those which can be solved without using randomness (<a href="https://en.wikipedia.org/wiki/Time_complexity#Polynomial_time">P</a>).</p>
-
-    <p>​</p>
   </li>
   <li>
     <p>In order to empirically establish that biological-brains are superior than turing-machines, we have to find a class of functions that can be solved by brains which are undecidable, of which there is no evidence so far.</p>

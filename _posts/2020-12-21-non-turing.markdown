@@ -14,6 +14,9 @@ I recently got to read a whitepaper on [neuromorphic computing](/assets/docs/non
 <img src="/assets/turing_machine.jpeg">
 <div class="thecap">An Artistic illustration of a turing-machine</div>
 </div>
+
+![alt text](/assets/turing_machine.jpeg "Title")
+
 **A quick intro to turing-machines:** "Turing Machine" is hypothetical model of a computer, it is fundamental for understanding what a computer can and cannot do. Although the computers we use today do not entirely behave in the way an ideal turing machine is supposed to ("*infinite memory, single input tape etc..*"). They are found to be pretty useful especially in formalizing computer-science. 
 
 **What is neuromorphic signal processing?**  It is a model of computing which is non-algorithmic  in nature. I.e, There is no concept of clear symbolic-arithmetic which is what makes human-brains "superior" when compared to turing machines. According to the paper key reasons for taking a departure from turing-computability are given as follows:-

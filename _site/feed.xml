@@ -5,23 +5,23 @@
     <description></description>
     <link>http://rokosbasilisk.github.io/</link>
     <atom:link href="http://rokosbasilisk.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 09 May 2021 21:49:38 +0530</pubDate>
-    <lastBuildDate>Sun, 09 May 2021 21:49:38 +0530</lastBuildDate>
+    <pubDate>Fri, 21 May 2021 15:53:48 +0530</pubDate>
+    <lastBuildDate>Fri, 21 May 2021 15:53:48 +0530</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
         <title>cultural evolution and neural networks</title>
         <description>&lt;p&gt;This post is inspired by yoshua bengio’s paper “&lt;a href=&quot;https://arxiv.org/abs/1203.2990&quot;&gt;Evolving Culture vs Local Minima&lt;/a&gt;”, which relates several aspects of difficulty in learning of deep neural-network architectures to culture and language.&lt;/p&gt;
 
-&lt;p&gt;Assume that there exists an isomorphism between configuration of weights in deep neural-networks to the configuration of a biological-brains. Training neural networks towards some &lt;strong&gt;“goal”&lt;/strong&gt; is finding a better local-minima which minimises some objective function, therefore learning in humans can be considered as reaching a better brain-state configuration.&lt;/p&gt;
+&lt;p&gt;Assume that there exists an isomorphism between configuration of weights in deep neural-networks to the configuration of a biological-brains. In theory, training neural networks towards some goal is finding a better local-minima which minimises some objective function, therefore learning in humans can be considered as reaching a better brain-state configuration.&lt;/p&gt;
 
-&lt;p&gt;Experiments show that there are huge-number of local minima, and it is near impossible to reach desired a weight-configuration purely out of chance, even for smaller cases. I.e, random initialization of weights can never reach a desired local-minima. Theerefore the &lt;a href=&quot;https://en.wikipedia.org/wiki/Boltzmann_brain&quot;&gt;Boltzmann-Brain&lt;/a&gt; argument can then be considered false.&lt;/p&gt;
+&lt;p&gt;Experiments show that there are huge-number of local minima, and it is impossible to reach desired a weight-configuration purely out of chance, even for smaller-network cases. I.e, random initialization of weights can never reach a really useful local-minima. Which implies that the &lt;a href=&quot;https://en.wikipedia.org/wiki/Boltzmann_brain&quot;&gt;Boltzmann-Brain&lt;/a&gt; argument can then be considered false.&lt;/p&gt;
 
-&lt;p&gt;But humans can exchange information without changing the synaptic strength of all neurons of their brains by a simple noisy medium which is called &lt;strong&gt;“language”&lt;/strong&gt;. Is there a way in which two deep neural-network models say, &lt;strong&gt;Na&lt;/strong&gt; and &lt;strong&gt;Nb&lt;/strong&gt; can communicate through an auxilliary network &lt;strong&gt;Rab&lt;/strong&gt; about the locations of their local minima? instead of finetuning all the layers (or some) on all the training-examples required?&lt;/p&gt;
+&lt;p&gt;But humans can exchange information without changing the synaptic strength of all neurons of their brains by a simple noisy medium which is called &lt;strong&gt;“language”&lt;/strong&gt;, does this imply that there a way in which two deep neural-network models say, &lt;strong&gt;Na&lt;/strong&gt; and &lt;strong&gt;Nb&lt;/strong&gt; can communicate through an auxilliary network &lt;strong&gt;Rab&lt;/strong&gt; about the locations of their local minima? instead of finetuning all the layers (or some) on all the training-examples required?&lt;/p&gt;
 
 &lt;p&gt;Can a deep neural-network &lt;strong&gt;Na&lt;/strong&gt; generate a training-example &lt;strong&gt;Sa&lt;/strong&gt; which when chosen along with a proper learning rate for &lt;strong&gt;Nb&lt;/strong&gt; make it reach the configuration of &lt;strong&gt;Na&lt;/strong&gt; with minimal training-steps using some sort of noisy channel?&lt;/p&gt;
 </description>
-        <pubDate>Sun, 11 Apr 2021 00:00:00 +0530</pubDate>
+        <pubDate>Sun, 11 Apr 2021 15:30:00 +0530</pubDate>
         <link>http://rokosbasilisk.github.io/2021/04/11/cultural/</link>
         <guid isPermaLink="true">http://rokosbasilisk.github.io/2021/04/11/cultural/</guid>
         
@@ -29,13 +29,16 @@
       </item>
     
       <item>
-        <title>on human brains and turing-completeness</title>
-        <description>&lt;p&gt;I recently got to read a whitepaper on &lt;a href=&quot;/assets/docs/non_turing.pdf&quot;&gt;neuromorphic computing&lt;/a&gt;, The core-thesis of the paper that the current “Turing-machine” formulation could’nt explain the cognitive capabilities human-brains, due to which computers cannot exhibit human-level learning ability. The following sections are my opinions on why this may be false and how human-like learning can be possible with turing-machines.&lt;/p&gt;
+        <title>human brains are turing-complete</title>
+        <description>&lt;p&gt;I recently got to read a whitepaper on &lt;a href=&quot;/assets/docs/non_turing.pdf&quot;&gt;neuromorphic computing&lt;/a&gt;, The core-thesis of the paper that the current “Turing-machine” formulation could’nt explain the cognitive capabilities human-brains, due to which computers cannot exhibit human-level learning ability. The post is my opinion about why this may be false.&lt;/p&gt;
 
 &lt;div class=&quot;imgcap&quot;&gt;
 &lt;img src=&quot;/assets/turing_machine.jpeg&quot; /&gt;
 &lt;div class=&quot;thecap&quot;&gt;An Artistic illustration of a turing-machine&lt;/div&gt;
 &lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/turing_machine.jpeg&quot; alt=&quot;alt text&quot; title=&quot;Title&quot; /&gt;&lt;/p&gt;
+
 &lt;p&gt;&lt;strong&gt;A quick intro to turing-machines:&lt;/strong&gt; “Turing Machine” is hypothetical model of a computer, it is fundamental for understanding what a computer can and cannot do. Although the computers we use today do not entirely behave in the way an ideal turing machine is supposed to (“&lt;em&gt;infinite memory, single input tape etc..&lt;/em&gt;”). They are found to be pretty useful especially in formalizing computer-science.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;What is neuromorphic signal processing?&lt;/strong&gt;  It is a model of computing which is non-algorithmic  in nature. I.e, There is no concept of clear symbolic-arithmetic which is what makes human-brains “superior” when compared to turing machines. According to the paper key reasons for taking a departure from turing-computability are given as follows:-&lt;/p&gt;
@@ -67,8 +70,6 @@ processes.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;Even if all the processes in the brain are purely stochastic in nature, all these can be &lt;strong&gt;efficiently&lt;/strong&gt; simulated on a turing-machine. No evidence is found out that the class of problems that can be solved using randomness (&lt;a href=&quot;https://en.wikipedia.org/wiki/BPP_(complexity)&quot;&gt;BPP&lt;/a&gt;) is more powerful than those which can be solved without using randomness (&lt;a href=&quot;https://en.wikipedia.org/wiki/Time_complexity#Polynomial_time&quot;&gt;P&lt;/a&gt;).&lt;/p&gt;
-
-    &lt;p&gt;​&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
     &lt;p&gt;In order to empirically establish that biological-brains are superior than turing-machines, we have to find a class of functions that can be solved by brains which are undecidable, of which there is no evidence so far.&lt;/p&gt;

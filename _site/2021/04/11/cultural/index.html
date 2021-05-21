@@ -34,7 +34,7 @@
 
     <div style="float:left; margin-top:10px; margin-right:10px;">
     <a href="/feed.xml">
-      <img src="/assets/rssicon.svg" width="40">
+      <img src="/assets/b.svg" width="40">
     </a>
     </div>
 
@@ -79,11 +79,11 @@
   <article class="post-content">
   <p>This post is inspired by yoshua bengio’s paper “<a href="https://arxiv.org/abs/1203.2990">Evolving Culture vs Local Minima</a>”, which relates several aspects of difficulty in learning of deep neural-network architectures to culture and language.</p>
 
-<p>Assume that there exists an isomorphism between configuration of weights in deep neural-networks to the configuration of a biological-brains. Training neural networks towards some <strong>“goal”</strong> is finding a better local-minima which minimises some objective function, therefore learning in humans can be considered as reaching a better brain-state configuration.</p>
+<p>Assume that there exists an isomorphism between configuration of weights in deep neural-networks to the configuration of a biological-brains. In theory, training neural networks towards some goal is finding a better local-minima which minimises some objective function, therefore learning in humans can be considered as reaching a better brain-state configuration.</p>
 
-<p>Experiments show that there are huge-number of local minima, and it is near impossible to reach desired a weight-configuration purely out of chance, even for smaller cases. I.e, random initialization of weights can never reach a desired local-minima. Theerefore the <a href="https://en.wikipedia.org/wiki/Boltzmann_brain">Boltzmann-Brain</a> argument can then be considered false.</p>
+<p>Experiments show that there are huge-number of local minima, and it is impossible to reach desired a weight-configuration purely out of chance, even for smaller-network cases. I.e, random initialization of weights can never reach a really useful local-minima. Which implies that the <a href="https://en.wikipedia.org/wiki/Boltzmann_brain">Boltzmann-Brain</a> argument can then be considered false.</p>
 
-<p>But humans can exchange information without changing the synaptic strength of all neurons of their brains by a simple noisy medium which is called <strong>“language”</strong>. Is there a way in which two deep neural-network models say, <strong>Na</strong> and <strong>Nb</strong> can communicate through an auxilliary network <strong>Rab</strong> about the locations of their local minima? instead of finetuning all the layers (or some) on all the training-examples required?</p>
+<p>But humans can exchange information without changing the synaptic strength of all neurons of their brains by a simple noisy medium which is called <strong>“language”</strong>, does this imply that there a way in which two deep neural-network models say, <strong>Na</strong> and <strong>Nb</strong> can communicate through an auxilliary network <strong>Rab</strong> about the locations of their local minima? instead of finetuning all the layers (or some) on all the training-examples required?</p>
 
 <p>Can a deep neural-network <strong>Na</strong> generate a training-example <strong>Sa</strong> which when chosen along with a proper learning rate for <strong>Nb</strong> make it reach the configuration of <strong>Na</strong> with minimal training-steps using some sort of noisy channel?</p>
 
