@@ -15,7 +15,6 @@ I recently got to read a whitepaper on [neuromorphic computing](/assets/docs/non
 <div class="thecap">An Artistic illustration of a turing-machine</div>
 </div>
 
-![alt text](/assets/turing_machine.jpeg "Title")
 
 **A quick intro to turing-machines:** "Turing Machine" is hypothetical model of a computer, it is fundamental for understanding what a computer can and cannot do. Although the computers we use today do not entirely behave in the way an ideal turing machine is supposed to ("*infinite memory, single input tape etc..*"). They are found to be pretty useful especially in formalizing computer-science. 
 
