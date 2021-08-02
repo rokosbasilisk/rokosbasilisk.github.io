@@ -5,7 +5,7 @@ title:  "cultural evolution and neural networks"
 date:   2021-04-11 10:00:00
 mathjax: false
 ---
-This post is heavily inspired by the paper "[Evolving Culture vs Local Minima](https://arxiv.org/abs/1203.2990)", which relates several aspects of difficulty in learning of deep neural-network architectures to culture and language.
+This post is heavily inspired by the paper [Evolving Culture vs Local Minima](https://arxiv.org/abs/1203.2990), which relates several aspects of difficulty in learning of deep neural-network architectures to culture and language.
 
 Assume that there exists an isomorphism between configuration of weights in deep neural-networks to the configuration of a biological-brains. In theory, training neural networks towards some goal is finding a better local-minima which minimises some objective function, therefore learning in humans can be considered as reaching a better brain-state configuration.
 
