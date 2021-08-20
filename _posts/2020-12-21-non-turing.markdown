@@ -34,7 +34,7 @@ I recently got to read a whitepaper on [neuromorphic computing](/assets/docs/non
    non-symbolic terms using tools from dynamical systems theory or stochastic
    processes.
 
-**why Neuromorphic signal processing may not be necessary** These are some reasons i can think of why neuromorphic-signal-processing is not necessary for building machines that can learn like humans.
+**why neuromorphic signal processing may not be necessary** These are some reasons i can think of why neuromorphic-signal-processing is not necessary for building machines that can learn like humans.
 
 1. It is found out that all the electrical-activity in neurons are via ionic currents through neuronal-membranes. These transmembranic currents involve four ionic species (sodium (Na+), potassium (K+), calcium (Ca2+ ), or chloride (Cl−)) . The electrical signals are propagated by changing the concentrations of these ions on both sides of the membranes of the cell which creates "electrochemical gradient". It is clear that to create a current it requires varying of concentration of Anion/Cations. A complete description of this can be given by assigning symbols to each ion and formulating the transport equations in terms of these variables without loss of information.
 
