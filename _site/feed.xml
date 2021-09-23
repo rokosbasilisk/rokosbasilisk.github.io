@@ -5,81 +5,9 @@
     <description></description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 23 Sep 2021 15:36:46 +0530</pubDate>
-    <lastBuildDate>Thu, 23 Sep 2021 15:36:46 +0530</lastBuildDate>
+    <pubDate>Thu, 23 Sep 2021 15:43:11 +0530</pubDate>
+    <lastBuildDate>Thu, 23 Sep 2021 15:43:11 +0530</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
-    
-      <item>
-        <title>cultural evolution and neural networks</title>
-        <description>&lt;p&gt;This post is heavily inspired by the paper &lt;a href=&quot;https://arxiv.org/abs/1203.2990&quot;&gt;evolving culture vs local minima&lt;/a&gt;, which relates several aspects of difficulty in learning of deep neural-network architectures to culture and language.&lt;/p&gt;
-
-&lt;p&gt;Assume that there exists an isomorphism between configuration of weights in deep neural-networks to the configuration of a biological-brains. In theory, training neural networks towards some goal is finding a better local-minima which minimises some objective function, therefore learning in humans can be considered as reaching a better brain-state configuration.&lt;/p&gt;
-
-&lt;p&gt;Experiments show that there are huge-number of local minima, and it is impossible to reach desired a weight-configuration purely out of chance, even for smaller-network cases. I.e, random initialization of weights can never reach a really useful local-minima. Which implies that the &lt;a href=&quot;https://en.wikipedia.org/wiki/Boltzmann_brain&quot;&gt;Boltzmann-Brain&lt;/a&gt; argument can then be considered false.&lt;/p&gt;
-
-&lt;p&gt;But humans can exchange information without changing the synaptic strength of all neurons of their brains by a simple noisy medium which is called &lt;strong&gt;“language”&lt;/strong&gt;, does this imply that there a way in which two deep neural-network models say, &lt;strong&gt;Na&lt;/strong&gt; and &lt;strong&gt;Nb&lt;/strong&gt; can communicate through an auxilliary network &lt;strong&gt;Rab&lt;/strong&gt; about the locations of their local minima? instead of finetuning all the layers (or some) on all the training-examples required?&lt;/p&gt;
-
-&lt;p&gt;Can a deep neural-network &lt;strong&gt;Na&lt;/strong&gt; generate a training-example &lt;strong&gt;Sa&lt;/strong&gt; which when chosen along with a proper learning rate for &lt;strong&gt;Nb&lt;/strong&gt; make it reach the configuration of &lt;strong&gt;Na&lt;/strong&gt; with minimal training-steps using some sort of noisy channel?&lt;/p&gt;
-</description>
-        <pubDate>Sun, 11 Apr 2021 15:30:00 +0530</pubDate>
-        <link>http://localhost:4000/2021/04/11/cultural/</link>
-        <guid isPermaLink="true">http://localhost:4000/2021/04/11/cultural/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>human brains are turing-complete</title>
-        <description>&lt;p&gt;I recently got to read a whitepaper on &lt;a href=&quot;/assets/docs/non_turing.pdf&quot;&gt;neuromorphic computing&lt;/a&gt;, The thesis of that paper is that, the “Turing-machine” formulation could’nt explain the cognitive capabilities human-brains, due to which computers cannot exhibit human-level learning ability. The post is my opinion about why this may be false.&lt;/p&gt;
-
-&lt;div class=&quot;imgcap&quot;&gt;
-&lt;img src=&quot;/assets/turing_machine.jpeg&quot; /&gt;
-&lt;div class=&quot;thecap&quot;&gt;An Artistic illustration of a turing-machine&lt;/div&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;strong&gt;A quick intro to turing-machines:&lt;/strong&gt; “Turing Machine” is hypothetical model of a computer, it is fundamental for understanding what a computer can and cannot do. Although the computers we use today do not entirely behave in the way an ideal turing machine is supposed to (“&lt;em&gt;infinite memory, single input tape etc..&lt;/em&gt;”). They are found to be pretty useful especially in formalizing computer-science.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;What is neuromorphic signal processing?&lt;/strong&gt;  It is a model of computing which is non-algorithmic  in nature. I.e, There is no concept of clear symbolic-arithmetic which is what makes human-brains “superior” when compared to turing machines. According to the paper key reasons for taking a departure from turing-computability are given as follows:-&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;In neural dynamics there are no clear candidates for symbols in the first place. This is
-due to the unclocked, parallel, distributed, high-dimensional, non-stationary and
-stochastic nature of neural dynamics which makes it hard to identify phenomena
-which could be called symbols. While a number of neurodynamical mechanisms have
-been suggested as carriers for symbols, they are disconcertingly different from each
-other and each of them lacks some of the properties of platonic symbols (discrete
-identifiability, unchangeability, addressability by name, finite alphabet.&lt;/p&gt;
-
-    &lt;p&gt;​&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Virtually all neural “processing rules” that have been suggested are formulated in
-non-symbolic terms using tools from dynamical systems theory or stochastic
-processes.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;why neuromorphic signal processing may not be necessary&lt;/strong&gt; These are some reasons i can think of why neuromorphic-signal-processing is not necessary for building machines that can learn like humans.&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;It is found out that all the electrical-activity in neurons are via ionic currents through neuronal-membranes. These transmembranic currents involve four ionic species (sodium (Na+), potassium (K+), calcium (Ca2+ ), or chloride (Cl−)) . The electrical signals are propagated by changing the concentrations of these ions on both sides of the membranes of the cell which creates “electrochemical gradient”. It is clear that to create a current it requires varying of concentration of Anion/Cations. A complete description of this can be given by assigning symbols to each ion and formulating the transport equations in terms of these variables without loss of information.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Even if all the processes in the brain are purely stochastic in nature, all these can be &lt;strong&gt;efficiently&lt;/strong&gt; simulated on a turing-machine. No evidence is found out that the class of problems that can be solved using randomness (&lt;a href=&quot;https://en.wikipedia.org/wiki/BPP_(complexity)&quot;&gt;BPP&lt;/a&gt;) is more powerful than those which can be solved without using randomness (&lt;a href=&quot;https://en.wikipedia.org/wiki/Time_complexity#Polynomial_time&quot;&gt;P&lt;/a&gt;).&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;In order to empirically establish that biological-brains are superior than turing-machines, we have to find a class of functions that can be solved by brains which are undecidable, of which there is no evidence so far.&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        <pubDate>Mon, 21 Dec 2020 15:30:00 +0530</pubDate>
-        <link>http://localhost:4000/2020/12/21/non-turing/</link>
-        <guid isPermaLink="true">http://localhost:4000/2020/12/21/non-turing/</guid>
-        
-        
-      </item>
     
       <item>
         <title>alexander the god</title>
