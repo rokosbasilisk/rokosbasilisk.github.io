@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title:  "alexander the god"
+title:  "Alexander the god"
 date:   2020-04-02 10:00:00
 mathjax: false
 ---
