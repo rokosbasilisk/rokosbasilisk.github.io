@@ -5,43 +5,45 @@
     <description></description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sat, 16 Oct 2021 23:29:55 +0530</pubDate>
-    <lastBuildDate>Sat, 16 Oct 2021 23:29:55 +0530</lastBuildDate>
+    <pubDate>Sun, 17 Oct 2021 12:04:54 +0530</pubDate>
+    <lastBuildDate>Sun, 17 Oct 2021 12:04:54 +0530</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
         <title>The AGI needs to be honest</title>
-        <description>&lt;p&gt;Imagine that are a trained mathematician and you have been assigned the job of testing an arbitrarily intelligent chatbot for its intelligence.&lt;/p&gt;
+        <description>&lt;p&gt;&lt;em&gt;link to corresponding&lt;/em&gt; &lt;a href=&quot;https://www.lesswrong.com/posts/hqzHbew35Jx4xoDhE/the-agi-needs-to-be-honest&quot;&gt;&lt;em&gt;lesswrong article&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;You being knowledgeable about a fair amount of computer-science theory won’t test it with the likes of turing-test or similar, since such a bot might have any useful priors about the world.&lt;/p&gt;
+&lt;p&gt;Imagine that you are a trained mathematician and you have been assigned the job of testing an arbitrarily intelligent chatbot for its intelligence.&lt;/p&gt;
 
-&lt;p&gt;You have asked it find a proof for the “Riemann hypothesis”. the bot started its search-program and after several months it gave you a gigantic proof written in coq.&lt;/p&gt;
+&lt;p&gt;You being knowledgeable about a fair amount of computer-science theory won’t test it with the likes of Turing-test or similar, since such a bot might have any useful priors about the world.&lt;/p&gt;
 
-&lt;p&gt;You have tried to run the proof through a proof-checking assistant, but quickly realized that checking that itself would years or decades, also no other computer except the one running the bot is sophisticated enough to run such a gigantic proof.&lt;/p&gt;
+&lt;p&gt;You have asked it find a proof for the “Riemann hypothesis”. the bot started its search program and after several months it gave you gigantic proof written in coq.&lt;/p&gt;
 
-&lt;p&gt;You have asked the bot to provide you a zero-knowledge-proof, but being a trained mathematician you know that for a zero-knowledge-proof of sufficient credibility requires as much compute as the original one. 
-also the correctness is directly linked to the length of the proof it generates.&lt;/p&gt;
+&lt;p&gt;You have tried to run the proof through a proof-checking assistant but quickly realized that checking that itself would years or decades, also no other computer except the one running the bot is sophisticated enough to run such a gigantic proof.&lt;/p&gt;
 
-&lt;p&gt;You know that the bot may have formed increasingly complex abstractions while solving the problem, and it would be very har to describe those in exact language to you.&lt;/p&gt;
+&lt;p&gt;You have asked the bot to provide you a zero-knowledge-proof, but being a trained mathematician you know that a zero-knowledge-proof of sufficient credibility requires as much compute as the original one. also, the correctness is directly linked to the length of the proof it generates.&lt;/p&gt;
+
+&lt;p&gt;You know that the bot may have formed increasingly complex abstractions while solving the problem, and it would be very hard to describe those in exact language to you.&lt;/p&gt;
 
 &lt;p&gt;You have asked the bot to summarize the proof for you in natural-language, but you know that the bot can easily trick you into accepting the proof.&lt;/p&gt;
 
-&lt;p&gt;You have now started to think about a bigger question, the bot essentially is a powerfully optimizer. In this case the bot is trained to find proofs, its reward is based on what the humans feel about the proofs.&lt;/p&gt;
+&lt;p&gt;You have now started to think about a bigger question, the bot essentially is a powerful optimizer. In this case, the bot is trained to find proofs, its reward is based on finding what a group of mathematicians agree on how a correct proof looks like.&lt;/p&gt;
 
-&lt;p&gt;But the bot being bot don’t actually care about being true to you or itself, its not rewarded for being “honest” its only being rewarded for finding proof-like strings that humans may select or reject.&lt;/p&gt;
+&lt;p&gt;But the bot being bot doesn’t care about being true to you or itself, it is not rewarded for being “honest” it is only being rewarded for finding proof-like strings that humans may select or reject.&lt;/p&gt;
 
-&lt;p&gt;So its far more easier to find a large coq-program, large enough that you cannot check by any other means than to actually find a proof for riemann-hypothesis.&lt;/p&gt;
+&lt;p&gt;So it is far easier to find a large coq-program, large enough that you cannot check by any other means than to find a proof for Riemann-hypothesis.&lt;/p&gt;
 
 &lt;p&gt;Now you have concluded that before you certify that the bot is intelligent, you have to prove that the bot is being honest.&lt;/p&gt;
 
-&lt;p&gt;Going by the current trend, lets assume that such an arbitrarily intelligent bot would definitely have a significant part of it based on the principles of current deep-learning stack. assume it be a large neural-network based agent, also assume that the language-understanding component is somewhat based on the current language-model design.&lt;/p&gt;
+&lt;p&gt;Going by the current trend, it is okay for us to assume that such an arbitrarily intelligent bot would have a significant part of it based on the principles of the current deep-learning stack. assume it be a large neural-network-based agent, also assume that the language-understanding component is somewhat based on the current language-model design.&lt;/p&gt;
 
 &lt;p&gt;So how do you know that the large language model is being honest?&lt;/p&gt;
 
-&lt;p&gt;a quick look at the plots of truthfulqa dataset shows that truthfulness reduces with the model-size, going by this momentum any future large-models trained on large datasets are more likely to give fluke answersto significantly complex questions. 
+&lt;p&gt;A quick look at the plots of results on truthful-qa dataset shows that truthfulness reduces with the model-size, going by this momentum any large-models trained on large datasets are more likely to give fluke answers to significantly complex questions.
 &lt;img src=&quot;/assets/truthful.png&quot; alt=&quot;title&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;So, any complex question if cast into an optimization problem has one hard to find global-minima called “truth” but extremely large number of easy to find local-minima, how do you then make a powerful optimizer optimize for honesty?&lt;/p&gt;
+&lt;p&gt;Any significantly complex decision-question if cast into an optimization problem has one hard-to-find global-minima called “truth” but an extremely large number of easy-to-find local-minima, how do you then make a powerful optimizer optimize for honesty?&lt;/p&gt;
+
 </description>
         <pubDate>Sat, 16 Oct 2021 15:30:00 +0530</pubDate>
         <link>http://localhost:4000/2021/10/16/truth/</link>
