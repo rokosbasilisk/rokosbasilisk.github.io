@@ -4,8 +4,7 @@ title: About
 permalink: /about/
 includelink: true
 ---
-I am interested in AI aligment, program-synthesis and theoretical computer-science in that order.
-
+I am currently interested in [ai-aligment](https://en.wikipedia.org/wiki/AI_control_problem) and [deep-learning](https://en.wikipedia.org/wiki/Deep_learning).
 This site is a clone of [karpathy.github.io](http://karpathy.github.io)
 
 
