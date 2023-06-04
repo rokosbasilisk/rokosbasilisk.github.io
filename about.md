@@ -5,4 +5,4 @@ permalink: /about/
 includelink: true
 ---
 
-This site is heavily inspired from [andrej karpathy's blog](karpathy.github.io).
+This site is heavily inspired by [andrej karpathy's blog](karpathy.github.io).
