@@ -16,5 +16,3 @@ The aim of the [Hutter Prize](http://www.hutter1.net/) is to compress the first 
 However, all the winning solutions so far are based on [arithmetic encoding, context mixing](http://prize.hutter1.net/hfaq.htm#paq8). These solutions hold little relevance in mainstream AGI research.
 
 Current day LLMs are really powerful [models of our world](https://bmk.sh/2020/08/17/Building-AGI-Using-Language-Models/).And it is highly possible that most LLMs are trained on data that consist of the first 1GB of Wikipedia. Therefore, with appropriate prompting, it should be possible to extract most or all of this data from the LLMs.
-
-*I am looking for ideas/papers which would help me validate whether it is possible to extract pieces of wikipedia using prompts with any publicly available LLMs.*
