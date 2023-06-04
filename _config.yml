@@ -1,0 +1,18 @@
+# Site settings
+title: Ram Bharadwaj
+email: 
+description: "cached thoughts"
+baseurl: ""
+url: "http://rokosbasilisk.github.io"
+twitter_username: 1rokosbasilisk
+github_username:  rokosbasilisk
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+highlighter: rouge
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
