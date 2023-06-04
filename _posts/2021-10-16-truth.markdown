@@ -36,7 +36,7 @@ Going by the current trend, it is okay for us to assume that such an arbitrarily
 So how do you know that the large language model is being honest?
 
 A quick look at the plots of results on truthful-qa dataset shows that truthfulness reduces with the model-size, going by this momentum any large-models trained on large datasets are more likely to give fluke answers to significantly complex questions.
-![/assets/truthful.png]*TruthfulQA benchmark*
+![*TruthfulQA benchmark*](/assets/truthfulqa.png)
 
 
 Any significantly complex decision-question if cast into an optimization problem has one hard-to-find global-minima called “truth” but an extremely large number of easy-to-find local-minima, how do you then make a powerful optimizer optimize for honesty?
