@@ -8,7 +8,7 @@ mathjax: false
 ---
 
 
-Consider an adversarial training-scheme for solving goal-misgeneralization,( here i consider Redwood Research's work on ["Adversarial Training for High-Stakes Reliability"](https://arxiv.org/pdf/2205.01663.pdf)).
+Consider an adversarial training-scheme for solving goal-misgeneralization, ( here i consider Redwood Research's work on ["Adversarial Training for High-Stakes Reliability"](https://arxiv.org/pdf/2205.01663.pdf)).
 
 Consider a model that was trained to perform a specific task. To guarantee worst-case performance for this model, we need to have bounds for its outputs in adversarial examples. However, it is not feasible to run the model in the actual environment because it could lead to unwanted consequences.
 
