@@ -2,7 +2,7 @@
 layout: post
 comments: false
 title: "Goal-misgeneralization is ELK-hard"
-excerpt: "is goal-misgeneralization a true name for the problem?"
+excerpt: "can goal-misgeneralization be formulated as an instance of ELK?"
 date:   2023-03-24 10:00:00
 mathjax: false
 ---
