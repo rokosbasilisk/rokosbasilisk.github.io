@@ -18,4 +18,4 @@ To propel a recursively self-improving system closer to AGI, it must tackle the 
 
 Crucially, this advanced model must be able to distinguish between different types of states it encounters from sensor readings. 
 
-This discrimination could be facilitated through the use of separation tokens or other learned mechanisms, allowing the model to represent and manipulate multiple embeddings within the same space and dimensionality. This capability, akin to the concept of "meta" as discussed in the paper [megabyte](https://arxiv.org/pdf/2305.07185.pdf), would be a fundamental step towards achieving AGI.
+This discrimination could be facilitated through the use of separation tokens or other learned mechanisms, allowing the model to represent and manipulate multiple embeddings within the same space and dimensionality.
