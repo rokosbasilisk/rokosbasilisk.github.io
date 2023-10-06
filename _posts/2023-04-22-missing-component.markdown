@@ -1,8 +1,8 @@
 ---
 layout: post
 comments: false
-title: "Missing Component for AGI"
-excerpt: "AGI stream of thought"
+title: "Somethoughts on acheiving AGI via next-token-predictors"
+excerpt: "next token prediction"
 date:   2023-04-22 10:00:00
 mathjax: false
 ---
