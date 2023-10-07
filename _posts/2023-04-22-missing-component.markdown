@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: false
-title: "Somethoughts on acheiving AGI via next-token-predictors"
+title: "thoughts on acheiving AGI via next-token-predictors"
 excerpt: "next token prediction"
 date:   2023-04-22 10:00:00
 mathjax: false
