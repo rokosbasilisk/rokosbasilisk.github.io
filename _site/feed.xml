@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ram Bharadwaj</title>
+    <description>cached thoughts</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Mon, 12 Aug 2024 02:00:07 +0530</pubDate>
+    <lastBuildDate>Mon, 12 Aug 2024 02:00:07 +0530</lastBuildDate>
+    <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>Decrypting hidden chain of thought</title>
+        <description>&lt;p&gt;The recent paper &lt;a href=&quot;https://arxiv.org/abs/2404.15758&quot;&gt;&lt;em&gt;“Let’s Think Dot by Dot”&lt;/em&gt;&lt;/a&gt; introduces an intriguing approach to Chain of Thought (CoT) reasoning in language models. The authors trained a small 34M LLaMA model on CoT sequences for 3SUM and 2SUM tasks, where the sequences were replaced with hidden characters (“.”). Notably, the model performs well on the 3SUM task with the hidden CoT but fails without it.&lt;/p&gt;
+
+&lt;p&gt;While the explicit training on these hidden sequences may seem unnatural, it raises an important question: Can we decrypt and understand what’s happening “under the hood” during the hidden character CoT process?&lt;/p&gt;
+
+&lt;p&gt;The significant performance drop observed without the hidden CoT suggests that meaningful computations are occurring beneath the surface. To investigate this phenomenon, I conducted some small experiments aimed at answering two key questions:&lt;/p&gt;
+
+&lt;p&gt;What information is contained in the logits during this chain-of-thought?
+How does the hidden CoT information propagate through the model’s layers?&lt;/p&gt;
+
+&lt;p&gt;Initial findings:&lt;/p&gt;
+
+&lt;p&gt;During greedy decoding, while the top-ranked token is always a hidden character, lower-ranked tokens (rank 2 and below) contain sequences without hidden information. This suggests that the model maintains access to the original, unhidden information throughout the process.&lt;/p&gt;
+
+&lt;p&gt;Using a logit-lens-like method, I observed that the initial layers still contain the pure number sequences related to the 3SUM’s CoT. These are gradually replaced with hidden characters in subsequent layers.
+These preliminary results indicate that the model retains and processes the original information, even while outputting hidden characters. Further experiments are needed to gain additional insights into this intriguing phenomenon.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/hiddencot.png&quot; alt=&quot;*Hidden COT decoded tokens*&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Future work: Conduct more in-depth analyses of the model’s internal representations and information flow to better understand the mechanisms underlying the hidden CoT process.&lt;/p&gt;
+</description>
+        <pubDate>Sun, 11 Aug 2024 07:19:00 +0530</pubDate>
+        <link>http://localhost:4000/2024/08/11/hiddencot/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024/08/11/hiddencot/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Goal-misgeneralization is ELK-hard</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://www.lesswrong.com/posts/MWSCqzPrAbNrYoqWv/goal-misgeneralization-is-elk-hard&quot;&gt;&lt;em&gt;link to lesswrong post&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Consider an adversarial training-scheme for solving goal-misgeneralization, ( here i consider Redwood Research’s work on &lt;a href=&quot;https://arxiv.org/pdf/2205.01663.pdf&quot;&gt;“Adversarial Training for High-Stakes Reliability”&lt;/a&gt;).&lt;/p&gt;
+
+&lt;p&gt;Consider a model that was trained to perform a specific task. To guarantee worst-case performance for this model, we need to have bounds for its outputs in adversarial examples. However, it is not feasible to run the model in the actual environment because it could lead to unwanted consequences.&lt;/p&gt;
+
+&lt;p&gt;Therefore, we can use a prediction-head to generate a simulated version of the trajectory that the model might undergo. We can train a classifier from the output of the prediction-head to classify whether the AI system exhibits goal-misgeneralization in an adversarial manner. The model can then be penalized for misgeneralization behavior, and the policy obtained can be distilled into a newer model iteratively. We can use this prediction-head to build another model that can act as a classifier and distill the conservative policy (model) into a newer one.&lt;/p&gt;
+
+&lt;p&gt;However, this is only possible when the prediction-head is not deceiving, which is essentially the same as the &lt;a href=&quot;https://docs.google.com/document/d/1WwsnJQstPq91_Yh-Ch2XRL8H_EpsnjrC1dwZXR37PC8/&quot;&gt;ELK problem&lt;/a&gt;.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 24 Mar 2023 15:30:00 +0530</pubDate>
+        <link>http://localhost:4000/2023/03/24/goalmisgen/</link>
+        <guid isPermaLink="true">http://localhost:4000/2023/03/24/goalmisgen/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Hutter-Prize for Prompts</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://www.lesswrong.com/posts/axxnpQi8FyBPE4rbq/hutter-prize-for-prompts&quot;&gt;&lt;em&gt;link to lesswrong post&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The aim of the &lt;a href=&quot;http://www.hutter1.net/&quot;&gt;Hutter Prize&lt;/a&gt; is to compress the first 1GB of Wikipedia to the smallest possible size. From the AIXI standpoint, compression is equal to AI, and if we can compress this to the ideal size (75MB according to Shannon’s lower estimate), then the compression algorithm is equivalent to AIXI.&lt;/p&gt;
+
+&lt;p&gt;However, all the winning solutions so far are based on &lt;a href=&quot;http://prize.hutter1.net/hfaq.htm#paq8&quot;&gt;arithmetic encoding, context mixing&lt;/a&gt;. These solutions hold little relevance in mainstream AGI research.&lt;/p&gt;
+
+&lt;p&gt;Current day LLMs are really powerful &lt;a href=&quot;https://bmk.sh/2020/08/17/Building-AGI-Using-Language-Models/&quot;&gt;models of our world&lt;/a&gt;.And it is highly possible that most LLMs are trained on data that consist of the first 1GB of Wikipedia. Therefore, with appropriate prompting, it should be possible to extract most or all of this data from the LLMs.&lt;/p&gt;
+</description>
+        <pubDate>Fri, 24 Mar 2023 15:30:00 +0530</pubDate>
+        <link>http://localhost:4000/2023/03/24/prompt-hutter/</link>
+        <guid isPermaLink="true">http://localhost:4000/2023/03/24/prompt-hutter/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>The AGI needs to be honest</title>
+        <description>&lt;p&gt;&lt;a href=&quot;https://www.lesswrong.com/posts/hqzHbew35Jx4xoDhE/the-agi-needs-to-be-honest&quot;&gt;&lt;em&gt;link to lesswrong post&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Imagine that you are a trained mathematician and you have been assigned the job of testing an arbitrarily intelligent chatbot for its intelligence.&lt;/p&gt;
+
+&lt;p&gt;You being knowledgeable about a fair amount of computer-science theory won’t test it with the likes of Turing-test or similar, since such a bot might have any useful priors about the world.&lt;/p&gt;
+
+&lt;p&gt;You have asked it find a proof for the “Riemann hypothesis”. the bot started its search program and after several months it gave you gigantic proof written in coq.&lt;/p&gt;
+
+&lt;p&gt;You have tried to run the proof through a proof-checking assistant but quickly realized that checking that itself would years or decades, also no other computer except the one running the bot is sophisticated enough to run such a gigantic proof.&lt;/p&gt;
+
+&lt;p&gt;You have asked the bot to provide you a zero-knowledge-proof, but being a trained mathematician you know that a zero-knowledge-proof of sufficient credibility requires as much compute as the original one. also, the correctness is directly linked to the length of the proof it generates.&lt;/p&gt;
+
+&lt;p&gt;You know that the bot may have formed increasingly complex abstractions while solving the problem, and it would be very hard to describe those in exact language to you.&lt;/p&gt;
+
+&lt;p&gt;You have asked the bot to summarize the proof for you in natural-language, but you know that the bot can easily trick you into accepting the proof.&lt;/p&gt;
+
+&lt;p&gt;You have now started to think about a bigger question, the bot essentially is a powerful optimizer. In this case, the bot is trained to find proofs, its reward is based on finding what a group of mathematicians agree on how a correct proof looks like.&lt;/p&gt;
+
+&lt;p&gt;But the bot being bot doesn’t care about being true to you or itself, it is not rewarded for being “honest” it is only being rewarded for finding proof-like strings that humans may select or reject.&lt;/p&gt;
+
+&lt;p&gt;So it is far easier to find a large coq-program, large enough that you cannot check by any other means than to find a proof for Riemann-hypothesis.&lt;/p&gt;
+
+&lt;p&gt;Now you have concluded that before you certify that the bot is intelligent, you have to prove that the bot is being honest.&lt;/p&gt;
+
+&lt;p&gt;Going by the current trend, it is okay for us to assume that such an arbitrarily intelligent bot would have a significant part of it based on the principles of the current deep-learning stack. assume it be a large neural-network-based agent, also assume that the language-understanding component is somewhat based on the current language-model design.&lt;/p&gt;
+
+&lt;p&gt;So how do you know that the large language model is being honest?&lt;/p&gt;
+
+&lt;p&gt;A quick look at the plots of results on truthful-qa dataset shows that truthfulness reduces with the model-size, going by this momentum any large-models trained on large datasets are more likely to give fluke answers to significantly complex questions.
+&lt;img src=&quot;/assets/truthfulqa.png&quot; alt=&quot;*TruthfulQA benchmark*&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Any significantly complex decision-question if cast into an optimization problem has one hard-to-find global-minima called “truth” but an extremely large number of easy-to-find local-minima, how do you then make a powerful optimizer optimize for honesty?&lt;/p&gt;
+
+</description>
+        <pubDate>Sat, 16 Oct 2021 15:30:00 +0530</pubDate>
+        <link>http://localhost:4000/2021/10/16/truth/</link>
+        <guid isPermaLink="true">http://localhost:4000/2021/10/16/truth/</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
