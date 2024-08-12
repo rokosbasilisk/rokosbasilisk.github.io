@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Decrypting hidden chain of thought</title>
+    <title>Indian Philosophies as Reinforcement Learning</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="cached thoughts">
-    <link rel="canonical" href="http://localhost:4000/2024/08/11/hiddencot/">
+    <link rel="canonical" href="http://localhost:4000/2024/08/12/rlphilosphy/">
     <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Ram Bharadwaj posts" />
 
     <!-- Custom CSS -->
@@ -69,30 +69,113 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>Decrypting hidden chain of thought</h1>
-    <p class="meta">Aug 11, 2024</p>
+    <h1>Indian Philosophies as Reinforcement Learning</h1>
+    <p class="meta">Aug 12, 2024</p>
   </header>
 
   <article class="post-content">
-  <p>The paper <a href="https://arxiv.org/abs/2404.15758"><em>“Let’s Think Dot by Dot”</em></a> introduces an intriguing approach to Chain of Thought (CoT) reasoning in language models. The authors trained a small 34M LLaMA model on CoT sequences for 3SUM and 2SUM tasks, where the sequences were replaced with hidden characters (“.”). Notably, the model performs well on the 3SUM task with the hidden CoT but fails without it.</p>
+  <p><strong>Indian Philosophies as Reinforcement Learning</strong></p>
 
-<p>While the explicit training on these hidden sequences may seem unnatural, it raises an important question: Can we decrypt and understand what’s happening “under the hood” during the hidden character CoT process?</p>
+<p>Reinforcement Learning (RL) provides a powerful framework for understanding intelligence and decision-making. At its core, RL models an agent interacting with an environment, taking actions to maximize cumulative reward. This paradigm turns out to be surprisingly applicable to various domains, including, as I’ve been pondering lately, Indian philosophical systems.</p>
 
-<p>The significant performance drop observed without the hidden CoT suggests that meaningful computations are occurring beneath the surface. To investigate this phenomenon, I conducted some small experiments aimed at answering two key questions:</p>
+<p><strong>The RL Setup</strong></p>
 
-<p>What information is contained in the logits during this chain-of-thought?
-How does the hidden CoT information propagate through the model’s layers?</p>
+<p>Let’s start with a quick refresher on RL. The basic setup involves:</p>
 
-<p>Initial findings:</p>
+<ol>
+  <li>An agent</li>
+  <li>An environment</li>
+  <li>A set of possible actions</li>
+  <li>State observations</li>
+  <li>A reward signal</li>
+</ol>
 
-<p>During greedy decoding, while the top-ranked token is always a hidden character, lower-ranked tokens (rank 2 and below) contain sequences without hidden information. This suggests that the model maintains access to the original, unhidden information throughout the process.</p>
+<p>The agent’s goal is to learn a policy that maximizes expected cumulative reward over time. This framework is remarkably general and can model a wide range of situations.</p>
 
-<p>Using a logit-lens-like method, I observed that the initial layers still contain the pure number sequences related to the 3SUM’s CoT. These are gradually replaced with hidden characters in subsequent layers.
-These preliminary results indicate that the model retains and processes the original information, even while outputting hidden characters. Further experiments are needed to gain additional insights into this intriguing phenomenon.</p>
+<p><img src="/assets/agentinterface.png" alt="*Agent Environment Interface*" />
+<br />
+<em>The Agent-Environment Interface in Reinforcement Learning</em></p>
 
-<p><img src="/assets/hiddencot.png" alt="*Hidden COT decoded tokens*" /></p>
+<p><strong>Indian Philosophy: The Big Picture</strong></p>
 
-<p>Future work: Conduct more in-depth analyses of the model’s internal representations and information flow to better understand the mechanisms underlying the hidden CoT process.</p>
+<p>Now, let’s turn to Indian philosophy. While diverse, many schools share some common themes:</p>
+
+<ul>
+  <li>Atman: Individual consciousness</li>
+  <li>Brahman: Supreme or universal consciousness</li>
+  <li>Samsara: The phenomenal world of experience and rebirth</li>
+</ul>
+
+<p>The central question often revolves around the relationship between these entities. How does individual consciousness relate to the universal? What’s the nature of our experienced reality?</p>
+
+<p><strong>An RL Perspective on Advaita Vedanta</strong></p>
+
+<p>Let’s start with Advaita Vedanta, one of the most influential schools of Indian philosophy. In the RL framework, we might map it like this:</p>
+
+<ul>
+  <li>Atman (individual consciousness) → Agent</li>
+  <li>Samsara (phenomenal world) → Environment</li>
+  <li>Brahman (supreme consciousness) → The “true” nature of reality</li>
+</ul>
+
+<p><img src="/assets/sankara.jpg" alt="*Adi Sankara*" />
+<br />
+<em>Adi Shankara, the propounder of Advaita Vedanta</em></p>
+
+<p>The key insight of Advaita is that Atman and Brahman are ultimately identical. In RL terms, this is like saying the agent and the entirety of the system (agent + environment) are one and the same. The apparent duality – the sense of being a separate agent in an environment – is considered an illusion (maya). It’s as if the universal consciousness is playing a cosmic game of RL with itself, creating the appearance of separate agents and an environment.</p>
+
+<hr />
+
+<p><strong>Visistadvaita: Qualified Non-Dualism</strong></p>
+
+<p>Moving on to Visistadvaita, proposed by Ramanuja, we can model it as:</p>
+
+<ul>
+  <li>Atman (individual consciousness) → Agent</li>
+  <li>Samsara (phenomenal world) → Environment</li>
+  <li>Brahman (supreme consciousness) → A specific, named entity (e.g., Vishnu)</li>
+</ul>
+
+<p><img src="/assets/ramanuja.jpg" alt="*Ramanujacharya*" />
+<br />
+<em>Ramanujacharya, the propounder of Visistadvaita</em></p>
+
+<p>In this view, the multiplicity of agents and the environment occurs due to “ego” - a failure to cooperate with other agents while being misled by small rewards within the environment. It’s like an RL scenario where agents are optimizing for local rewards, missing the bigger picture of global optimization. The key difference from Advaita is that while Atman is part of Brahman, it maintains some level of distinctness. In RL terms, it’s as if the agents are sub-components of a larger system, each with their own local reward functions, but ultimately part of a greater whole.</p>
+
+<hr />
+
+<p><strong>Dvaita: Dualism</strong></p>
+
+<p>Dvaita, proposed by Madhva, takes a different approach:</p>
+
+<ul>
+  <li>Atman (individual consciousness) → Distinct agent</li>
+  <li>Samsara (phenomenal world) → Distinct environment</li>
+  <li>Brahman (supreme consciousness) → Separate supreme agent creating the environment</li>
+</ul>
+
+<p><img src="/assets/madhva.jpg" alt="*Madhvacharya*" /> 
+<em>Madhvacharya, the propounder of Dvaita</em></p>
+
+<p>In this view, the agent, environment, and supreme agent are indeed separate. It’s akin to a multi-agent RL system where one “super-agent” (Brahman) creates and maintains the environment for other agents (Atman) to operate in. This perspective aligns well with hierarchical RL frameworks, where higher-level agents can shape the environment or reward structures for lower-level agents.</p>
+
+<hr />
+
+<p><strong>Buddhism: A Different Approach</strong></p>
+
+<p>Buddhism, while not typically categorized with the above systems, offers an interesting contrast:</p>
+
+<ul>
+  <li>Rejects the existence of a supreme agent (no Brahman)</li>
+  <li>Focuses on the agent’s experience and decision-making process</li>
+  <li>Posits that the optimal policy is to detach from the reward function itself</li>
+</ul>
+
+<p><img src="/assets/buddha.jpg" alt="*Gautama Buddha*" />
+<br />
+<em>Gautama Buddha, the founder of Buddhism</em></p>
+
+<p>In RL terms, Buddhism suggests that the root of suffering (suboptimal outcomes) lies in the reward function itself. The path to enlightenment could be seen as learning to operate without being driven by the conventional reward signal. This is a fascinating inversion of the standard RL objective. Instead of maximizing cumulative reward, the goal becomes to transcend the very notion of reward-seeking behavior.</p>
 
   </article>
 
