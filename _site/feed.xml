@@ -5,9 +5,9 @@
     <description>cached thoughts</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Tue, 13 Aug 2024 02:44:25 +0530</pubDate>
-    <lastBuildDate>Tue, 13 Aug 2024 02:44:25 +0530</lastBuildDate>
-    <generator>Jekyll v3.8.6</generator>
+    <pubDate>Wed, 21 Aug 2024 10:19:41 +0530</pubDate>
+    <lastBuildDate>Wed, 21 Aug 2024 10:19:41 +0530</lastBuildDate>
+    <generator>Jekyll v3.9.0</generator>
     
       <item>
         <title>Indian Philosophies as Reinforcement Learning</title>
@@ -141,7 +141,9 @@ These preliminary results indicate that the model retains and processes the orig
 
 &lt;p&gt;&lt;img src=&quot;/assets/hiddencot.png&quot; alt=&quot;*Hidden COT decoded tokens*&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Future work: Conduct more in-depth analyses of the model’s internal representations and information flow to better understand the mechanisms underlying the hidden CoT process.&lt;/p&gt;
+&lt;p&gt;For almost all the test-set examples, the hidden-tokens in the output appear starting from the 3rd (h3_out) layer&lt;/p&gt;
+
+&lt;p&gt;A modified greedy autoregressive decoding method was implemented. When decoding a “hidden-token” (“.”), the algorithm selects the second-highest probability token instead of the top candidate. Results show 100% match in 3SUM satisfaction between this method and standard non-skip decoding.&lt;/p&gt;
 </description>
         <pubDate>Sun, 11 Aug 2024 07:19:00 +0530</pubDate>
         <link>http://localhost:4000/2024/08/11/hiddencot/</link>

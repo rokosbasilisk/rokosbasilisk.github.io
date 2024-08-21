@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Decrypting hidden chain of thought"
+title: "Decoding hidden chain of thought"
 excerpt: "chain-of-thought is decryptable"
 date:   2024-08-11 01:49:00
 mathjax: false
@@ -25,4 +25,6 @@ These preliminary results indicate that the model retains and processes the orig
 
 ![*Hidden COT decoded tokens*](/assets/hiddencot.png)
 
-Future work: Conduct more in-depth analyses of the model's internal representations and information flow to better understand the mechanisms underlying the hidden CoT process.
+For almost all the test-set examples, the hidden-tokens in the output appear starting from the 3rd (h3_out) layer
+
+A modified greedy autoregressive decoding method was implemented. When decoding a "hidden-token" ("."), the algorithm selects the second-highest probability token instead of the top candidate. Results show 100% match in 3SUM satisfaction between this method and standard non-skip decoding.
