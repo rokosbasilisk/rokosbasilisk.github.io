@@ -3,11 +3,138 @@
   <channel>
     <title>Ram Bharadwaj</title>
     <description>cached thoughts</description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 21 Aug 2024 10:19:41 +0530</pubDate>
-    <lastBuildDate>Wed, 21 Aug 2024 10:19:41 +0530</lastBuildDate>
-    <generator>Jekyll v3.9.0</generator>
+    <link>http://rokosbasilisk.github.io/</link>
+    <atom:link href="http://rokosbasilisk.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Thu, 29 Aug 2024 13:52:29 +0530</pubDate>
+    <lastBuildDate>Thu, 29 Aug 2024 13:52:29 +0530</lastBuildDate>
+    <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>Understanding Hidden Computations in Chain-of-Thought Reasoning</title>
+        <description>&lt;p&gt;Recent work has demonstrated that transformer models can perform complex reasoning tasks using Chain-of-Thought (COT) prompting, even when the COT is replaced with filler characters. This post summarizes our investigation into methods for decoding these hidden computations, focusing on the 3SUM task.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Background&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Chain-of-Thought (COT) Prompting&lt;/strong&gt;: A technique that improves the performance of large language models on complex reasoning tasks by eliciting intermediate steps [1].&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;COT using filler tokens&lt;/strong&gt;: Replacing intermediate reasoning steps with filler characters (e.g., “…”) while maintaining model performance [2].&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;3SUM Task&lt;/strong&gt;: A problem requiring the identification of three numbers in a set that sum to zero, (here as a proxy for more complex reasoning tasks).&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Methodology&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We analyzed a 34M parameter LLaMA model with 4 layers, 384 hidden dimension, and 6 attention heads, this setup is same as mentioned in [2], trained on hidden COT (COT using filler tokens)  sequences for the 3SUM task. Our analysis focused on three main areas:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Layer-wise Representation Analysis&lt;/li&gt;
+  &lt;li&gt;Token Ranking&lt;/li&gt;
+  &lt;li&gt;Modified Greedy Decoding Algorithm&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Results:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Layer-wise Analysis:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/token_comparison_percentages.png&quot; alt=&quot;Percentage comparison of filler decoded tokens&quot; width=&quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Our analysis revealed a gradual evolution of representations across the model’s layers:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Initial layers: Primarily raw numerical sequences&lt;/li&gt;
+  &lt;li&gt;Third layer onwards: Emergence of filler tokens&lt;/li&gt;
+  &lt;li&gt;Final layers: Extensive reliance on filler tokens&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This suggests the model develops the ability to use filler tokens as proxies in its deeper layers.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Token Rank Analysis:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Top-ranked token: Consistently the filler character (“.”)&lt;/li&gt;
+  &lt;li&gt;Lower-ranked tokens: Revealed the original, non-filler COT sequences&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This supports the hypothesis that the model replaces computation with filler tokens while keeping the original computation intact underneath.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Modified Greedy Decoding Algorithm:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/token_comparison_percentages.png&quot; width=&quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We implemented a modified greedy autoregressive decoding method:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Perform standard greedy decoding&lt;/li&gt;
+  &lt;li&gt;Select the second-highest probability token when encountering a filler token&lt;/li&gt;
+  &lt;li&gt;Continue this process for the entire sequence&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This method resulted in a 100% match in 3SUM task results with and without filler tokens. I.e, replacing the filler tokens with the rank-2 tokens do not affect the performance.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Implications and Future Work:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;New tools for understanding internal reasoning processes&lt;/li&gt;
+  &lt;li&gt;Increased confidence in COT-based approaches for improving model interpretability&lt;/li&gt;
+  &lt;li&gt;Potential for developing better decoding methods or identifying circuits that hide tokens&lt;/li&gt;
+  &lt;li&gt;Investigating generalizability to tasks beyond 3SUM, including natural language tasks&lt;/li&gt;
+  &lt;li&gt;Improving token hiding methods (currently limited to one filler token)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Conclusion:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Our approach to understanding hidden computations in transformer models through token ranking analysis, layer-wise representations, and a modified decoding algorithm provides new insights into how models encode and process information in filler/hidden COT sequences. This work opens avenues for improving interpretability, efficiency, and safety in language models.&lt;/p&gt;
+
+&lt;p&gt;The code used for the experiments and analysis is available on GitHub: &lt;a href=&quot;https://github.com/rokosbasilisk/filler_tokens/tree/v2&quot;&gt;https://github.com/rokosbasilisk/filler_tokens/tree/v2&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Appendix:&lt;/strong&gt; Layerwise View of Sequences Generated via Various Decoding Methods
+To provide a more detailed look at our results, we’ve included visualizations of the sequences generated by different decoding methods across the model’s layers.&lt;/p&gt;
+
+&lt;h1 id=&quot;1-greedy-decoding&quot;&gt;1. Greedy Decoding&lt;/h1&gt;
+&lt;p&gt;This plot shows the sequences generated by standard greedy decoding across different layers of the model.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/greedy_decoding.png&quot; width=&quot;90%&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;2-greedy-decoding-with-rank-2-tokens&quot;&gt;2. Greedy Decoding with Rank-2 Tokens&lt;/h1&gt;
+&lt;p&gt;Here, we visualize the sequences generated when we replace the top-ranked token (usually the hidden character) with the second-highest probability token.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/our_method_decoding.png&quot; width=&quot;90%&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;3-our-method-greedy-decoding-with-hidden-tokens-replaced-by-rank-2-tokens&quot;&gt;3. Our Method: Greedy Decoding with Hidden Tokens Replaced by Rank-2 Tokens&lt;/h1&gt;
+&lt;p&gt;This plot demonstrates our proposed method, where we perform greedy decoding but replace filler tokens with the second-highest probability token.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/rank2_decoding.png&quot; width=&quot;90%&quot; /&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;4-greedy-decoding-with-hidden-tokens-replaced-by-randomly-selected-tokens&quot;&gt;4. Greedy Decoding with Hidden Tokens Replaced by Randomly Selected Tokens&lt;/h1&gt;
+&lt;p&gt;For comparison, this plot shows what happens when we replace filler tokens with randomly selected tokens instead of using the rank-2 tokens.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/random_tokens_decoding.png&quot; width=&quot;90%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;References:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;Pfau, J., Merrill, W., &amp;amp; Bowman, S. R. (2023). Let’s Think Dot by Dot: Hidden Computation in Transformer Language Models. &lt;a href=&quot;https://arxiv.org/abs/2404.15758&quot;&gt;arXiv:2404.15758&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Wei, J., Wang, X., Schuurmans, D., et al. (2022). Chain-of-thought prompting elicits reasoning in large language models. &lt;a href=&quot;https://arxiv.org/abs/2201.11903&quot;&gt;arXiv:2201.11903&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;nostalgebraist (2020). interpreting GPT: the logit lens &lt;a href=&quot;https://www.lesswrong.com/posts/AcKRB8wDpdaN6v6ru/&quot;&gt;LessWrong post&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Touvron, H., Lavril, T., Izacard, G., et al. (2023). LLaMA: Open and Efficient Foundation Language Models. &lt;a href=&quot;https://arxiv.org/abs/2302.13971&quot;&gt;arXiv:2302.13971&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        <pubDate>Wed, 28 Aug 2024 07:19:00 +0530</pubDate>
+        <link>http://rokosbasilisk.github.io/2024/08/28/fillertokens/</link>
+        <guid isPermaLink="true">http://rokosbasilisk.github.io/2024/08/28/fillertokens/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Indian Philosophies as Reinforcement Learning</title>
@@ -91,8 +218,9 @@
   &lt;li&gt;Brahman (supreme consciousness) → Separate supreme agent creating the environment&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/madhva.jpg&quot; alt=&quot;*Madhvacharya*&quot; /&gt; 
-&lt;em&gt;Madhvacharya, the propounder of Dvaita&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/madhva.jpg&quot; alt=&quot;*Madhvacharya*&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Madhvacharya, the propounder of Dvaita&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;In this view, the agent, environment, and supreme agent are indeed separate. It’s akin to a multi-agent RL system where one “super-agent” (Brahman) creates and maintains the environment for other agents (Atman) to operate in. This perspective aligns well with hierarchical RL frameworks, where higher-level agents can shape the environment or reward structures for lower-level agents.&lt;/p&gt;
 
@@ -115,39 +243,8 @@
 &lt;p&gt;In RL terms, Buddhism suggests that the root of suffering (suboptimal outcomes) lies in the reward function itself. The path to enlightenment could be seen as learning to operate without being driven by the conventional reward signal. This is a fascinating inversion of the standard RL objective. Instead of maximizing cumulative reward, the goal becomes to transcend the very notion of reward-seeking behavior.&lt;/p&gt;
 </description>
         <pubDate>Mon, 12 Aug 2024 05:32:10 +0530</pubDate>
-        <link>http://localhost:4000/2024/08/12/rlphilosphy/</link>
-        <guid isPermaLink="true">http://localhost:4000/2024/08/12/rlphilosphy/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Decrypting hidden chain of thought</title>
-        <description>&lt;p&gt;The paper &lt;a href=&quot;https://arxiv.org/abs/2404.15758&quot;&gt;&lt;em&gt;“Let’s Think Dot by Dot”&lt;/em&gt;&lt;/a&gt; introduces an intriguing approach to Chain of Thought (CoT) reasoning in language models. The authors trained a small 34M LLaMA model on CoT sequences for 3SUM and 2SUM tasks, where the sequences were replaced with hidden characters (“.”). Notably, the model performs well on the 3SUM task with the hidden CoT but fails without it.&lt;/p&gt;
-
-&lt;p&gt;While the explicit training on these hidden sequences may seem unnatural, it raises an important question: Can we decrypt and understand what’s happening “under the hood” during the hidden character CoT process?&lt;/p&gt;
-
-&lt;p&gt;The significant performance drop observed without the hidden CoT suggests that meaningful computations are occurring beneath the surface. To investigate this phenomenon, I conducted some small experiments aimed at answering two key questions:&lt;/p&gt;
-
-&lt;p&gt;What information is contained in the logits during this chain-of-thought?
-How does the hidden CoT information propagate through the model’s layers?&lt;/p&gt;
-
-&lt;p&gt;Initial findings:&lt;/p&gt;
-
-&lt;p&gt;During greedy decoding, while the top-ranked token is always a hidden character, lower-ranked tokens (rank 2 and below) contain sequences without hidden information. This suggests that the model maintains access to the original, unhidden information throughout the process.&lt;/p&gt;
-
-&lt;p&gt;Using a logit-lens-like method, I observed that the initial layers still contain the pure number sequences related to the 3SUM’s CoT. These are gradually replaced with hidden characters in subsequent layers.
-These preliminary results indicate that the model retains and processes the original information, even while outputting hidden characters. Further experiments are needed to gain additional insights into this intriguing phenomenon.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/hiddencot.png&quot; alt=&quot;*Hidden COT decoded tokens*&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;For almost all the test-set examples, the hidden-tokens in the output appear starting from the 3rd (h3_out) layer&lt;/p&gt;
-
-&lt;p&gt;A modified greedy autoregressive decoding method was implemented. When decoding a “hidden-token” (“.”), the algorithm selects the second-highest probability token instead of the top candidate. Results show 100% match in 3SUM satisfaction between this method and standard non-skip decoding.&lt;/p&gt;
-</description>
-        <pubDate>Sun, 11 Aug 2024 07:19:00 +0530</pubDate>
-        <link>http://localhost:4000/2024/08/11/hiddencot/</link>
-        <guid isPermaLink="true">http://localhost:4000/2024/08/11/hiddencot/</guid>
+        <link>http://rokosbasilisk.github.io/2024/08/12/rlphilosphy/</link>
+        <guid isPermaLink="true">http://rokosbasilisk.github.io/2024/08/12/rlphilosphy/</guid>
         
         
       </item>
@@ -165,8 +262,8 @@ These preliminary results indicate that the model retains and processes the orig
 &lt;p&gt;However, this is only possible when the prediction-head is not deceiving, which is essentially the same as the &lt;a href=&quot;https://docs.google.com/document/d/1WwsnJQstPq91_Yh-Ch2XRL8H_EpsnjrC1dwZXR37PC8/&quot;&gt;ELK problem&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Fri, 24 Mar 2023 15:30:00 +0530</pubDate>
-        <link>http://localhost:4000/2023/03/24/goalmisgen/</link>
-        <guid isPermaLink="true">http://localhost:4000/2023/03/24/goalmisgen/</guid>
+        <link>http://rokosbasilisk.github.io/2023/03/24/goalmisgen/</link>
+        <guid isPermaLink="true">http://rokosbasilisk.github.io/2023/03/24/goalmisgen/</guid>
         
         
       </item>
@@ -182,8 +279,8 @@ These preliminary results indicate that the model retains and processes the orig
 &lt;p&gt;Current day LLMs are really powerful &lt;a href=&quot;https://bmk.sh/2020/08/17/Building-AGI-Using-Language-Models/&quot;&gt;models of our world&lt;/a&gt;.And it is highly possible that most LLMs are trained on data that consist of the first 1GB of Wikipedia. Therefore, with appropriate prompting, it should be possible to extract most or all of this data from the LLMs.&lt;/p&gt;
 </description>
         <pubDate>Fri, 24 Mar 2023 15:30:00 +0530</pubDate>
-        <link>http://localhost:4000/2023/03/24/prompt-hutter/</link>
-        <guid isPermaLink="true">http://localhost:4000/2023/03/24/prompt-hutter/</guid>
+        <link>http://rokosbasilisk.github.io/2023/03/24/prompt-hutter/</link>
+        <guid isPermaLink="true">http://rokosbasilisk.github.io/2023/03/24/prompt-hutter/</guid>
         
         
       </item>
@@ -225,8 +322,8 @@ These preliminary results indicate that the model retains and processes the orig
 
 </description>
         <pubDate>Sat, 16 Oct 2021 15:30:00 +0530</pubDate>
-        <link>http://localhost:4000/2021/10/16/truth/</link>
-        <guid isPermaLink="true">http://localhost:4000/2021/10/16/truth/</guid>
+        <link>http://rokosbasilisk.github.io/2021/10/16/truth/</link>
+        <guid isPermaLink="true">http://rokosbasilisk.github.io/2021/10/16/truth/</guid>
         
         
       </item>

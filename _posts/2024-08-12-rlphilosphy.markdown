@@ -78,6 +78,7 @@ Dvaita, proposed by Madhva, takes a different approach:
 - Brahman (supreme consciousness) → Separate supreme agent creating the environment
 
 ![*Madhvacharya*](/assets/madhva.jpg) 
+
 *Madhvacharya, the propounder of Dvaita*
 
 In this view, the agent, environment, and supreme agent are indeed separate. It's akin to a multi-agent RL system where one "super-agent" (Brahman) creates and maintains the environment for other agents (Atman) to operate in. This perspective aligns well with hierarchical RL frameworks, where higher-level agents can shape the environment or reward structures for lower-level agents.
