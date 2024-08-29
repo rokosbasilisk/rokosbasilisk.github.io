@@ -5,8 +5,8 @@
     <description>cached thoughts</description>
     <link>http://rokosbasilisk.github.io/</link>
     <atom:link href="http://rokosbasilisk.github.io/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 29 Aug 2024 13:52:29 +0530</pubDate>
-    <lastBuildDate>Thu, 29 Aug 2024 13:52:29 +0530</lastBuildDate>
+    <pubDate>Thu, 29 Aug 2024 14:29:20 +0530</pubDate>
+    <lastBuildDate>Thu, 29 Aug 2024 14:29:20 +0530</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
     
       <item>
@@ -40,7 +40,7 @@
 
 &lt;p&gt;&lt;strong&gt;Layer-wise Analysis:&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/token_comparison_percentages.png&quot; alt=&quot;Percentage comparison of filler decoded tokens&quot; width=&quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/hidden_tokens_percentage_by_layer.png&quot; alt=&quot;Percentage comparison of filler decoded tokens&quot; width=&quot;80%&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Our analysis revealed a gradual evolution of representations across the model’s layers:&lt;/p&gt;
 &lt;ul&gt;

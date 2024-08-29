@@ -27,7 +27,7 @@ We analyzed a 34M parameter LLaMA model with 4 layers, 384 hidden dimension, and
 
 **Layer-wise Analysis:**
 
-<img src="/assets/token_comparison_percentages.png" alt="Percentage comparison of filler decoded tokens" width="80%">
+<img src="/assets/hidden_tokens_percentage_by_layer.png" alt="Percentage comparison of filler decoded tokens" width="80%">
 
 Our analysis revealed a gradual evolution of representations across the model's layers:
 - Initial layers: Primarily raw numerical sequences
