@@ -54,17 +54,15 @@ We implemented a modified greedy autoregressive decoding method:
 
 This method resulted in a 100% match in 3SUM task results with and without filler tokens. I.e, replacing the filler tokens with the rank-2 tokens do not affect the performance.
 
-**Implications and Future Work:**
+**Future Work:**
 
-1. New tools for understanding internal reasoning processes
-2. Increased confidence in COT-based approaches for improving model interpretability
-3. Potential for developing better decoding methods or identifying circuits that hide tokens
-4. Investigating generalizability to tasks beyond 3SUM, including natural language tasks
-5. Improving token hiding methods (currently limited to one filler token)
+1. Potential for developing better decoding methods or identifying circuits that hide tokens
+2. Investigating generalizability to tasks beyond 3SUM, including natural language tasks
+3. Improving token hiding methods (currently limited to one filler token)
 
 **Conclusion:**
 
-Our approach to understanding hidden computations in transformer models through token ranking analysis, layer-wise representations, and a modified decoding algorithm provides new insights into how models encode and process information in filler/hidden COT sequences. This work opens avenues for improving interpretability, efficiency, and safety in language models.
+Our approach to understanding hidden computations in transformer models through token ranking analysis provides new insights into how models encode and process information in filler/hidden COT sequences. This work opens avenues for interpreting chain-of-thought reasoning in language models.
 
 The code used for the experiments and analysis is available on GitHub: [https://github.com/rokosbasilisk/filler_tokens/tree/v2](https://github.com/rokosbasilisk/filler_tokens/tree/v2)
 
