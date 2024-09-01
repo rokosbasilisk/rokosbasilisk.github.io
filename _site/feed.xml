@@ -5,8 +5,8 @@
     <description>cached thoughts</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 01 Sep 2024 14:03:21 +0530</pubDate>
-    <lastBuildDate>Sun, 01 Sep 2024 14:03:21 +0530</lastBuildDate>
+    <pubDate>Sun, 01 Sep 2024 14:21:11 +0530</pubDate>
+    <lastBuildDate>Sun, 01 Sep 2024 14:21:11 +0530</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -135,16 +135,43 @@ To provide a more detailed look at our results, we’ve included visualizations 
       </item>
     
       <item>
-        <title>Goal-misgeneralization is ELK-hard</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://www.lesswrong.com/posts/MWSCqzPrAbNrYoqWv/goal-misgeneralization-is-elk-hard&quot;&gt;&lt;em&gt;link to lesswrong post&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
+        <title>Goal-misgeneralization might be ELK-hard</title>
+        <description>&lt;p&gt;Goal misgeneralization and the ELK (Eliciting Latent Knowledge) problem are two of the most intriguing yet well-defined sub-problems within the broader AI alignment challenge. In this post, I’ll share my opinion on why solving goal misgeneralization is as challenging as solving the ELK problem.&lt;/p&gt;
 
-&lt;p&gt;Consider an adversarial training-scheme for solving goal-misgeneralization, ( here i consider Redwood Research’s work on &lt;a href=&quot;https://arxiv.org/pdf/2205.01663.pdf&quot;&gt;“Adversarial Training for High-Stakes Reliability”&lt;/a&gt;).&lt;/p&gt;
+&lt;h3 id=&quot;goal-misgeneralization&quot;&gt;Goal Misgeneralization&lt;/h3&gt;
 
-&lt;p&gt;Consider a model that was trained to perform a specific task. To guarantee worst-case performance for this model, we need to have bounds for its outputs in adversarial examples. However, it is not feasible to run the model in the actual environment because it could lead to unwanted consequences.&lt;/p&gt;
+&lt;p&gt;Goal misgeneralization occurs when a reinforcement learning agent retains its capabilities out-of-distribution yet pursues the wrong goal. This misalignment between the intended goal and the agent’s actual behavior can lead to unexpected and potentially harmful outcomes.
+A more detailed explanation of this can be found in the &lt;a href=&quot;https://arxiv.org/abs/2105.14111&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
-&lt;p&gt;Therefore, we can use a prediction-head to generate a simulated version of the trajectory that the model might undergo. We can train a classifier from the output of the prediction-head to classify whether the AI system exhibits goal-misgeneralization in an adversarial manner. The model can then be penalized for misgeneralization behavior, and the policy obtained can be distilled into a newer model iteratively. We can use this prediction-head to build another model that can act as a classifier and distill the conservative policy (model) into a newer one.&lt;/p&gt;
+&lt;h3 id=&quot;the-elk-problem&quot;&gt;The ELK Problem&lt;/h3&gt;
 
-&lt;p&gt;However, this is only possible when the prediction-head is not deceiving, which is essentially the same as the &lt;a href=&quot;https://docs.google.com/document/d/1WwsnJQstPq91_Yh-Ch2XRL8H_EpsnjrC1dwZXR37PC8/&quot;&gt;ELK problem&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Alignment Research Center (ARC) provides a simple, informal explanation of the ELK problem:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Suppose we train a model to predict what the future will look like according to cameras and other sensors. We then use planning algorithms to find a sequence of actions that lead to predicted futures that look good to us.&lt;/p&gt;
+
+  &lt;p&gt;But some action sequences could tamper with the cameras so they show happy humans regardless of what’s really happening. More generally, some futures look great on camera but are actually catastrophically bad.&lt;/p&gt;
+
+  &lt;p&gt;In these cases, the prediction model “knows” facts (like “the camera was tampered with”) that are not visible on camera but would change our evaluation of the predicted future if we learned them. How can we train this model to report its latent knowledge of off-screen events?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A more sophisticated explanation of the ELK problem can be found in the &lt;a href=&quot;https://docs.google.com/document/d/1WwsnJQstPq91_Yh-Ch2XRL8H_EpsnjrC1dwZXR37PC8/&quot;&gt;ELK problem document&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As of now, this problem too remains unsolved.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-solving-goal-misgeneralization-is-as-hard-as-solving-elk&quot;&gt;Why Solving Goal Misgeneralization is as Hard as Solving ELK&lt;/h3&gt;
+
+&lt;p&gt;Consider an adversarial training scheme for solving goal misgeneralization, such as Redwood Research’s work on &lt;a href=&quot;https://arxiv.org/pdf/2205.01663.pdf&quot;&gt;“Adversarial Training for High-Stakes Reliability”&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Let’s examine a model trained to perform a specific task. To guarantee worst-case performance for this model, we need to establish bounds for its outputs in adversarial examples. However, running the model in the actual environment is not feasible due to potential unwanted consequences.&lt;/p&gt;
+
+&lt;p&gt;To address this, we can use a prediction-head to generate a simulated version of the trajectory that the model might undergo. We can then train a classifier from the output of the prediction-head to determine whether the AI system exhibits goal misgeneralization in an adversarial manner. The model can be penalized for misgeneralization behavior, and the resulting policy can be iteratively distilled into a newer model.&lt;/p&gt;
+
+&lt;p&gt;This prediction-head can be used to build another model that acts as a classifier, allowing us to distill the conservative policy (model) into a newer one.&lt;/p&gt;
+
+&lt;p&gt;However, this approach is only viable when the prediction-head is not deceiving, which is essentially the same challenge posed by the ELK problem.&lt;/p&gt;
+
+&lt;p&gt;In conclusion, the difficulty of solving goal misgeneralization for the worst case mirrors the core challenge of the ELK problem.&lt;/p&gt;
 </description>
         <pubDate>Fri, 24 Mar 2023 15:30:00 +0530</pubDate>
         <link>http://localhost:4000/2023/03/24/goalmisgen/</link>

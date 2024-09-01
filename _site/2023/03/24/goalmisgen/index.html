@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Goal-misgeneralization is ELK-hard</title>
+    <title>Goal-misgeneralization might be ELK-hard</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="cached thoughts">
     <link rel="canonical" href="http://localhost:4000/2023/03/24/goalmisgen/">
@@ -69,20 +69,47 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>Goal-misgeneralization is ELK-hard</h1>
+    <h1>Goal-misgeneralization might be ELK-hard</h1>
     <p class="meta">Mar 24, 2023</p>
   </header>
 
   <article class="post-content">
-  <p><a href="https://www.lesswrong.com/posts/MWSCqzPrAbNrYoqWv/goal-misgeneralization-is-elk-hard"><em>link to lesswrong post</em></a></p>
+  <p>Goal misgeneralization and the ELK (Eliciting Latent Knowledge) problem are two of the most intriguing yet well-defined sub-problems within the broader AI alignment challenge. In this post, I’ll share my opinion on why solving goal misgeneralization is as challenging as solving the ELK problem.</p>
 
-<p>Consider an adversarial training-scheme for solving goal-misgeneralization, ( here i consider Redwood Research’s work on <a href="https://arxiv.org/pdf/2205.01663.pdf">“Adversarial Training for High-Stakes Reliability”</a>).</p>
+<h3 id="goal-misgeneralization">Goal Misgeneralization</h3>
 
-<p>Consider a model that was trained to perform a specific task. To guarantee worst-case performance for this model, we need to have bounds for its outputs in adversarial examples. However, it is not feasible to run the model in the actual environment because it could lead to unwanted consequences.</p>
+<p>Goal misgeneralization occurs when a reinforcement learning agent retains its capabilities out-of-distribution yet pursues the wrong goal. This misalignment between the intended goal and the agent’s actual behavior can lead to unexpected and potentially harmful outcomes.
+A more detailed explanation of this can be found in the <a href="https://arxiv.org/abs/2105.14111">here</a>.</p>
 
-<p>Therefore, we can use a prediction-head to generate a simulated version of the trajectory that the model might undergo. We can train a classifier from the output of the prediction-head to classify whether the AI system exhibits goal-misgeneralization in an adversarial manner. The model can then be penalized for misgeneralization behavior, and the policy obtained can be distilled into a newer model iteratively. We can use this prediction-head to build another model that can act as a classifier and distill the conservative policy (model) into a newer one.</p>
+<h3 id="the-elk-problem">The ELK Problem</h3>
 
-<p>However, this is only possible when the prediction-head is not deceiving, which is essentially the same as the <a href="https://docs.google.com/document/d/1WwsnJQstPq91_Yh-Ch2XRL8H_EpsnjrC1dwZXR37PC8/">ELK problem</a>.</p>
+<p>Alignment Research Center (ARC) provides a simple, informal explanation of the ELK problem:</p>
+
+<blockquote>
+  <p>Suppose we train a model to predict what the future will look like according to cameras and other sensors. We then use planning algorithms to find a sequence of actions that lead to predicted futures that look good to us.</p>
+
+  <p>But some action sequences could tamper with the cameras so they show happy humans regardless of what’s really happening. More generally, some futures look great on camera but are actually catastrophically bad.</p>
+
+  <p>In these cases, the prediction model “knows” facts (like “the camera was tampered with”) that are not visible on camera but would change our evaluation of the predicted future if we learned them. How can we train this model to report its latent knowledge of off-screen events?</p>
+</blockquote>
+
+<p>A more sophisticated explanation of the ELK problem can be found in the <a href="https://docs.google.com/document/d/1WwsnJQstPq91_Yh-Ch2XRL8H_EpsnjrC1dwZXR37PC8/">ELK problem document</a>.</p>
+
+<p>As of now, this problem too remains unsolved.</p>
+
+<h3 id="why-solving-goal-misgeneralization-is-as-hard-as-solving-elk">Why Solving Goal Misgeneralization is as Hard as Solving ELK</h3>
+
+<p>Consider an adversarial training scheme for solving goal misgeneralization, such as Redwood Research’s work on <a href="https://arxiv.org/pdf/2205.01663.pdf">“Adversarial Training for High-Stakes Reliability”</a>.</p>
+
+<p>Let’s examine a model trained to perform a specific task. To guarantee worst-case performance for this model, we need to establish bounds for its outputs in adversarial examples. However, running the model in the actual environment is not feasible due to potential unwanted consequences.</p>
+
+<p>To address this, we can use a prediction-head to generate a simulated version of the trajectory that the model might undergo. We can then train a classifier from the output of the prediction-head to determine whether the AI system exhibits goal misgeneralization in an adversarial manner. The model can be penalized for misgeneralization behavior, and the resulting policy can be iteratively distilled into a newer model.</p>
+
+<p>This prediction-head can be used to build another model that acts as a classifier, allowing us to distill the conservative policy (model) into a newer one.</p>
+
+<p>However, this approach is only viable when the prediction-head is not deceiving, which is essentially the same challenge posed by the ELK problem.</p>
+
+<p>In conclusion, the difficulty of solving goal misgeneralization for the worst case mirrors the core challenge of the ELK problem.</p>
 
   </article>
 
@@ -130,23 +157,7 @@
             <span class="username">rokosbasilisk</span>
           </a>
         </li>
-        <li>
-          <a href="https://twitter.com/thenoblemoon">
-            <span class="icon twitter">
-              <svg version="1.1" class="twitter-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                 viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
-                <path fill="#C2C2C2" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809
-                c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27
-                c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767
-                c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206
-                C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271
-                c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469
-                c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/>
-              </svg>
-            </span>
-            <span class="username">thenoblemoon</span>
-          </a>
-        </li>
+        
       </ul>
     </div>
 
