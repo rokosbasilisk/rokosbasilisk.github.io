@@ -7,8 +7,6 @@ mathjax: false
 comments: false
 ---
 
-[*link to lesswrong post*](https://www.lesswrong.com/posts/hqzHbew35Jx4xoDhE/the-agi-needs-to-be-honest)
-
 Imagine that you are a trained mathematician and you have been assigned the job of testing an arbitrarily intelligent chatbot for its intelligence.
 
 You being knowledgeable about a fair amount of computer-science theory won’t test it with the likes of Turing-test or similar, since such a bot might have any useful priors about the world.
