@@ -7,7 +7,7 @@
     <title>Understanding Hidden Computations in Chain-of-Thought Reasoning</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="cached thoughts">
-    <link rel="canonical" href="http://rokosbasilisk.github.io/2024/08/28/fillertokens/">
+    <link rel="canonical" href="http://localhost:4000/2024/08/28/fillertokens/">
     <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Ram Bharadwaj posts" />
 
     <!-- Custom CSS -->
@@ -136,11 +136,9 @@
 
 <p>This method resulted in a 100% match in 3SUM task results with and without filler tokens. I.e, replacing the filler tokens with the rank-2 tokens do not affect the performance.</p>
 
-<p><strong>Implications and Future Work:</strong></p>
+<p><strong>Future Work:</strong></p>
 
 <ol>
-  <li>New tools for understanding internal reasoning processes</li>
-  <li>Increased confidence in COT-based approaches for improving model interpretability</li>
   <li>Potential for developing better decoding methods or identifying circuits that hide tokens</li>
   <li>Investigating generalizability to tasks beyond 3SUM, including natural language tasks</li>
   <li>Improving token hiding methods (currently limited to one filler token)</li>
@@ -148,7 +146,7 @@
 
 <p><strong>Conclusion:</strong></p>
 
-<p>Our approach to understanding hidden computations in transformer models through token ranking analysis, layer-wise representations, and a modified decoding algorithm provides new insights into how models encode and process information in filler/hidden COT sequences. This work opens avenues for improving interpretability, efficiency, and safety in language models.</p>
+<p>Our approach to understanding hidden computations in transformer models through token ranking analysis provides new insights into how models encode and process information in filler/hidden COT sequences. This work opens avenues for interpreting chain-of-thought reasoning in language models.</p>
 
 <p>The code used for the experiments and analysis is available on GitHub: <a href="https://github.com/rokosbasilisk/filler_tokens/tree/v2">https://github.com/rokosbasilisk/filler_tokens/tree/v2</a></p>
 

@@ -1,13 +1,12 @@
 ---
 layout: post
 comments: false
-title: "Goal-misgeneralization is ELK-hard"
+title: "Goal-misgeneralization might be ELK-hard"
 excerpt: "can goal-misgeneralization be formulated as an instance of ELK?"
 date:   2023-03-24 10:00:00
 mathjax: false
 ---
 
-[*link to lesswrong post*](https://www.lesswrong.com/posts/MWSCqzPrAbNrYoqWv/goal-misgeneralization-is-elk-hard)
 
 Consider an adversarial training-scheme for solving goal-misgeneralization, ( here i consider Redwood Research's work on ["Adversarial Training for High-Stakes Reliability"](https://arxiv.org/pdf/2205.01663.pdf)).
 
