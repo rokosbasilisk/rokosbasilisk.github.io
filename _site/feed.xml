@@ -5,9 +5,39 @@
     <description>cached thoughts</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 01 Sep 2024 14:21:11 +0530</pubDate>
-    <lastBuildDate>Sun, 01 Sep 2024 14:21:11 +0530</lastBuildDate>
+    <pubDate>Sun, 20 Oct 2024 14:35:30 +0530</pubDate>
+    <lastBuildDate>Sun, 20 Oct 2024 14:35:30 +0530</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
+    
+      <item>
+        <title>Exploring the Platonic Representation Hypothesis Beyond In-Distribution Data</title>
+        <description>&lt;p&gt;&lt;strong&gt;Introduction&lt;/strong&gt;
+The &lt;a href=&quot;https://arxiv.org/pdf/2405.07987&quot;&gt;Platonic Representation Hypothesis&lt;/a&gt; (PRH) suggests that models trained with different objectives and on various modalities can converge to a shared statistical understanding of reality. While this is an intriguing idea, initial experiments in the paper focused on image-based models (like ViT) trained on the same pretraining (ImageNet) dataset. This raises an important question:&lt;/p&gt;
+
+&lt;p&gt;Does PRH hold only when models are trained on data from the same distribution?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Methodology&lt;/strong&gt;
+To explore this question, the experiment was extended to &lt;a href=&quot;https://arxiv.org/pdf/1907.07174&quot;&gt;ImageNet-O&lt;/a&gt;,  a dataset specifically designed with out-of-distribution (OOD) images compared to ImageNet. Using ImageNet-O, the correlation analysis of alignment scores across various metrics for image classification models was re-evaluated.&lt;/p&gt;
+
+&lt;p&gt;The outcome? PRH holds true in the OOD setting as well, which challenges the notion that a shared data distribution is a prerequisite for this convergence. This observation carries significant implications for AI alignment research, suggesting that a deeper underlying structure may govern how models develop representations of reality, even when the training data differs.&lt;/p&gt;
+
+&lt;p&gt;Below are the correlation plots comparing results from the original in-distribution experiment to those with OOD data:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/prh_correlation_plot.png&quot; alt=&quot;prh_correlation_plot&quot; width=&quot;80%&quot; /&gt;
+&lt;img src=&quot;/assets/spearman_correlation_ood_prh.png&quot; alt=&quot;spearman_correlation_ood_prh&quot; width=&quot;80%&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The notebook documenting these experiments is available &lt;a href=&quot;https://github.com/rokosbasilisk/platonic-rep/blob/main/OOD-experiments.ipynb&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;What’s Next?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;The next step in this research is to identify datasets or conditions where PRH might be falsifiable&lt;/p&gt;
+</description>
+        <pubDate>Sat, 19 Oct 2024 07:50:00 +0530</pubDate>
+        <link>http://localhost:4000/2024/10/19/prh-ood/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024/10/19/prh-ood/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Understanding Hidden Computations in Chain-of-Thought Reasoning</title>
@@ -182,9 +212,7 @@ A more detailed explanation of this can be found in the &lt;a href=&quot;https:/
     
       <item>
         <title>The AGI needs to be honest</title>
-        <description>&lt;p&gt;&lt;a href=&quot;https://www.lesswrong.com/posts/hqzHbew35Jx4xoDhE/the-agi-needs-to-be-honest&quot;&gt;&lt;em&gt;link to lesswrong post&lt;/em&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Imagine that you are a trained mathematician and you have been assigned the job of testing an arbitrarily intelligent chatbot for its intelligence.&lt;/p&gt;
+        <description>&lt;p&gt;Imagine that you are a trained mathematician and you have been assigned the job of testing an arbitrarily intelligent chatbot for its intelligence.&lt;/p&gt;
 
 &lt;p&gt;You being knowledgeable about a fair amount of computer-science theory won’t test it with the likes of Turing-test or similar, since such a bot might have any useful priors about the world.&lt;/p&gt;
 

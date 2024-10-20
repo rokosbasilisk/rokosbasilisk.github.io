@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>The AGI needs to be honest</title>
+    <title>Exploring the Platonic Representation Hypothesis Beyond In-Distribution Data</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="cached thoughts">
-    <link rel="canonical" href="http://localhost:4000/2021/10/16/truth/">
+    <link rel="canonical" href="http://localhost:4000/2024/10/19/prh-ood/">
     <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Ram Bharadwaj posts" />
 
     <!-- Custom CSS -->
@@ -69,42 +69,31 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>The AGI needs to be honest</h1>
-    <p class="meta">Oct 16, 2021</p>
+    <h1>Exploring the Platonic Representation Hypothesis Beyond In-Distribution Data</h1>
+    <p class="meta">Oct 19, 2024</p>
   </header>
 
   <article class="post-content">
-  <p>Imagine that you are a trained mathematician and you have been assigned the job of testing an arbitrarily intelligent chatbot for its intelligence.</p>
+  <p><strong>Introduction</strong>
+The <a href="https://arxiv.org/pdf/2405.07987">Platonic Representation Hypothesis</a> (PRH) suggests that models trained with different objectives and on various modalities can converge to a shared statistical understanding of reality. While this is an intriguing idea, initial experiments in the paper focused on image-based models (like ViT) trained on the same pretraining (ImageNet) dataset. This raises an important question:</p>
 
-<p>You being knowledgeable about a fair amount of computer-science theory won’t test it with the likes of Turing-test or similar, since such a bot might have any useful priors about the world.</p>
+<p>Does PRH hold only when models are trained on data from the same distribution?</p>
 
-<p>You have asked it find a proof for the “Riemann hypothesis”. the bot started its search program and after several months it gave you gigantic proof written in coq.</p>
+<p><strong>Methodology</strong>
+To explore this question, the experiment was extended to <a href="https://arxiv.org/pdf/1907.07174">ImageNet-O</a>,  a dataset specifically designed with out-of-distribution (OOD) images compared to ImageNet. Using ImageNet-O, the correlation analysis of alignment scores across various metrics for image classification models was re-evaluated.</p>
 
-<p>You have tried to run the proof through a proof-checking assistant but quickly realized that checking that itself would years or decades, also no other computer except the one running the bot is sophisticated enough to run such a gigantic proof.</p>
+<p>The outcome? PRH holds true in the OOD setting as well, which challenges the notion that a shared data distribution is a prerequisite for this convergence. This observation carries significant implications for AI alignment research, suggesting that a deeper underlying structure may govern how models develop representations of reality, even when the training data differs.</p>
 
-<p>You have asked the bot to provide you a zero-knowledge-proof, but being a trained mathematician you know that a zero-knowledge-proof of sufficient credibility requires as much compute as the original one. also, the correctness is directly linked to the length of the proof it generates.</p>
+<p>Below are the correlation plots comparing results from the original in-distribution experiment to those with OOD data:</p>
 
-<p>You know that the bot may have formed increasingly complex abstractions while solving the problem, and it would be very hard to describe those in exact language to you.</p>
+<p><img src="/assets/prh_correlation_plot.png" alt="prh_correlation_plot" width="80%" />
+<img src="/assets/spearman_correlation_ood_prh.png" alt="spearman_correlation_ood_prh" width="80%" /></p>
 
-<p>You have asked the bot to summarize the proof for you in natural-language, but you know that the bot can easily trick you into accepting the proof.</p>
+<p>The notebook documenting these experiments is available <a href="https://github.com/rokosbasilisk/platonic-rep/blob/main/OOD-experiments.ipynb">here</a>.</p>
 
-<p>You have now started to think about a bigger question, the bot essentially is a powerful optimizer. In this case, the bot is trained to find proofs, its reward is based on finding what a group of mathematicians agree on how a correct proof looks like.</p>
+<p><strong>What’s Next?</strong></p>
 
-<p>But the bot being bot doesn’t care about being true to you or itself, it is not rewarded for being “honest” it is only being rewarded for finding proof-like strings that humans may select or reject.</p>
-
-<p>So it is far easier to find a large coq-program, large enough that you cannot check by any other means than to find a proof for Riemann-hypothesis.</p>
-
-<p>Now you have concluded that before you certify that the bot is intelligent, you have to prove that the bot is being honest.</p>
-
-<p>Going by the current trend, it is okay for us to assume that such an arbitrarily intelligent bot would have a significant part of it based on the principles of the current deep-learning stack. assume it be a large neural-network-based agent, also assume that the language-understanding component is somewhat based on the current language-model design.</p>
-
-<p>So how do you know that the large language model is being honest?</p>
-
-<p>A quick look at the plots of results on truthful-qa dataset shows that truthfulness reduces with the model-size, going by this momentum any large-models trained on large datasets are more likely to give fluke answers to significantly complex questions.
-<img src="/assets/truthfulqa.png" alt="*TruthfulQA benchmark*" /></p>
-
-<p>Any significantly complex decision-question if cast into an optimization problem has one hard-to-find global-minima called “truth” but an extremely large number of easy-to-find local-minima, how do you then make a powerful optimizer optimize for honesty?</p>
-
+<p>The next step in this research is to identify datasets or conditions where PRH might be falsifiable</p>
 
   </article>
 

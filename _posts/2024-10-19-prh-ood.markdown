@@ -1,0 +1,30 @@
+---
+layout: post
+title: "Exploring the Platonic Representation Hypothesis Beyond In-Distribution Data"
+excerpt: "prh is true"
+date:   2024-10-19 2:20:00
+mathjax: false
+comments: false
+---
+**Introduction**
+The [Platonic Representation Hypothesis](https://arxiv.org/pdf/2405.07987) (PRH) suggests that models trained with different objectives and on various modalities can converge to a shared statistical understanding of reality. While this is an intriguing idea, initial experiments in the paper focused on image-based models (like ViT) trained on the same pretraining (ImageNet) dataset. This raises an important question:
+
+Does PRH hold only when models are trained on data from the same distribution?
+
+**Methodology**
+To explore this question, the experiment was extended to [ImageNet-O](https://arxiv.org/pdf/1907.07174),  a dataset specifically designed with out-of-distribution (OOD) images compared to ImageNet. Using ImageNet-O, the correlation analysis of alignment scores across various metrics for image classification models was re-evaluated.
+
+The outcome? PRH holds true in the OOD setting as well, which challenges the notion that a shared data distribution is a prerequisite for this convergence. This observation carries significant implications for AI alignment research, suggesting that a deeper underlying structure may govern how models develop representations of reality, even when the training data differs.
+
+Below are the correlation plots comparing results from the original in-distribution experiment to those with OOD data:
+
+
+<img src="/assets/prh_correlation_plot.png" alt="prh_correlation_plot" width="80%">
+<img src="/assets/spearman_correlation_ood_prh.png" alt="spearman_correlation_ood_prh" width="80%">
+
+
+The notebook documenting these experiments is available [here](https://github.com/rokosbasilisk/platonic-rep/blob/main/OOD-experiments.ipynb).
+
+**What's Next?**
+
+The next step in this research is to identify datasets or conditions where PRH might be falsifiable
