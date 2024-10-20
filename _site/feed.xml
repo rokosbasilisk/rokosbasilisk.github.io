@@ -5,8 +5,8 @@
     <description>cached thoughts</description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 20 Oct 2024 14:35:30 +0530</pubDate>
-    <lastBuildDate>Sun, 20 Oct 2024 14:35:30 +0530</lastBuildDate>
+    <pubDate>Sun, 20 Oct 2024 15:08:36 +0530</pubDate>
+    <lastBuildDate>Sun, 20 Oct 2024 15:08:36 +0530</lastBuildDate>
     <generator>Jekyll v3.8.6</generator>
     
       <item>
@@ -23,10 +23,17 @@ To explore this question, the experiment was extended to &lt;a href=&quot;https:
 
 &lt;p&gt;Below are the correlation plots comparing results from the original in-distribution experiment to those with OOD data:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/prh_correlation_plot.png&quot; alt=&quot;prh_correlation_plot&quot; width=&quot;80%&quot; /&gt;
-&lt;img src=&quot;/assets/spearman_correlation_ood_prh.png&quot; alt=&quot;spearman_correlation_ood_prh&quot; width=&quot;80%&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/prh_correlation_plot.png&quot; alt=&quot;prh_correlation_plot&quot; width=&quot;100%&quot; /&gt;
+&lt;img src=&quot;/assets/spearman_correlation_ood_prh.png&quot; alt=&quot;spearman_correlation_ood_prh&quot; width=&quot;100%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;The notebook documenting these experiments is available &lt;a href=&quot;https://github.com/rokosbasilisk/platonic-rep/blob/main/OOD-experiments.ipynb&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;But does this mean that the model’s align even for purely randomly generated data?&lt;/p&gt;
+
+&lt;p&gt;The answer is NO.&lt;/p&gt;
+
+&lt;p&gt;This plot shows the correlation of the alignment scores for the models on purely randomly generated images.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/prh_correlation_rnd.png&quot; alt=&quot;prh_correlation_rnd&quot; width=&quot;100%&quot; /&gt;
+The notebook documenting these experiments is available &lt;a href=&quot;https://github.com/rokosbasilisk/platonic-rep/blob/main/OOD-experiments.ipynb&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;What’s Next?&lt;/strong&gt;&lt;/p&gt;
 

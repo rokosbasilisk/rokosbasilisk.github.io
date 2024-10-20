@@ -19,10 +19,16 @@ The outcome? PRH holds true in the OOD setting as well, which challenges the not
 Below are the correlation plots comparing results from the original in-distribution experiment to those with OOD data:
 
 
-<img src="/assets/prh_correlation_plot.png" alt="prh_correlation_plot" width="80%">
-<img src="/assets/spearman_correlation_ood_prh.png" alt="spearman_correlation_ood_prh" width="80%">
+<img src="/assets/prh_correlation_plot.png" alt="prh_correlation_plot" width="100%">
+<img src="/assets/spearman_correlation_ood_prh.png" alt="spearman_correlation_ood_prh" width="100%">
 
+But does this mean that the model's align even for purely randomly generated data?
 
+The answer is NO.
+
+This plot shows the correlation of the alignment scores for the models on purely randomly generated images.
+
+<img src="/assets/prh_correlation_rnd.png" alt="prh_correlation_rnd" width="100%">
 The notebook documenting these experiments is available [here](https://github.com/rokosbasilisk/platonic-rep/blob/main/OOD-experiments.ipynb).
 
 **What's Next?**
