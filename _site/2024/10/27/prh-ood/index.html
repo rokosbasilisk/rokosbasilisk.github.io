@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Exploring the Platonic Representation Hypothesis Beyond In-Distribution Data</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="cached thoughts">
+    <link rel="canonical" href="http://localhost:4000/2024/10/27/prh-ood/">
+    <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Ram Bharadwaj posts" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-3698471-23', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+
+  <div class="wrap">
+
+    <div style="float:left; margin-top:10px; margin-right:10px;">
+    </div>
+
+    <a class="site-title" href="/">Ram Bharadwaj</a>
+    
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           viewBox="0 0 18 15" enable-background="new 0 0 18 15" xml:space="preserve">
+          <path fill="#505050" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0
+            h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#505050" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484
+            h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#505050" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0
+            c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        
+          <a class="page-link" href="/about/">About</a>
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      <div class="post">
+
+  <header class="post-header">
+    <h1>Exploring the Platonic Representation Hypothesis Beyond In-Distribution Data</h1>
+    <p class="meta">Oct 27, 2024</p>
+  </header>
+
+  <article class="post-content">
+  <p><strong>Introduction</strong></p>
+
+<p>The <a href="https://arxiv.org/pdf/2405.07987">Platonic Representation Hypothesis</a> (PRH) suggests that neural networks, despite being trained with different objectives and on various modalities, converge to a shared statistical understanding of reality. Inspired by Plato’s Allegory of the Cave, PRH posits that models across domains—such as vision and language—internalize similar structures, reflecting an idealized model of the world. While initial experiments focused on image-based models like Vision Transformers (ViT) trained on the same pretraining dataset (ImageNet), this raises an important question:</p>
+
+<p><strong>Does PRH hold only when models are trained on data from the same distribution?</strong></p>
+
+<p><strong>Methodology</strong></p>
+
+<p>To rigorously evaluate PRH beyond in-distribution data, we extended our experiments to encompass a variety of challenging scenarios:</p>
+
+<ol>
+  <li><strong>Representational Alignment Across Data Types:</strong>
+    <ul>
+      <li><strong>In-distribution data:</strong> Utilized the validation set from Places365, aligning closely with the training data of many vision models.</li>
+      <li><strong>Out-of-distribution (OOD) data:</strong> Employed the <a href="https://arxiv.org/pdf/1907.07174">ImageNet-O</a> dataset, containing images that diverge significantly from the standard ImageNet distribution.</li>
+      <li><strong>Random noise:</strong> Generated purely random images to probe the extreme boundaries of representational alignment.</li>
+    </ul>
+
+    <p>Alignment was measured using Spearman’s rank correlation on mutual k-NN distances across model representations, assessing how models interpret the similarity of various data inputs.</p>
+  </li>
+  <li><strong>Progressive Noise Injection in Vision Models:</strong>
+    <ul>
+      <li>Corrupted a set of 250 images with Gaussian noise over 100 incremental steps.</li>
+      <li>Measured mutual alignment across 17 Vision Transformer models at each noise level.</li>
+      <li>Analyzed alignment scores to detect patterns in how noise impacts convergence.</li>
+    </ul>
+  </li>
+  <li><strong>Tracking Alignment During Language Model Training:</strong>
+    <ul>
+      <li>Analyzed six large language models (LLMs) using checkpoints saved at 100 different training stages.</li>
+      <li>Measured alignment between every pair of models at each checkpoint to observe changes in representational similarity over time.</li>
+      <li>Aimed to uncover phases of increased or decreased similarity, providing insights into how models internalize structure during training.</li>
+    </ul>
+  </li>
+</ol>
+
+<p><strong>Results</strong></p>
+
+<h3 id="alignment-across-data-types">Alignment Across Data Types</h3>
+
+<p><img src="/assets/prh_correlation_plot.png" alt="Spearman rank correlation between models on Places365's validation data" style="width:100%; height:auto;" /></p>
+
+<p><em>Figure 1: Spearman rank correlation between models on Places365’s validation data, indicating a high degree of alignment in in-distribution data.</em></p>
+
+<h4 id="out-of-distribution-data">Out-of-Distribution Data</h4>
+
+<p><img src="/assets/spearman_correlation_ood_prh.png" alt="Alignment of vision models on the ImageNet-O dataset" style="width:100%; height:auto;" /></p>
+
+<p><em>Figure 2: Alignment of vision models on the ImageNet-O dataset. Spearman correlation suggests that even with outlier data, models maintain a shared statistical representation. Despite prediction errors in this OOD case, models converge in their representations, implying that larger models exhibit predictable error patterns similar to smaller models.</em></p>
+
+<h4 id="random-noise-data">Random Noise Data</h4>
+
+<p><img src="/assets/prh_correlation_rnd.png" alt="Spearman correlation of alignment scores on random noise data" style="width:80%; height:auto; display: block; margin-left: auto; margin-right: auto;" /></p>
+
+<p><em>Figure 3: Spearman correlation of alignment scores on random noise data. The lower correlation values indicate a breakdown in representational alignment, suggesting that random data lacks the underlying structure required for PRH.</em></p>
+
+<h3 id="impact-of-noise-injection">Impact of Noise Injection</h3>
+
+<p><img src="/assets/alignment_vs_signal_level.png" alt="Relationship between noise level and mean alignment scores of 17 ViT models" style="width:100%; height:auto;" /></p>
+
+<p><em>Figure 4: Relationship between noise level and mean alignment scores of 17 ViT models. A quadratic trend is observed as noise increases, suggesting a threshold of signal required for representational alignment to occur.</em></p>
+
+<p><img src="/assets/alignment_plot.png" alt="Alignment of individual ViT models with respect to noise level" style="width:80%; height:auto; display: block; margin-left: auto; margin-right: auto;" /></p>
+
+<p><em>Figure 5: Alignment of individual ViT models with respect to noise level, highlighting both similarities and differences across the 17 models.</em></p>
+
+<p><img src="/assets/legend_models.png" alt="Legend showing the names of individual ViT models used in the study" style="width:60%; height:auto; display: block; margin-left: auto; margin-right: auto;" /></p>
+
+<p><em>Figure 6: Legend showing the names of individual ViT models used in the study.</em></p>
+
+<h3 id="alignment-dynamics-during-llm-training">Alignment Dynamics During LLM Training</h3>
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+  <div style="flex: 1 1 45%; max-width: 45%;">
+    <img src="/assets/mean_alignment_score_14m.png" alt="Alignment trends of LLMs during training (14M)" style="width:100%; height:auto;" />
+  </div>
+  <div style="flex: 1 1 45%; max-width: 45%;">
+    <img src="/assets/mean_alignment_score_160m.png" alt="Alignment trends of LLMs during training (160M)" style="width:100%; height:auto;" />
+  </div>
+  <div style="flex: 1 1 45%; max-width: 45%;">
+    <img src="/assets/mean_alignment_score_410m.png" alt="Alignment trends of LLMs during training (410M)" style="width:100%; height:auto;" />
+  </div>
+  <div style="flex: 1 1 45%; max-width: 45%;">
+    <img src="/assets/mean_alignment_score_1b.png" alt="Alignment trends of LLMs during training (1B)" style="width:100%; height:auto;" />
+  </div>
+  <div style="flex: 1 1 45%; max-width: 45%;">
+    <img src="/assets/mean_alignment_score_1.4b.png" alt="Alignment trends of LLMs during training (1.4B)" style="width:100%; height:auto;" />
+  </div>
+</div>
+
+<p><em>Figure 7: Alignment trends of LLMs during training. Scores show non-linear trends across different parameter sizes, with initial similarity between smaller and larger models due to similar initialization methods, followed by divergence as larger models form more detailed representations.</em></p>
+
+<p><strong>Discussion</strong></p>
+
+<p>Our comprehensive experiments extend the understanding of PRH by demonstrating that neural networks maintain representational alignment even in out-of-distribution (OOD) contexts. However, this alignment breaks down when models are exposed to purely random data, indicating that some underlying structure within the dataset is crucial for PRH to hold.</p>
+
+<p>The noise injection experiments reveal that representational alignment degrades smoothly as noise increases, following a quadratic trend relative to the signal level. This suggests that a certain threshold of information is necessary for models to maintain a shared representation.</p>
+
+<p>In the realm of language models, alignment dynamics during training show non-linear trends. Initially, smaller and larger models exhibit similar alignment due to shared initialization methods. As training progresses, larger models develop more nuanced and detailed representations, leading to divergence in alignment scores. This highlights the influence of model capacity and training progression on representational convergence.</p>
+
+<p><strong>Conclusion</strong></p>
+
+<p>Our study provides robust support for the Platonic Representation Hypothesis in structured and diverse data environments. The findings underscore the importance of data structure in achieving representational alignment across different models and modalities. While PRH holds in both in-distribution and out-of-distribution settings, it fails in the absence of structured input, as evidenced by random noise data.</p>
+
+<p>Future research directions include exploring PRH in multimodal settings and investigating how different training strategies impact representational convergence. Understanding these dynamics can further illuminate the shared structures that underpin neural network representations, contributing to advancements in AI alignment and interpretability.</p>
+
+<p>The code for experiments and analysis in this paper is available on GitHub <a href="https://github.com/rokosbasilisk/prh-experiments">here</a>.</p>
+
+
+  </article>
+
+  <!-- mathjax -->
+  
+  
+  <!-- disqus comments -->
+ 
+  
+</div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrap">
+
+    <!-- <h2 class="footer-heading">Ram Bharadwaj</h2> -->
+
+    <div class="footer-col-1 column">
+      <ul>
+        <li>Ram Bharadwaj</li>
+        <!-- <li><a href="mailto:"></a></li> -->
+      </ul>
+    </div>
+
+    <div class="footer-col-2 column">
+      <ul>
+        <li>
+          <a href="https://github.com/rokosbasilisk">
+            <span class="icon github">
+              <svg version="1.1" class="github-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
+                <path fill-rule="evenodd" clip-rule="evenodd" fill="#C2C2C2" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761
+                c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32
+                c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472
+                c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037
+                C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65
+                c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261
+                c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082
+                c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129
+                c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            <span class="username">rokosbasilisk</span>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+
+    <div class="footer-col-3 column">
+      <p class="text">cached thoughts</p>
+    </div>
+
+  </div>
+
+</footer>
+
+
+    </body>
+</html>

@@ -1,36 +1,108 @@
 ---
 layout: post
 title: "Exploring the Platonic Representation Hypothesis Beyond In-Distribution Data"
-excerpt: "prh is true"
-date:   2024-10-19 2:20:00
+excerpt: "Investigating the validity of PRH in diverse and challenging data environments."
+date:   2024-10-27 10:00:00
 mathjax: false
 comments: false
 ---
-**Introduction**
-The [Platonic Representation Hypothesis](https://arxiv.org/pdf/2405.07987) (PRH) suggests that models trained with different objectives and on various modalities can converge to a shared statistical understanding of reality. While this is an intriguing idea, initial experiments in the paper focused on image-based models (like ViT) trained on the same pretraining (ImageNet) dataset. This raises an important question:
 
-Does PRH hold only when models are trained on data from the same distribution?
+**Introduction**
+
+The [Platonic Representation Hypothesis](https://arxiv.org/pdf/2405.07987) (PRH) suggests that neural networks, despite being trained with different objectives and on various modalities, converge to a shared statistical understanding of reality. Inspired by Plato’s Allegory of the Cave, PRH posits that models across domains—such as vision and language—internalize similar structures, reflecting an idealized model of the world. While initial experiments focused on image-based models like Vision Transformers (ViT) trained on the same pretraining dataset (ImageNet), this raises an important question:
+
+**Does PRH hold only when models are trained on data from the same distribution?**
 
 **Methodology**
-To explore this question, the experiment was extended to [ImageNet-O](https://arxiv.org/pdf/1907.07174),  a dataset specifically designed with out-of-distribution (OOD) images compared to ImageNet. Using ImageNet-O, the correlation analysis of alignment scores across various metrics for image classification models was re-evaluated.
 
-The outcome? PRH holds true in the OOD setting as well, which challenges the notion that a shared data distribution is a prerequisite for this convergence. This observation carries significant implications for AI alignment research, suggesting that a deeper underlying structure may govern how models develop representations of reality, even when the training data differs.
+To rigorously evaluate PRH beyond in-distribution data, we extended our experiments to encompass a variety of challenging scenarios:
 
-Below are the correlation plots comparing results from the original in-distribution experiment to those with OOD data:
+1. **Representational Alignment Across Data Types:**
+   - **In-distribution data:** Utilized the validation set from Places365, aligning closely with the training data of many vision models.
+   - **Out-of-distribution (OOD) data:** Employed the [ImageNet-O](https://arxiv.org/pdf/1907.07174) dataset, containing images that diverge significantly from the standard ImageNet distribution.
+   - **Random noise:** Generated purely random images to probe the extreme boundaries of representational alignment.
 
+   Alignment was measured using Spearman's rank correlation on mutual k-NN distances across model representations, assessing how models interpret the similarity of various data inputs.
 
-<img src="/assets/prh_correlation_plot.png" alt="prh_correlation_plot" width="100%">
-<img src="/assets/spearman_correlation_ood_prh.png" alt="spearman_correlation_ood_prh" width="100%">
+2. **Progressive Noise Injection in Vision Models:**
+   - Corrupted a set of 250 images with Gaussian noise over 100 incremental steps.
+   - Measured mutual alignment across 17 Vision Transformer models at each noise level.
+   - Analyzed alignment scores to detect patterns in how noise impacts convergence.
 
-But does this mean that the model's align even for purely randomly generated data?
+3. **Tracking Alignment During Language Model Training:**
+   - Analyzed six large language models (LLMs) using checkpoints saved at 100 different training stages.
+   - Measured alignment between every pair of models at each checkpoint to observe changes in representational similarity over time.
+   - Aimed to uncover phases of increased or decreased similarity, providing insights into how models internalize structure during training.
 
-The answer is NO.
+**Results**
 
-This plot shows the correlation of the alignment scores for the models on purely randomly generated images.
+### Alignment Across Data Types
 
-<img src="/assets/prh_correlation_rnd.png" alt="prh_correlation_rnd" width="100%">
-The notebook documenting these experiments is available [here](https://github.com/rokosbasilisk/platonic-rep/blob/main/OOD-experiments.ipynb).
+<img src="/assets/prh_correlation_plot.png" alt="Spearman rank correlation between models on Places365's validation data" style="width:100%; height:auto;">
 
-**What's Next?**
+*Figure 1: Spearman rank correlation between models on Places365's validation data, indicating a high degree of alignment in in-distribution data.*
 
-The next step in this research is to identify datasets or conditions where PRH might be falsifiable
+#### Out-of-Distribution Data
+
+<img src="/assets/spearman_correlation_ood_prh.png" alt="Alignment of vision models on the ImageNet-O dataset" style="width:100%; height:auto;">
+
+*Figure 2: Alignment of vision models on the ImageNet-O dataset. Spearman correlation suggests that even with outlier data, models maintain a shared statistical representation. Despite prediction errors in this OOD case, models converge in their representations, implying that larger models exhibit predictable error patterns similar to smaller models.*
+
+#### Random Noise Data
+
+<img src="/assets/prh_correlation_rnd.png" alt="Spearman correlation of alignment scores on random noise data" style="width:80%; height:auto; display: block; margin-left: auto; margin-right: auto;">
+
+*Figure 3: Spearman correlation of alignment scores on random noise data. The lower correlation values indicate a breakdown in representational alignment, suggesting that random data lacks the underlying structure required for PRH.*
+
+### Impact of Noise Injection
+
+<img src="/assets/alignment_vs_signal_level.png" alt="Relationship between noise level and mean alignment scores of 17 ViT models" style="width:100%; height:auto;">
+
+*Figure 4: Relationship between noise level and mean alignment scores of 17 ViT models. A quadratic trend is observed as noise increases, suggesting a threshold of signal required for representational alignment to occur.*
+
+<img src="/assets/alignment_plot.png" alt="Alignment of individual ViT models with respect to noise level" style="width:80%; height:auto; display: block; margin-left: auto; margin-right: auto;">
+
+*Figure 5: Alignment of individual ViT models with respect to noise level, highlighting both similarities and differences across the 17 models.*
+
+<img src="/assets/legend_models.png" alt="Legend showing the names of individual ViT models used in the study" style="width:60%; height:auto; display: block; margin-left: auto; margin-right: auto;">
+
+*Figure 6: Legend showing the names of individual ViT models used in the study.*
+
+### Alignment Dynamics During LLM Training
+
+<div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+  <div style="flex: 1 1 45%; max-width: 45%;">
+    <img src="/assets/mean_alignment_score_14m.png" alt="Alignment trends of LLMs during training (14M)" style="width:100%; height:auto;">
+  </div>
+  <div style="flex: 1 1 45%; max-width: 45%;">
+    <img src="/assets/mean_alignment_score_160m.png" alt="Alignment trends of LLMs during training (160M)" style="width:100%; height:auto;">
+  </div>
+  <div style="flex: 1 1 45%; max-width: 45%;">
+    <img src="/assets/mean_alignment_score_410m.png" alt="Alignment trends of LLMs during training (410M)" style="width:100%; height:auto;">
+  </div>
+  <div style="flex: 1 1 45%; max-width: 45%;">
+    <img src="/assets/mean_alignment_score_1b.png" alt="Alignment trends of LLMs during training (1B)" style="width:100%; height:auto;">
+  </div>
+  <div style="flex: 1 1 45%; max-width: 45%;">
+    <img src="/assets/mean_alignment_score_1.4b.png" alt="Alignment trends of LLMs during training (1.4B)" style="width:100%; height:auto;">
+  </div>
+</div>
+
+*Figure 7: Alignment trends of LLMs during training. Scores show non-linear trends across different parameter sizes, with initial similarity between smaller and larger models due to similar initialization methods, followed by divergence as larger models form more detailed representations.*
+
+**Discussion**
+
+Our comprehensive experiments extend the understanding of PRH by demonstrating that neural networks maintain representational alignment even in out-of-distribution (OOD) contexts. However, this alignment breaks down when models are exposed to purely random data, indicating that some underlying structure within the dataset is crucial for PRH to hold.
+
+The noise injection experiments reveal that representational alignment degrades smoothly as noise increases, following a quadratic trend relative to the signal level. This suggests that a certain threshold of information is necessary for models to maintain a shared representation.
+
+In the realm of language models, alignment dynamics during training show non-linear trends. Initially, smaller and larger models exhibit similar alignment due to shared initialization methods. As training progresses, larger models develop more nuanced and detailed representations, leading to divergence in alignment scores. This highlights the influence of model capacity and training progression on representational convergence.
+
+**Conclusion**
+
+Our study provides robust support for the Platonic Representation Hypothesis in structured and diverse data environments. The findings underscore the importance of data structure in achieving representational alignment across different models and modalities. While PRH holds in both in-distribution and out-of-distribution settings, it fails in the absence of structured input, as evidenced by random noise data.
+
+Future research directions include exploring PRH in multimodal settings and investigating how different training strategies impact representational convergence. Understanding these dynamics can further illuminate the shared structures that underpin neural network representations, contributing to advancements in AI alignment and interpretability.
+
+The code for experiments and analysis in this paper is available on GitHub [here](https://github.com/rokosbasilisk/prh-experiments).
+
