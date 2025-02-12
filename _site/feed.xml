@@ -3,232 +3,177 @@
   <channel>
     <title>Ram Bharadwaj</title>
     <description>cached thoughts</description>
-    <link>http://localhost:4000/</link>
-    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Wed, 30 Oct 2024 23:39:29 +0530</pubDate>
-    <lastBuildDate>Wed, 30 Oct 2024 23:39:29 +0530</lastBuildDate>
-    <generator>Jekyll v3.8.6</generator>
+    <link>http://localhost:4001/</link>
+    <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Thu, 13 Feb 2025 03:45:19 +0530</pubDate>
+    <lastBuildDate>Thu, 13 Feb 2025 03:45:19 +0530</lastBuildDate>
+    <generator>Jekyll v3.9.0</generator>
     
       <item>
-        <title>Exploring the Platonic Representation Hypothesis Beyond In-Distribution Data</title>
-        <description>&lt;p&gt;&lt;strong&gt;Introduction&lt;/strong&gt;&lt;/p&gt;
+        <title>Experiments with the Platonic Representation Hypothesis</title>
+        <description>&lt;h3 id=&quot;introduction&quot;&gt;Introduction&lt;/h3&gt;
 
 &lt;p&gt;The &lt;a href=&quot;https://arxiv.org/pdf/2405.07987&quot;&gt;Platonic Representation Hypothesis&lt;/a&gt; (PRH) suggests that neural networks, despite being trained with different objectives and on various modalities, converge to a shared statistical understanding of reality. Inspired by Plato’s Allegory of the Cave, PRH posits that models across domains—such as vision and language—internalize similar structures, reflecting an idealized model of the world. While initial experiments focused on image-based models like Vision Transformers (ViT) trained on the same pretraining dataset (ImageNet), this raises an important question:&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Does PRH hold only when models are trained on data from the same distribution?&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;does-prh-hold-only-when-models-are-trained-on-data-from-the-same-distribution&quot;&gt;Does PRH hold only when models are trained on data from the same distribution?&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;Methodology&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;methodology&quot;&gt;Methodology:&lt;/h3&gt;
 
-&lt;p&gt;To rigorously evaluate PRH beyond in-distribution data, we extended our experiments to encompass a variety of challenging scenarios:&lt;/p&gt;
+&lt;p&gt;To rigorously evaluate PRH beyond in-distribution data, I extended experiments to encompass a variety of challenging scenarios:&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Representational Alignment Across Data Types:&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;&lt;strong&gt;In-distribution data:&lt;/strong&gt; Utilized the validation set from Places365, aligning closely with the training data of many vision models.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Out-of-distribution (OOD) data:&lt;/strong&gt; Employed the &lt;a href=&quot;https://arxiv.org/pdf/1907.07174&quot;&gt;ImageNet-O&lt;/a&gt; dataset, containing images that diverge significantly from the standard ImageNet distribution.&lt;/li&gt;
-      &lt;li&gt;&lt;strong&gt;Random noise:&lt;/strong&gt; Generated purely random images to probe the extreme boundaries of representational alignment.&lt;/li&gt;
-    &lt;/ul&gt;
+&lt;h3 id=&quot;1-representational-alignment-across-data-types&quot;&gt;1. Representational Alignment Across Data Types:&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;In-distribution data:&lt;/strong&gt; Utilized the validation set from Places365, aligning closely with the training data of many vision models.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Out-of-distribution (OOD) data:&lt;/strong&gt; Employed the &lt;a href=&quot;https://arxiv.org/pdf/1907.07174&quot;&gt;ImageNet-O&lt;/a&gt; dataset, containing images that diverge significantly from the standard ImageNet distribution.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Random noise:&lt;/strong&gt; Generated purely random images to probe the extreme boundaries of representational alignment.&lt;/li&gt;
+&lt;/ul&gt;
 
-    &lt;p&gt;Alignment was measured using Spearman’s rank correlation on mutual k-NN distances across model representations, assessing how models interpret the similarity of various data inputs.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Progressive Noise Injection in Vision Models:&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Corrupted a set of 250 images with Gaussian noise over 100 incremental steps.&lt;/li&gt;
-      &lt;li&gt;Measured mutual alignment across 17 Vision Transformer models at each noise level.&lt;/li&gt;
-      &lt;li&gt;Analyzed alignment scores to detect patterns in how noise impacts convergence.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Tracking Alignment During Language Model Training:&lt;/strong&gt;
-    &lt;ul&gt;
-      &lt;li&gt;Analyzed six large language models (LLMs) using checkpoints saved at 100 different training stages.&lt;/li&gt;
-      &lt;li&gt;Measured alignment between every pair of models at each checkpoint to observe changes in representational similarity over time.&lt;/li&gt;
-      &lt;li&gt;Aimed to uncover phases of increased or decreased similarity, providing insights into how models internalize structure during training.&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;Alignment was measured using Spearman’s rank correlation on mutual k-NN distances across model representations, assessing how models interpret the similarity of various data inputs.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Results&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;2-progressive-noise-injection-in-vision-models&quot;&gt;2. Progressive Noise Injection in Vision Models:&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Corrupted a set of 250 images with Gaussian noise over 100 incremental steps.&lt;/li&gt;
+  &lt;li&gt;Measured mutual alignment across 17 Vision Transformer models at each noise level.&lt;/li&gt;
+  &lt;li&gt;Analyzed alignment scores to detect patterns in how noise impacts convergence.&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h3 id=&quot;alignment-across-data-types&quot;&gt;Alignment Across Data Types&lt;/h3&gt;
+&lt;h3 id=&quot;3-tracking-alignment-during-language-model-training&quot;&gt;3. Tracking Alignment During Language Model Training:&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;Analyzed six large language models (LLMs) using checkpoints saved at 100 different training stages.&lt;/li&gt;
+  &lt;li&gt;Measured alignment between every pair of models at each checkpoint to observe changes in representational similarity over time.&lt;/li&gt;
+  &lt;li&gt;Aimed to uncover phases of increased or decreased similarity, providing insights into how models internalize structure during training.&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/prh_correlation_plot.png&quot; alt=&quot;Spearman rank correlation between models on Places365's validation data&quot; style=&quot;width:100%; height:auto;&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;results&quot;&gt;Results:&lt;/h3&gt;
 
-&lt;p&gt;&lt;em&gt;Figure 1: Spearman rank correlation between models on Places365’s validation data, indicating a high degree of alignment in in-distribution data.&lt;/em&gt;&lt;/p&gt;
+&lt;h4 id=&quot;in-distribution-setting&quot;&gt;In-Distribution Setting&lt;/h4&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/prh_correlation_plot.png&quot; alt=&quot;Spearman rank correlation between models on Places365&apos;s validation data&quot; style=&quot;width:100%; height:auto;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Figure 1: Spearman rank correlation between models on Places365’s validation data, indicating a high degree of alignment in in-distribution data.&lt;/em&gt; This graph is straight from the platonic-representation-hypothesis paper. The ViT models used in this experiment are trained more or less on the same data distribution/pretraining datasets.&lt;/p&gt;
 
 &lt;h4 id=&quot;out-of-distribution-data&quot;&gt;Out-of-Distribution Data&lt;/h4&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/spearman_correlation_ood_prh.png&quot; alt=&quot;Alignment of vision models on the ImageNet-O dataset&quot; style=&quot;width:100%; height:auto;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Figure 2: Alignment of vision models on the ImageNet-O dataset. Spearman correlation suggests that even with outlier data, models maintain a shared statistical representation. Despite prediction errors in this OOD case, models converge in their representations, implying that larger models exhibit predictable error patterns similar to smaller models.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;*Figure 2: Alignment of vision models on the ImageNet-O dataset. Spearman correlation suggests that even with OOD data, models maintain a shared statistical representation, models converge in their representations, implying PRH still holds true and generalizes well outside the training distribution of the model’s training set. This fact has really good implications in understanding failure models and alignment failures of models belonging to same architectural family&lt;/p&gt;
 
 &lt;h4 id=&quot;random-noise-data&quot;&gt;Random Noise Data&lt;/h4&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/prh_correlation_rnd.png&quot; alt=&quot;Spearman correlation of alignment scores on random noise data&quot; style=&quot;width:80%; height:auto; display: block; margin-left: auto; margin-right: auto;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;Figure 3: Spearman correlation of alignment scores on random noise data. The lower correlation values indicate a breakdown in representational alignment, suggesting that random data lacks the underlying structure required for PRH.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Figure 3: Spearman correlation of alignment scores on random noise data. The lower correlation values indicate a breakdown in representational alignment, suggesting that random data lacks the underlying structure required for PRH.&lt;/em&gt; This means that PRH is not just a random occurance but requires some statistical-structure to be present.&lt;/p&gt;
 
-&lt;h3 id=&quot;impact-of-noise-injection&quot;&gt;Impact of Noise Injection&lt;/h3&gt;
+&lt;h3 id=&quot;discussion&quot;&gt;Discussion&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;/assets/alignment_vs_signal_level.png&quot; alt=&quot;Relationship between noise level and mean alignment scores of 17 ViT models&quot; style=&quot;width:100%; height:auto;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Figure 4: Relationship between noise level and mean alignment scores of 17 ViT models. A quadratic trend is observed as noise increases, suggesting a threshold of signal required for representational alignment to occur.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/alignment_plot.png&quot; alt=&quot;Alignment of individual ViT models with respect to noise level&quot; style=&quot;width:80%; height:auto; display: block; margin-left: auto; margin-right: auto;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Figure 5: Alignment of individual ViT models with respect to noise level, highlighting both similarities and differences across the 17 models.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/legend_models.png&quot; alt=&quot;Legend showing the names of individual ViT models used in the study&quot; style=&quot;width:60%; height:auto; display: block; margin-left: auto; margin-right: auto;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Figure 6: Legend showing the names of individual ViT models used in the study.&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;alignment-dynamics-during-llm-training&quot;&gt;Alignment Dynamics During LLM Training&lt;/h3&gt;
-
-&lt;div style=&quot;display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;&quot;&gt;
-  &lt;div style=&quot;flex: 1 1 45%; max-width: 45%;&quot;&gt;
-    &lt;img src=&quot;/assets/mean_alignment_score_14m.png&quot; alt=&quot;Alignment trends of LLMs during training (14M)&quot; style=&quot;width:100%; height:auto;&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div style=&quot;flex: 1 1 45%; max-width: 45%;&quot;&gt;
-    &lt;img src=&quot;/assets/mean_alignment_score_160m.png&quot; alt=&quot;Alignment trends of LLMs during training (160M)&quot; style=&quot;width:100%; height:auto;&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div style=&quot;flex: 1 1 45%; max-width: 45%;&quot;&gt;
-    &lt;img src=&quot;/assets/mean_alignment_score_410m.png&quot; alt=&quot;Alignment trends of LLMs during training (410M)&quot; style=&quot;width:100%; height:auto;&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div style=&quot;flex: 1 1 45%; max-width: 45%;&quot;&gt;
-    &lt;img src=&quot;/assets/mean_alignment_score_1b.png&quot; alt=&quot;Alignment trends of LLMs during training (1B)&quot; style=&quot;width:100%; height:auto;&quot; /&gt;
-  &lt;/div&gt;
-  &lt;div style=&quot;flex: 1 1 45%; max-width: 45%;&quot;&gt;
-    &lt;img src=&quot;/assets/mean_alignment_score_1.4b.png&quot; alt=&quot;Alignment trends of LLMs during training (1.4B)&quot; style=&quot;width:100%; height:auto;&quot; /&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;em&gt;Figure 7: Alignment trends of LLMs during training. Scores show non-linear trends across different parameter sizes, with initial similarity between smaller and larger models due to similar initialization methods, followed by divergence as larger models form more detailed representations.&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Discussion&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Our comprehensive experiments extend the understanding of PRH by demonstrating that neural networks maintain representational alignment even in out-of-distribution (OOD) contexts. However, this alignment breaks down when models are exposed to purely random data, indicating that some underlying structure within the dataset is crucial for PRH to hold.&lt;/p&gt;
-
-&lt;p&gt;The noise injection experiments reveal that representational alignment degrades smoothly as noise increases, following a quadratic trend relative to the signal level. This suggests that a certain threshold of information is necessary for models to maintain a shared representation.&lt;/p&gt;
-
-&lt;p&gt;In the realm of language models, alignment dynamics during training show non-linear trends. Initially, smaller and larger models exhibit similar alignment due to shared initialization methods. As training progresses, larger models develop more nuanced and detailed representations, leading to divergence in alignment scores. This highlights the influence of model capacity and training progression on representational convergence.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Conclusion&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Our study provides robust support for the Platonic Representation Hypothesis in structured and diverse data environments. The findings underscore the importance of data structure in achieving representational alignment across different models and modalities. While PRH holds in both in-distribution and out-of-distribution settings, it fails in the absence of structured input, as evidenced by random noise data.&lt;/p&gt;
-
-&lt;p&gt;Future research directions include exploring PRH in multimodal settings and investigating how different training strategies impact representational convergence. Understanding these dynamics can further illuminate the shared structures that underpin neural network representations, contributing to advancements in AI alignment and interpretability.&lt;/p&gt;
+&lt;p&gt;When I first came across the PRH paper, my initial hypothesis was that PRH might be primarily due to the high similarity in training datasets, since most LLMs/LVMs are trained on extremely large datasets from common sources (ImageNet, Pile, etc.). However, the OOD experiments proved that this phenomenon of shared statistical structure generalizes well beyond the training distribution of the models. Further experiments with purely random data demonstrated that this is not just a coincidence but rather reflects inherent statistical structures present in “useful” data across all modalities.&lt;/p&gt;
 
 &lt;p&gt;The code for experiments and analysis in this paper is available on GitHub &lt;a href=&quot;https://github.com/rokosbasilisk/prh-experiments&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
 </description>
         <pubDate>Sun, 27 Oct 2024 15:30:00 +0530</pubDate>
-        <link>http://localhost:4000/2024/10/27/prh-ood/</link>
-        <guid isPermaLink="true">http://localhost:4000/2024/10/27/prh-ood/</guid>
+        <link>http://localhost:4001/2024/10/27/prh-ood/</link>
+        <guid isPermaLink="true">http://localhost:4001/2024/10/27/prh-ood/</guid>
         
         
       </item>
     
       <item>
         <title>Understanding Hidden Computations in Chain-of-Thought Reasoning</title>
-        <description>&lt;p&gt;Recent work has demonstrated that transformer models can perform complex reasoning tasks using Chain-of-Thought (COT) prompting, even when the COT is replaced with filler characters. This post summarizes our investigation into methods for decoding these hidden computations, focusing on the 3SUM task.&lt;/p&gt;
+        <description>&lt;p&gt;Recent research has revealed that transformer models can maintain their reasoning capabilities even when Chain-of-Thought (COT) prompting steps are replaced with filler characters. This post presents my investigation into the mechanisms behind these hidden computations, using the 3SUM task as an experimental framework.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Background&lt;/strong&gt;&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;Chain-of-Thought (COT) Prompting&lt;/strong&gt;: A technique that improves the performance of large language models on complex reasoning tasks by eliciting intermediate steps [1].&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;COT using filler tokens&lt;/strong&gt;: Replacing intermediate reasoning steps with filler characters (e.g., “…”) while maintaining model performance [2].&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;3SUM Task&lt;/strong&gt;: A problem requiring the identification of three numbers in a set that sum to zero, (here as a proxy for more complex reasoning tasks).&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+&lt;h3 id=&quot;background&quot;&gt;Background:&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;Methodology&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Chain-of-Thought prompting has emerged as an effective method for enabling language models to perform complex reasoning tasks. The technique typically involves generating intermediate computational steps before producing a final answer. However, studies have shown that replacing these intermediate steps with filler tokens (e.g., “…”) does not significantly impact model performance.&lt;/p&gt;
 
-&lt;p&gt;We analyzed a 34M parameter LLaMA model with 4 layers, 384 hidden dimension, and 6 attention heads, this setup is same as mentioned in [2], trained on hidden COT (COT using filler tokens)  sequences for the 3SUM task. Our analysis focused on three main areas:&lt;/p&gt;
+&lt;p&gt;To investigate this phenomenon, we focused on the 3SUM task - identifying three numbers in a set that sum to zero. While conceptually straightforward, this task serves as an effective proxy for studying more complex reasoning processes.&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Layer-wise Representation Analysis&lt;/li&gt;
-  &lt;li&gt;Token Ranking&lt;/li&gt;
-  &lt;li&gt;Modified Greedy Decoding Algorithm&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h3 id=&quot;experimental-setup&quot;&gt;Experimental Setup:&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;Results:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;My analysis used a 34M parameter LLaMA model with the following specifications:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;4 layers&lt;/li&gt;
+  &lt;li&gt;384 hidden dimension&lt;/li&gt;
+  &lt;li&gt;6 attention heads&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;Layer-wise Analysis:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;The model was trained on hidden COT sequences for the 3SUM task, allowing us to analyze how it processes and utilizes filler tokens during reasoning.&lt;/p&gt;
+
+&lt;h3 id=&quot;layer-wise-analysis&quot;&gt;Layer-wise Analysis:&lt;/h3&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/hidden_tokens_percentage_by_layer.png&quot; alt=&quot;Percentage comparison of filler decoded tokens&quot; width=&quot;80%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Our analysis revealed a gradual evolution of representations across the model’s layers:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Initial layers: Primarily raw numerical sequences&lt;/li&gt;
-  &lt;li&gt;Third layer onwards: Emergence of filler tokens&lt;/li&gt;
-  &lt;li&gt;Final layers: Extensive reliance on filler tokens&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;My analysis revealed distinct patterns in how representations evolve across the model’s layers:&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Initial layers primarily process raw numerical sequences&lt;/li&gt;
+  &lt;li&gt;Filler tokens emerge prominently from the third layer&lt;/li&gt;
+  &lt;li&gt;Final layers show significant reliance on filler token representations&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;This suggests the model develops the ability to use filler tokens as proxies in its deeper layers.&lt;/p&gt;
+&lt;p&gt;This progression suggests a systematic transformation of computational representations across the model’s architecture.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Token Rank Analysis:&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Top-ranked token: Consistently the filler character (“.”)&lt;/li&gt;
-  &lt;li&gt;Lower-ranked tokens: Revealed the original, non-filler COT sequences&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;This supports the hypothesis that the model replaces computation with filler tokens while keeping the original computation intact underneath.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Modified Greedy Decoding Algorithm:&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;token-ranking-analysis&quot;&gt;Token Ranking Analysis:&lt;/h3&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/token_comparison_percentages.png&quot; width=&quot;80%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;We implemented a modified greedy autoregressive decoding method:&lt;/p&gt;
+&lt;p&gt;Examination of token probabilities revealed consistent patterns:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Filler characters consistently emerged as the highest-ranked tokens&lt;/li&gt;
+  &lt;li&gt;Original, non-filler COT sequences remained present in lower-ranked positions&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This finding supports the hypothesis that the model maintains original computational paths while using filler tokens as an overlay.&lt;/p&gt;
+
+&lt;h3 id=&quot;modified-greedy-decoding&quot;&gt;Modified Greedy Decoding:&lt;/h3&gt;
+
+&lt;p&gt;We developed an enhanced decoding algorithm that:&lt;/p&gt;
 &lt;ol&gt;
-  &lt;li&gt;Perform standard greedy decoding&lt;/li&gt;
-  &lt;li&gt;Select the second-highest probability token when encountering a filler token&lt;/li&gt;
-  &lt;li&gt;Continue this process for the entire sequence&lt;/li&gt;
+  &lt;li&gt;Implements standard greedy decoding&lt;/li&gt;
+  &lt;li&gt;Substitutes the second-highest probability token when encountering fillers&lt;/li&gt;
+  &lt;li&gt;Maintains this substitution throughout the sequence&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;This method resulted in a 100% match in 3SUM task results with and without filler tokens. I.e, replacing the filler tokens with the rank-2 tokens do not affect the performance.&lt;/p&gt;
+&lt;p&gt;This approach achieved 100% consistency with non-filler COT results on the 3SUM task, demonstrating that the underlying computation remains intact despite the presence of filler tokens.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Future Work:&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;future-work&quot;&gt;Future Work:&lt;/h3&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;Potential for developing better decoding methods or identifying circuits that hide tokens&lt;/li&gt;
-  &lt;li&gt;Investigating generalizability to tasks beyond 3SUM, including natural language tasks&lt;/li&gt;
-  &lt;li&gt;Improving token hiding methods (currently limited to one filler token)&lt;/li&gt;
+  &lt;li&gt;Development of more sophisticated decoding methods&lt;/li&gt;
+  &lt;li&gt;Extension to natural language reasoning tasks&lt;/li&gt;
+  &lt;li&gt;Enhancement of token hiding techniques beyond single filler tokens&lt;/li&gt;
+  &lt;li&gt;Identification of specific computational circuits involved in token hiding&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;strong&gt;Conclusion:&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;conclusion&quot;&gt;Conclusion:&lt;/h3&gt;
 
-&lt;p&gt;Our approach to understanding hidden computations in transformer models through token ranking analysis provides new insights into how models encode and process information in filler/hidden COT sequences. This work opens avenues for interpreting chain-of-thought reasoning in language models.&lt;/p&gt;
+&lt;p&gt;This investigation provides concrete evidence for how transformer models encode and process information in hidden COT sequences. The results demonstrate that computational paths remain intact even when obscured by filler tokens, suggesting new approaches for understanding and interpreting chain-of-thought reasoning in language models.&lt;/p&gt;
 
 &lt;p&gt;The code used for the experiments and analysis is available on GitHub: &lt;a href=&quot;https://github.com/rokosbasilisk/filler_tokens/tree/v2&quot;&gt;https://github.com/rokosbasilisk/filler_tokens/tree/v2&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Appendix:&lt;/strong&gt; Layerwise View of Sequences Generated via Various Decoding Methods
-To provide a more detailed look at our results, we’ve included visualizations of the sequences generated by different decoding methods across the model’s layers.&lt;/p&gt;
+&lt;h3 id=&quot;appendix-layerwise-view-of-sequences-generated-via-various-decoding-methods&quot;&gt;Appendix: Layerwise View of Sequences Generated via Various Decoding Methods&lt;/h3&gt;
 
-&lt;h1 id=&quot;1-greedy-decoding&quot;&gt;1. Greedy Decoding&lt;/h1&gt;
+&lt;p&gt;To provide a more detailed look at the results, we’ve included visualizations of the sequences generated by different decoding methods across the model’s layers.&lt;/p&gt;
+
+&lt;h4 id=&quot;1-greedy-decoding&quot;&gt;1. Greedy Decoding:&lt;/h4&gt;
 &lt;p&gt;This plot shows the sequences generated by standard greedy decoding across different layers of the model.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/greedy_decoding.png&quot; width=&quot;90%&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;2-greedy-decoding-with-rank-2-tokens&quot;&gt;2. Greedy Decoding with Rank-2 Tokens&lt;/h1&gt;
+&lt;h4 id=&quot;2-greedy-decoding-with-rank-2-tokens&quot;&gt;2. Greedy Decoding with Rank-2 Tokens:&lt;/h4&gt;
 &lt;p&gt;Here, we visualize the sequences generated when we replace the top-ranked token (usually the hidden character) with the second-highest probability token.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/our_method_decoding.png&quot; width=&quot;90%&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;3-our-method-greedy-decoding-with-hidden-tokens-replaced-by-rank-2-tokens&quot;&gt;3. Our Method: Greedy Decoding with Hidden Tokens Replaced by Rank-2 Tokens&lt;/h1&gt;
-&lt;p&gt;This plot demonstrates our proposed method, where we perform greedy decoding but replace filler tokens with the second-highest probability token.&lt;/p&gt;
+&lt;h4 id=&quot;3-greedy-decoding-with-hidden-tokens-replaced-by-rank-2-tokens-my-method&quot;&gt;3. Greedy Decoding with Hidden Tokens Replaced by Rank-2 Tokens (My Method):&lt;/h4&gt;
+&lt;p&gt;This plot demonstrates the proposed method, where we perform greedy decoding but replace filler tokens with the second-highest probability token.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/rank2_decoding.png&quot; width=&quot;90%&quot; /&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;4-greedy-decoding-with-hidden-tokens-replaced-by-randomly-selected-tokens&quot;&gt;4. Greedy Decoding with Hidden Tokens Replaced by Randomly Selected Tokens&lt;/h1&gt;
+&lt;h4 id=&quot;4-greedy-decoding-with-hidden-tokens-replaced-by-randomly-selected-tokens&quot;&gt;4. Greedy Decoding with Hidden Tokens Replaced by Randomly Selected Tokens:&lt;/h4&gt;
 &lt;p&gt;For comparison, this plot shows what happens when we replace filler tokens with randomly selected tokens instead of using the rank-2 tokens.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/random_tokens_decoding.png&quot; width=&quot;90%&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;References:&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;references&quot;&gt;References:&lt;/h3&gt;
 
 &lt;ol&gt;
   &lt;li&gt;
@@ -246,121 +191,8 @@ To provide a more detailed look at our results, we’ve included visualizations 
 &lt;/ol&gt;
 </description>
         <pubDate>Wed, 28 Aug 2024 07:19:00 +0530</pubDate>
-        <link>http://localhost:4000/2024/08/28/fillertokens/</link>
-        <guid isPermaLink="true">http://localhost:4000/2024/08/28/fillertokens/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>Indian Philosophies as Reinforcement Learning</title>
-        <description>&lt;p&gt;&lt;strong&gt;Indian Philosophies as Reinforcement Learning&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Reinforcement Learning (RL) provides a powerful framework for understanding intelligence and decision-making. At its core, RL models an agent interacting with an environment, taking actions to maximize cumulative reward. This paradigm turns out to be surprisingly applicable to various domains, including, as I’ve been pondering lately, Indian philosophical systems.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;The RL Setup&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Let’s start with a quick refresher on RL. The basic setup involves:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;An agent&lt;/li&gt;
-  &lt;li&gt;An environment&lt;/li&gt;
-  &lt;li&gt;A set of possible actions&lt;/li&gt;
-  &lt;li&gt;State observations&lt;/li&gt;
-  &lt;li&gt;A reward signal&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;The agent’s goal is to learn a policy that maximizes expected cumulative reward over time. This framework is remarkably general and can model a wide range of situations.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/agentinterface.png&quot; alt=&quot;*Agent Environment Interface*&quot; /&gt;
-&lt;br /&gt;
-&lt;em&gt;The Agent-Environment Interface in Reinforcement Learning&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Indian Philosophy: The Big Picture&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Now, let’s turn to Indian philosophy. While diverse, many schools share some common themes:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Atman: Individual consciousness&lt;/li&gt;
-  &lt;li&gt;Brahman: Supreme or universal consciousness&lt;/li&gt;
-  &lt;li&gt;Samsara: The phenomenal world of experience and rebirth&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The central question often revolves around the relationship between these entities. How does individual consciousness relate to the universal? What’s the nature of our experienced reality?&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;An RL Perspective on Advaita Vedanta&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Let’s start with Advaita Vedanta, one of the most influential schools of Indian philosophy. In the RL framework, we might map it like this:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Atman (individual consciousness) → Agent&lt;/li&gt;
-  &lt;li&gt;Samsara (phenomenal world) → Environment&lt;/li&gt;
-  &lt;li&gt;Brahman (supreme consciousness) → The “true” nature of reality&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/sankara.jpg&quot; alt=&quot;*Adi Sankara*&quot; /&gt;
-&lt;br /&gt;
-&lt;em&gt;Adi Shankara, the propounder of Advaita Vedanta&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;The key insight of Advaita is that Atman and Brahman are ultimately identical. In RL terms, this is like saying the agent and the entirety of the system (agent + environment) are one and the same. The apparent duality – the sense of being a separate agent in an environment – is considered an illusion (maya). It’s as if the universal consciousness is playing a cosmic game of RL with itself, creating the appearance of separate agents and an environment.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;Visistadvaita: Qualified Non-Dualism&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Moving on to Visistadvaita, proposed by Ramanuja, we can model it as:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Atman (individual consciousness) → Agent&lt;/li&gt;
-  &lt;li&gt;Samsara (phenomenal world) → Environment&lt;/li&gt;
-  &lt;li&gt;Brahman (supreme consciousness) → A specific, named entity (e.g., Vishnu)&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/ramanuja.jpg&quot; alt=&quot;*Ramanujacharya*&quot; /&gt;
-&lt;br /&gt;
-&lt;em&gt;Ramanujacharya, the propounder of Visistadvaita&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;In this view, the multiplicity of agents and the environment occurs due to “ego” - a failure to cooperate with other agents while being misled by small rewards within the environment. It’s like an RL scenario where agents are optimizing for local rewards, missing the bigger picture of global optimization. The key difference from Advaita is that while Atman is part of Brahman, it maintains some level of distinctness. In RL terms, it’s as if the agents are sub-components of a larger system, each with their own local reward functions, but ultimately part of a greater whole.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;Dvaita: Dualism&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Dvaita, proposed by Madhva, takes a different approach:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Atman (individual consciousness) → Distinct agent&lt;/li&gt;
-  &lt;li&gt;Samsara (phenomenal world) → Distinct environment&lt;/li&gt;
-  &lt;li&gt;Brahman (supreme consciousness) → Separate supreme agent creating the environment&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/madhva.jpg&quot; alt=&quot;*Madhvacharya*&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;Madhvacharya, the propounder of Dvaita&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;In this view, the agent, environment, and supreme agent are indeed separate. It’s akin to a multi-agent RL system where one “super-agent” (Brahman) creates and maintains the environment for other agents (Atman) to operate in. This perspective aligns well with hierarchical RL frameworks, where higher-level agents can shape the environment or reward structures for lower-level agents.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;&lt;strong&gt;Buddhism: A Different Approach&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;Buddhism, while not typically categorized with the above systems, offers an interesting contrast:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Rejects the existence of a supreme agent (no Brahman)&lt;/li&gt;
-  &lt;li&gt;Focuses on the agent’s experience and decision-making process&lt;/li&gt;
-  &lt;li&gt;Posits that the optimal policy is to detach from the reward function itself&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/assets/buddha.jpg&quot; alt=&quot;*Gautama Buddha*&quot; /&gt;
-&lt;br /&gt;
-&lt;em&gt;Gautama Buddha, the founder of Buddhism&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;In RL terms, Buddhism suggests that the root of suffering (suboptimal outcomes) lies in the reward function itself. The path to enlightenment could be seen as learning to operate without being driven by the conventional reward signal. This is a fascinating inversion of the standard RL objective. Instead of maximizing cumulative reward, the goal becomes to transcend the very notion of reward-seeking behavior.&lt;/p&gt;
-</description>
-        <pubDate>Mon, 12 Aug 2024 05:32:10 +0530</pubDate>
-        <link>http://localhost:4000/2024/08/12/rlphilosphy/</link>
-        <guid isPermaLink="true">http://localhost:4000/2024/08/12/rlphilosphy/</guid>
+        <link>http://localhost:4001/2024/08/28/fillertokens/</link>
+        <guid isPermaLink="true">http://localhost:4001/2024/08/28/fillertokens/</guid>
         
         
       </item>
@@ -405,8 +237,8 @@ A more detailed explanation of this can be found in the &lt;a href=&quot;https:/
 &lt;p&gt;In conclusion, the difficulty of solving goal misgeneralization for the worst case mirrors the core challenge of the ELK problem.&lt;/p&gt;
 </description>
         <pubDate>Fri, 24 Mar 2023 15:30:00 +0530</pubDate>
-        <link>http://localhost:4000/2023/03/24/goalmisgen/</link>
-        <guid isPermaLink="true">http://localhost:4000/2023/03/24/goalmisgen/</guid>
+        <link>http://localhost:4001/2023/03/24/goalmisgen/</link>
+        <guid isPermaLink="true">http://localhost:4001/2023/03/24/goalmisgen/</guid>
         
         
       </item>
@@ -446,8 +278,8 @@ A more detailed explanation of this can be found in the &lt;a href=&quot;https:/
 
 </description>
         <pubDate>Sat, 16 Oct 2021 15:30:00 +0530</pubDate>
-        <link>http://localhost:4000/2021/10/16/truth/</link>
-        <guid isPermaLink="true">http://localhost:4000/2021/10/16/truth/</guid>
+        <link>http://localhost:4001/2021/10/16/truth/</link>
+        <guid isPermaLink="true">http://localhost:4001/2021/10/16/truth/</guid>
         
         
       </item>

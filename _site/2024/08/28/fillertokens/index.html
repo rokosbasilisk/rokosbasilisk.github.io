@@ -7,7 +7,7 @@
     <title>Understanding Hidden Computations in Chain-of-Thought Reasoning</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="cached thoughts">
-    <link rel="canonical" href="http://localhost:4000/2024/08/28/fillertokens/">
+    <link rel="canonical" href="http://localhost:4001/2024/08/28/fillertokens/">
     <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Ram Bharadwaj posts" />
 
     <!-- Custom CSS -->
@@ -74,106 +74,101 @@
   </header>
 
   <article class="post-content">
-  <p>Recent work has demonstrated that transformer models can perform complex reasoning tasks using Chain-of-Thought (COT) prompting, even when the COT is replaced with filler characters. This post summarizes our investigation into methods for decoding these hidden computations, focusing on the 3SUM task.</p>
+  <p>Recent research has revealed that transformer models can maintain their reasoning capabilities even when Chain-of-Thought (COT) prompting steps are replaced with filler characters. This post presents my investigation into the mechanisms behind these hidden computations, using the 3SUM task as an experimental framework.</p>
 
-<p><strong>Background</strong></p>
-<ol>
-  <li>
-    <p><strong>Chain-of-Thought (COT) Prompting</strong>: A technique that improves the performance of large language models on complex reasoning tasks by eliciting intermediate steps [1].</p>
-  </li>
-  <li>
-    <p><strong>COT using filler tokens</strong>: Replacing intermediate reasoning steps with filler characters (e.g., “…”) while maintaining model performance [2].</p>
-  </li>
-  <li>
-    <p><strong>3SUM Task</strong>: A problem requiring the identification of three numbers in a set that sum to zero, (here as a proxy for more complex reasoning tasks).</p>
-  </li>
-</ol>
+<h3 id="background">Background:</h3>
 
-<p><strong>Methodology</strong></p>
+<p>Chain-of-Thought prompting has emerged as an effective method for enabling language models to perform complex reasoning tasks. The technique typically involves generating intermediate computational steps before producing a final answer. However, studies have shown that replacing these intermediate steps with filler tokens (e.g., “…”) does not significantly impact model performance.</p>
 
-<p>We analyzed a 34M parameter LLaMA model with 4 layers, 384 hidden dimension, and 6 attention heads, this setup is same as mentioned in [2], trained on hidden COT (COT using filler tokens)  sequences for the 3SUM task. Our analysis focused on three main areas:</p>
+<p>To investigate this phenomenon, we focused on the 3SUM task - identifying three numbers in a set that sum to zero. While conceptually straightforward, this task serves as an effective proxy for studying more complex reasoning processes.</p>
 
-<ol>
-  <li>Layer-wise Representation Analysis</li>
-  <li>Token Ranking</li>
-  <li>Modified Greedy Decoding Algorithm</li>
-</ol>
+<h3 id="experimental-setup">Experimental Setup:</h3>
 
-<p><strong>Results:</strong></p>
+<p>My analysis used a 34M parameter LLaMA model with the following specifications:</p>
+<ul>
+  <li>4 layers</li>
+  <li>384 hidden dimension</li>
+  <li>6 attention heads</li>
+</ul>
 
-<p><strong>Layer-wise Analysis:</strong></p>
+<p>The model was trained on hidden COT sequences for the 3SUM task, allowing us to analyze how it processes and utilizes filler tokens during reasoning.</p>
+
+<h3 id="layer-wise-analysis">Layer-wise Analysis:</h3>
 
 <p><img src="/assets/hidden_tokens_percentage_by_layer.png" alt="Percentage comparison of filler decoded tokens" width="80%" /></p>
 
-<p>Our analysis revealed a gradual evolution of representations across the model’s layers:</p>
-<ul>
-  <li>Initial layers: Primarily raw numerical sequences</li>
-  <li>Third layer onwards: Emergence of filler tokens</li>
-  <li>Final layers: Extensive reliance on filler tokens</li>
-</ul>
+<p>My analysis revealed distinct patterns in how representations evolve across the model’s layers:</p>
+<ol>
+  <li>Initial layers primarily process raw numerical sequences</li>
+  <li>Filler tokens emerge prominently from the third layer</li>
+  <li>Final layers show significant reliance on filler token representations</li>
+</ol>
 
-<p>This suggests the model develops the ability to use filler tokens as proxies in its deeper layers.</p>
+<p>This progression suggests a systematic transformation of computational representations across the model’s architecture.</p>
 
-<p><strong>Token Rank Analysis:</strong></p>
-
-<ul>
-  <li>Top-ranked token: Consistently the filler character (“.”)</li>
-  <li>Lower-ranked tokens: Revealed the original, non-filler COT sequences</li>
-</ul>
-
-<p>This supports the hypothesis that the model replaces computation with filler tokens while keeping the original computation intact underneath.</p>
-
-<p><strong>Modified Greedy Decoding Algorithm:</strong></p>
+<h3 id="token-ranking-analysis">Token Ranking Analysis:</h3>
 
 <p><img src="/assets/token_comparison_percentages.png" width="80%" /></p>
 
-<p>We implemented a modified greedy autoregressive decoding method:</p>
+<p>Examination of token probabilities revealed consistent patterns:</p>
+<ul>
+  <li>Filler characters consistently emerged as the highest-ranked tokens</li>
+  <li>Original, non-filler COT sequences remained present in lower-ranked positions</li>
+</ul>
+
+<p>This finding supports the hypothesis that the model maintains original computational paths while using filler tokens as an overlay.</p>
+
+<h3 id="modified-greedy-decoding">Modified Greedy Decoding:</h3>
+
+<p>We developed an enhanced decoding algorithm that:</p>
 <ol>
-  <li>Perform standard greedy decoding</li>
-  <li>Select the second-highest probability token when encountering a filler token</li>
-  <li>Continue this process for the entire sequence</li>
+  <li>Implements standard greedy decoding</li>
+  <li>Substitutes the second-highest probability token when encountering fillers</li>
+  <li>Maintains this substitution throughout the sequence</li>
 </ol>
 
-<p>This method resulted in a 100% match in 3SUM task results with and without filler tokens. I.e, replacing the filler tokens with the rank-2 tokens do not affect the performance.</p>
+<p>This approach achieved 100% consistency with non-filler COT results on the 3SUM task, demonstrating that the underlying computation remains intact despite the presence of filler tokens.</p>
 
-<p><strong>Future Work:</strong></p>
+<h3 id="future-work">Future Work:</h3>
 
 <ol>
-  <li>Potential for developing better decoding methods or identifying circuits that hide tokens</li>
-  <li>Investigating generalizability to tasks beyond 3SUM, including natural language tasks</li>
-  <li>Improving token hiding methods (currently limited to one filler token)</li>
+  <li>Development of more sophisticated decoding methods</li>
+  <li>Extension to natural language reasoning tasks</li>
+  <li>Enhancement of token hiding techniques beyond single filler tokens</li>
+  <li>Identification of specific computational circuits involved in token hiding</li>
 </ol>
 
-<p><strong>Conclusion:</strong></p>
+<h3 id="conclusion">Conclusion:</h3>
 
-<p>Our approach to understanding hidden computations in transformer models through token ranking analysis provides new insights into how models encode and process information in filler/hidden COT sequences. This work opens avenues for interpreting chain-of-thought reasoning in language models.</p>
+<p>This investigation provides concrete evidence for how transformer models encode and process information in hidden COT sequences. The results demonstrate that computational paths remain intact even when obscured by filler tokens, suggesting new approaches for understanding and interpreting chain-of-thought reasoning in language models.</p>
 
 <p>The code used for the experiments and analysis is available on GitHub: <a href="https://github.com/rokosbasilisk/filler_tokens/tree/v2">https://github.com/rokosbasilisk/filler_tokens/tree/v2</a></p>
 
-<p><strong>Appendix:</strong> Layerwise View of Sequences Generated via Various Decoding Methods
-To provide a more detailed look at our results, we’ve included visualizations of the sequences generated by different decoding methods across the model’s layers.</p>
+<h3 id="appendix-layerwise-view-of-sequences-generated-via-various-decoding-methods">Appendix: Layerwise View of Sequences Generated via Various Decoding Methods</h3>
 
-<h1 id="1-greedy-decoding">1. Greedy Decoding</h1>
+<p>To provide a more detailed look at the results, we’ve included visualizations of the sequences generated by different decoding methods across the model’s layers.</p>
+
+<h4 id="1-greedy-decoding">1. Greedy Decoding:</h4>
 <p>This plot shows the sequences generated by standard greedy decoding across different layers of the model.</p>
 
 <p><img src="/assets/greedy_decoding.png" width="90%" /></p>
 
-<h1 id="2-greedy-decoding-with-rank-2-tokens">2. Greedy Decoding with Rank-2 Tokens</h1>
+<h4 id="2-greedy-decoding-with-rank-2-tokens">2. Greedy Decoding with Rank-2 Tokens:</h4>
 <p>Here, we visualize the sequences generated when we replace the top-ranked token (usually the hidden character) with the second-highest probability token.</p>
 
 <p><img src="/assets/our_method_decoding.png" width="90%" /></p>
 
-<h1 id="3-our-method-greedy-decoding-with-hidden-tokens-replaced-by-rank-2-tokens">3. Our Method: Greedy Decoding with Hidden Tokens Replaced by Rank-2 Tokens</h1>
-<p>This plot demonstrates our proposed method, where we perform greedy decoding but replace filler tokens with the second-highest probability token.</p>
+<h4 id="3-greedy-decoding-with-hidden-tokens-replaced-by-rank-2-tokens-my-method">3. Greedy Decoding with Hidden Tokens Replaced by Rank-2 Tokens (My Method):</h4>
+<p>This plot demonstrates the proposed method, where we perform greedy decoding but replace filler tokens with the second-highest probability token.</p>
 
 <p><img src="/assets/rank2_decoding.png" width="90%" /></p>
 
-<h1 id="4-greedy-decoding-with-hidden-tokens-replaced-by-randomly-selected-tokens">4. Greedy Decoding with Hidden Tokens Replaced by Randomly Selected Tokens</h1>
+<h4 id="4-greedy-decoding-with-hidden-tokens-replaced-by-randomly-selected-tokens">4. Greedy Decoding with Hidden Tokens Replaced by Randomly Selected Tokens:</h4>
 <p>For comparison, this plot shows what happens when we replace filler tokens with randomly selected tokens instead of using the rank-2 tokens.</p>
 
 <p><img src="/assets/random_tokens_decoding.png" width="90%" /></p>
 
-<p><strong>References:</strong></p>
+<h3 id="references">References:</h3>
 
 <ol>
   <li>
