@@ -13,9 +13,7 @@ The [Platonic Representation Hypothesis](https://arxiv.org/pdf/2405.07987) (PRH)
 
 ### Does PRH hold only when models are trained on data from the same distribution?
 
-### Methodology:
-
-To rigorously evaluate PRH beyond in-distribution data, I extended experiments to three scenarios:
+To evaluate PRH beyond in-distribution data, I extended experiments to three scenarios:
 
    - **In-distribution data:** Utilized the validation set from Places365, aligning closely with the training data of many vision models.
    - **Out-of-distribution (OOD) data:** Employed the [ImageNet-O](https://arxiv.org/pdf/1907.07174) dataset, containing images that diverge significantly from the standard ImageNet distribution.
