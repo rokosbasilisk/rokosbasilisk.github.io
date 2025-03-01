@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Experiments with the Platonic Representation Hypothesis</title>
     <meta name="viewport" content="width=device-width">
-    <meta name="description" content="cached thoughts">
+    <meta name="description" content="">
     <link rel="canonical" href="http://localhost:4001/2024/10/27/prh-ood/">
-    <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Ram Bharadwaj posts" />
+    <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Full Wrong posts" />
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
@@ -35,7 +35,7 @@
     <div style="float:left; margin-top:10px; margin-right:10px;">
     </div>
 
-    <a class="site-title" href="/">Ram Bharadwaj</a>
+    <a class="site-title" href="/">Full Wrong</a>
     
     <nav class="site-nav">
       <a href="#" class="menu-icon">
@@ -80,31 +80,12 @@
 
 <h3 id="does-prh-hold-only-when-models-are-trained-on-data-from-the-same-distribution">Does PRH hold only when models are trained on data from the same distribution?</h3>
 
-<h3 id="methodology">Methodology:</h3>
+<p>To evaluate PRH beyond in-distribution data, I extended experiments to three scenarios:</p>
 
-<p>To rigorously evaluate PRH beyond in-distribution data, I extended experiments to encompass a variety of challenging scenarios:</p>
-
-<h3 id="1-representational-alignment-across-data-types">1. Representational Alignment Across Data Types:</h3>
 <ul>
   <li><strong>In-distribution data:</strong> Utilized the validation set from Places365, aligning closely with the training data of many vision models.</li>
   <li><strong>Out-of-distribution (OOD) data:</strong> Employed the <a href="https://arxiv.org/pdf/1907.07174">ImageNet-O</a> dataset, containing images that diverge significantly from the standard ImageNet distribution.</li>
   <li><strong>Random noise:</strong> Generated purely random images to probe the extreme boundaries of representational alignment.</li>
-</ul>
-
-<p>Alignment was measured using Spearman’s rank correlation on mutual k-NN distances across model representations, assessing how models interpret the similarity of various data inputs.</p>
-
-<h3 id="2-progressive-noise-injection-in-vision-models">2. Progressive Noise Injection in Vision Models:</h3>
-<ul>
-  <li>Corrupted a set of 250 images with Gaussian noise over 100 incremental steps.</li>
-  <li>Measured mutual alignment across 17 Vision Transformer models at each noise level.</li>
-  <li>Analyzed alignment scores to detect patterns in how noise impacts convergence.</li>
-</ul>
-
-<h3 id="3-tracking-alignment-during-language-model-training">3. Tracking Alignment During Language Model Training:</h3>
-<ul>
-  <li>Analyzed six large language models (LLMs) using checkpoints saved at 100 different training stages.</li>
-  <li>Measured alignment between every pair of models at each checkpoint to observe changes in representational similarity over time.</li>
-  <li>Aimed to uncover phases of increased or decreased similarity, providing insights into how models internalize structure during training.</li>
 </ul>
 
 <h3 id="results">Results:</h3>
@@ -149,11 +130,11 @@
 
   <div class="wrap">
 
-    <!-- <h2 class="footer-heading">Ram Bharadwaj</h2> -->
+    <!-- <h2 class="footer-heading">Full Wrong</h2> -->
 
     <div class="footer-col-1 column">
       <ul>
-        <li>Ram Bharadwaj</li>
+        <li>Full Wrong</li>
         <!-- <li><a href="mailto:"></a></li> -->
       </ul>
     </div>
@@ -184,7 +165,7 @@
     </div>
 
     <div class="footer-col-3 column">
-      <p class="text">cached thoughts</p>
+      <p class="text"></p>
     </div>
 
   </div>

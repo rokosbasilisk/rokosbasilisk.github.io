@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Ram Bharadwaj</title>
-    <description>cached thoughts</description>
+    <title>Full Wrong</title>
+    <description></description>
     <link>http://localhost:4001/</link>
     <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Thu, 13 Feb 2025 03:45:19 +0530</pubDate>
-    <lastBuildDate>Thu, 13 Feb 2025 03:45:19 +0530</lastBuildDate>
+    <pubDate>Sun, 02 Mar 2025 03:33:14 +0530</pubDate>
+    <lastBuildDate>Sun, 02 Mar 2025 03:33:14 +0530</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
     
       <item>
@@ -17,31 +17,12 @@
 
 &lt;h3 id=&quot;does-prh-hold-only-when-models-are-trained-on-data-from-the-same-distribution&quot;&gt;Does PRH hold only when models are trained on data from the same distribution?&lt;/h3&gt;
 
-&lt;h3 id=&quot;methodology&quot;&gt;Methodology:&lt;/h3&gt;
+&lt;p&gt;To evaluate PRH beyond in-distribution data, I extended experiments to three scenarios:&lt;/p&gt;
 
-&lt;p&gt;To rigorously evaluate PRH beyond in-distribution data, I extended experiments to encompass a variety of challenging scenarios:&lt;/p&gt;
-
-&lt;h3 id=&quot;1-representational-alignment-across-data-types&quot;&gt;1. Representational Alignment Across Data Types:&lt;/h3&gt;
 &lt;ul&gt;
   &lt;li&gt;&lt;strong&gt;In-distribution data:&lt;/strong&gt; Utilized the validation set from Places365, aligning closely with the training data of many vision models.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Out-of-distribution (OOD) data:&lt;/strong&gt; Employed the &lt;a href=&quot;https://arxiv.org/pdf/1907.07174&quot;&gt;ImageNet-O&lt;/a&gt; dataset, containing images that diverge significantly from the standard ImageNet distribution.&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;Random noise:&lt;/strong&gt; Generated purely random images to probe the extreme boundaries of representational alignment.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Alignment was measured using Spearman’s rank correlation on mutual k-NN distances across model representations, assessing how models interpret the similarity of various data inputs.&lt;/p&gt;
-
-&lt;h3 id=&quot;2-progressive-noise-injection-in-vision-models&quot;&gt;2. Progressive Noise Injection in Vision Models:&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Corrupted a set of 250 images with Gaussian noise over 100 incremental steps.&lt;/li&gt;
-  &lt;li&gt;Measured mutual alignment across 17 Vision Transformer models at each noise level.&lt;/li&gt;
-  &lt;li&gt;Analyzed alignment scores to detect patterns in how noise impacts convergence.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;3-tracking-alignment-during-language-model-training&quot;&gt;3. Tracking Alignment During Language Model Training:&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;Analyzed six large language models (LLMs) using checkpoints saved at 100 different training stages.&lt;/li&gt;
-  &lt;li&gt;Measured alignment between every pair of models at each checkpoint to observe changes in representational similarity over time.&lt;/li&gt;
-  &lt;li&gt;Aimed to uncover phases of increased or decreased similarity, providing insights into how models internalize structure during training.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;results&quot;&gt;Results:&lt;/h3&gt;
