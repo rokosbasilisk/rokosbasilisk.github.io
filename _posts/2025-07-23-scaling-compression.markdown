@@ -33,9 +33,9 @@ The other experimental parameters are:
   - **CHUNK_SIZE:** 2048 bytes  
   - **NUM_CHUNKS:** 2048 per dataset  
 - **Compression pipeline:**  
-  1. Raw bytes → ASCII via `chr(b % 128)`  
-  2. Tokenize (max_length = 1024)  
-  3. Arithmetic coding on LLM probabilities  
+  1. Raw bytes → ASCII 
+  2. Tokenize and pass the ASCII symbols to LLM
+  3. Arithmetic coding on LLM probabilities
   4. **CR** = compressed_bits / original_bits  
 - **Datasets & Preprocessing:**  
   - **Text:** enwik8 (Wikipedia XML)  
@@ -61,43 +61,43 @@ The other experimental parameters are:
   <tbody>
     <tr>
       <td style="border:1px solid #444;padding:4px;">pythia-70M</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.22</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.18</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.223</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.176</td>
       <td style="border:1px solid #444;padding:4px;text-align:right;">0.17</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.17</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.17</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.173</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.175</td>
     </tr>
     <tr>
       <td style="border:1px solid #444;padding:4px;">pythia-160M</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.22</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.16</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.15</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.15</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.15</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.218</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.159</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.149</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.149</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.150</td>
     </tr>
     <tr>
       <td style="border:1px solid #444;padding:4px;">pythia-410M</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.22</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.15</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.14</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.13</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.13</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.223</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.148</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.136</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.129</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.128</td>
     </tr>
     <tr>
-      <td style="border:1px solid #444;padding:4px;">pythia-1 B</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.21</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.14</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.13</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.12</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.12</td>
+      <td style="border:1px solid #444;padding:4px;">pythia-1B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.207</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.140</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.128</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.120</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.120</td>
     </tr>
     <tr>
-      <td style="border:1px solid #444;padding:4px;">pythia-1.4 B</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.21</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.14</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.12</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.11</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.11</td>
+      <td style="border:1px solid #444;padding:4px;">pythia-1.4B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.207</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.137</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.124</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.115</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.115</td>
     </tr>
   </tbody>
 </table>
@@ -139,43 +139,43 @@ The “Language Modeling Is Compression” paper shows that an LLM trained only 
   <tbody>
     <tr>
       <td style="border:1px solid #444;padding:4px;">pythia-70M</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.60</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.50</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.49</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.50</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.51</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.601</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.499</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.492</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.505</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.513</td>
     </tr>
     <tr>
       <td style="border:1px solid #444;padding:4px;">pythia-160M</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.61</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.48</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.48</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.49</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.615</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.483</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.471</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.482</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.492</td>
     </tr>
     <tr>
       <td style="border:1px solid #444;padding:4px;">pythia-410M</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.67</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.51</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.46</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.45</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.668</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.506</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.461</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.444</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.447</td>
     </tr>
     <tr>
-      <td style="border:1px solid #444;padding:4px;">pythia-1 B</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.60</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.46</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+      <td style="border:1px solid #444;padding:4px;">pythia-1B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.601</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.470</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.456</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.436</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.440</td>
     </tr>
     <tr>
-      <td style="border:1px solid #444;padding:4px;">pythia-1.4 B</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.64</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.48</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.43</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+      <td style="border:1px solid #444;padding:4px;">pythia-1.4B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.643</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.482</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.470</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.434</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.436</td>
     </tr>
   </tbody>
 </table>
@@ -205,43 +205,43 @@ $$
   <tbody>
     <tr>
       <td style="border:1px solid #444;padding:4px;">pythia-70M</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.69</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.46</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.695</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.460</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.439</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.475</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.466</td>
     </tr>
     <tr>
       <td style="border:1px solid #444;padding:4px;">pythia-160M</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.68</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.43</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.43</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.46</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.678</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.440</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.430</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.433</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.456</td>
     </tr>
     <tr>
       <td style="border:1px solid #444;padding:4px;">pythia-410M</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.77</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.51</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.40</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.38</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.39</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.770</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.505</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.404</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.383</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.391</td>
     </tr>
     <tr>
-      <td style="border:1px solid #444;padding:4px;">pythia-1 B</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.68</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.42</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.38</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.38</td>
+      <td style="border:1px solid #444;padding:4px;">pythia-1B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.677</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.424</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.444</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.376</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.384</td>
     </tr>
     <tr>
-      <td style="border:1px solid #444;padding:4px;">pythia-1.4 B</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.75</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.38</td>
-      <td style="border:1px solid #444;padding:4px;text-align:right;">0.39</td>
+      <td style="border:1px solid #444;padding:4px;">pythia-1.4B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.752</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.469</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.443</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.378</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.385</td>
     </tr>
   </tbody>
 </table>
@@ -272,13 +272,13 @@ It has been argued that LLMs trained only on text can form [world models for pro
 
 We hypothesize two primary mechanisms responsible for this:
 
-1. **In-Context Learning (ICL)**  
+1. **In-Context Learning**  
    Within a given token window, self-attention adapts on-the-fly to file-specific patterns (repeating pixels, periodic audio cycles), shaving off most of the entropy.
 
-2. **Universal Sequence Prior (USP)**  
-   Pretraining internalizes bursty repetitions, Zipf’s law, heavy tails, and long-range autocorrelations—statistics shared by all byte streams. Even without context, compression ratio should be far below uniform-noise rates.
+2. **Universal Sequence Prior**  
+   Pretraining internalizes bursty repetitions, Zipf’s law, heavy tails, and long-range autocorrelations statistics shared by all byte streams. Even without context, compression ratio should be far below uniform-noise rates. Do read [Benford’s Law, Zipf’s Law and the Pareto Distribution](https://terrytao.wordpress.com/2009/07/03/benfords-law-zipfs-law-and-the-pareto-distribution/) to know more about naturally occuring data distributions and their universality
 
-Future work should quantify each component’s contribution and trace how they emerge during pretraining.
+A really interesting future work should be to quantify each component’s contribution and trace how they emerge during pretraining.
 
 ---
 
