@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Scaling Laws for LLM-Based Compression"
+title: "Scaling Laws for LLM-Based Data Compression"
 excerpt: "Investigating how large language models compress text, image, and speech with universal power laws"
 date:   2025-07-23 10:00:00
 mathjax: true
