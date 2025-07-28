@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Goal-misgeneralization might be ELK-hard</title>
+    <title>The God's Song</title>
     <meta name="viewport" content="width=device-width">
     <meta name="description" content="">
-    <link rel="canonical" href="http://localhost:4000/2023/03/24/goalmisgen/">
+    <link rel="canonical" href="http://localhost:4000/2025/06/10/on-gita/">
     <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Full Wrong posts" />
 
     <!-- Custom CSS -->
@@ -71,47 +71,30 @@
       <div class="post">
 
   <header class="post-header">
-    <h1>Goal-misgeneralization might be ELK-hard</h1>
-    <p class="meta">Mar 24, 2023</p>
+    <h1>The God's Song</h1>
+    <p class="meta">Jun 10, 2025</p>
   </header>
 
   <article class="post-content">
-  <p>Goal misgeneralization and the ELK (Eliciting Latent Knowledge) problem are two of the most intriguing yet well-defined sub-problems within the broader AI alignment challenge. In this post, I’ll share my opinion on why solving goal misgeneralization is as challenging as solving the ELK problem.</p>
+  <p>They lit fires in the woods they cleared, and with fire came worship. Old people turned inward, toward stillness, toward silence.</p>
 
-<h3 id="goal-misgeneralization">Goal Misgeneralization</h3>
+<p>Wars broke. Races mingled. Gods were shared in smoky air. Some brought rituals, others talked about the soul. And a ladder was built. Those closest to fire rose, those mixed with earth sowed.</p>
 
-<p>Goal misgeneralization occurs when a reinforcement learning agent retains its capabilities out-of-distribution yet pursues the wrong goal. This misalignment between the intended goal and the agent’s actual behavior can lead to unexpected and potentially harmful outcomes.
-A more detailed explanation of this can be found in the <a href="https://arxiv.org/abs/2105.14111">here</a>.</p>
+<p>Rituals deepened, but work did not stop. After each fire, they asked: “What is the point of it all?” These questions became forest wisdom, echoes in quiet minds.</p>
 
-<h3 id="the-elk-problem">The ELK Problem</h3>
+<p>Knowledge passed, but only to some. The rest were needed, to keep the wheels turning, to keep the fire alive.</p>
 
-<p>Alignment Research Center (ARC) provides a simple, informal explanation of the ELK problem:</p>
+<p>The ones atop became scribes. They listened to bards, wove myths into lines, and slowly, a religion grew.</p>
 
-<blockquote>
-  <p>Suppose we train a model to predict what the future will look like according to cameras and other sensors. We then use planning algorithms to find a sequence of actions that lead to predicted futures that look good to us.</p>
+<p>Centuries passed. Ascetics multiplied. Top to bottom, silence spread.</p>
 
-  <p>But some action sequences could tamper with the cameras so they show happy humans regardless of what’s really happening. More generally, some futures look great on camera but are actually catastrophically bad.</p>
+<p>Then came the kid from the south, fire in mind, not bound to rite nor retreat. He debated all, rose swift, found the land’s greatest tale: the grand war.</p>
 
-  <p>In these cases, the prediction model “knows” facts (like “the camera was tampered with”) that are not visible on camera but would change our evaluation of the predicted future if we learned them. How can we train this model to report its latent knowledge of off-screen events?</p>
-</blockquote>
+<p>In its heart, the great dark warrior, in trance, speaking of inaction, yet exalting action. One mind in all forms, he said. Use them fully, there is no better thing.</p>
 
-<p>A more sophisticated explanation of the ELK problem can be found in the <a href="https://docs.google.com/document/d/1WwsnJQstPq91_Yh-Ch2XRL8H_EpsnjrC1dwZXR37PC8/">ELK problem document</a>.</p>
+<p>The kid was moved. He wrote as none before. “This is the truth,” he said “All is one, but action must go on.”</p>
 
-<p>As of now, this problem too remains unsolved.</p>
-
-<h3 id="why-solving-goal-misgeneralization-is-as-hard-as-solving-elk">Why Solving Goal Misgeneralization is as Hard as Solving ELK</h3>
-
-<p>Consider an adversarial training scheme for solving goal misgeneralization, such as Redwood Research’s work on <a href="https://arxiv.org/pdf/2205.01663.pdf">“Adversarial Training for High-Stakes Reliability”</a>.</p>
-
-<p>Let’s examine a model trained to perform a specific task. To guarantee worst-case performance for this model, we need to establish bounds for its outputs in adversarial examples. However, running the model in the actual environment is not feasible due to potential unwanted consequences.</p>
-
-<p>To address this, we can use a prediction-head to generate a simulated version of the trajectory that the model might undergo. We can then train a classifier from the output of the prediction-head to determine whether the AI system exhibits goal misgeneralization in an adversarial manner. The model can be penalized for misgeneralization behavior, and the resulting policy can be iteratively distilled into a newer model.</p>
-
-<p>This prediction-head can be used to build another model that acts as a classifier, allowing us to distill the conservative policy (model) into a newer one.</p>
-
-<p>However, this approach is only viable when the prediction-head is not deceiving, which is essentially the same challenge posed by the ELK problem.</p>
-
-<p>In conclusion, the difficulty of solving goal misgeneralization for the worst case mirrors the core challenge of the ELK problem.</p>
+<p>And so ends the god’s song.</p>
 
   </article>
 

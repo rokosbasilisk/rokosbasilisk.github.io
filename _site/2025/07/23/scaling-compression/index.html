@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Scaling Laws for LLM-Based Data Compression</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="">
+    <link rel="canonical" href="http://localhost:4000/2025/07/23/scaling-compression/">
+    <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Full Wrong posts" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-3698471-23', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+
+  <div class="wrap">
+
+    <div style="float:left; margin-top:10px; margin-right:10px;">
+    </div>
+
+    <a class="site-title" href="/">Full Wrong</a>
+    
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           viewBox="0 0 18 15" enable-background="new 0 0 18 15" xml:space="preserve">
+          <path fill="#505050" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0
+            h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#505050" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484
+            h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#505050" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0
+            c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        
+          
+        
+          <a class="page-link" href="/about/">About</a>
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      <div class="post">
+
+  <header class="post-header">
+    <h1>Scaling Laws for LLM-Based Data Compression</h1>
+    <p class="meta">Jul 23, 2025</p>
+  </header>
+
+  <article class="post-content">
+  <h2 id="introduction">Introduction</h2>
+
+<p>The <a href="https://arxiv.org/abs/2001.08361">scaling laws for neural language models</a> showed that cross-entropy loss follows a power law in three factors:</p>
+
+<ol>
+  <li><strong>Dataset size</strong></li>
+  <li><strong>Model parameters</strong></li>
+  <li><strong>Training compute</strong> (steps or epochs)</li>
+</ol>
+
+<p>The lower the cross-entropy loss, the better the model’s next-token prediction. Since prediction and compression are deeply linked (<a href="https://mindfulmodeler.substack.com/p/the-intricate-link-between-compression">The Intricate Link Between Compression and Prediction</a>), a lower loss should translate into better lossless compression. This raises the question:</p>
+
+<blockquote>
+  <p><strong>Do LLMs exhibit clean power-law scaling in compression performance?</strong></p>
+</blockquote>
+
+<hr />
+
+<h2 id="experiment">Experiment</h2>
+
+<p>For the experiment, I considered the Pythia models, which are available at multiple checkpoints and parameter sizes. All Pythia models are trained on the same dataset (The Pile), ensuring a uniform comparison. Following Delétang et al. (2023), The LLM’s predicted probabilities for each token are used to update the symbol table of an arithmetic encoder (a near-optimal entropy coder). I took the first 2048 chunks of the enwik8 dataset each chunk is 2048 bytes and fed them to the LLM to predict the next-token probabilities.</p>
+
+<p>The other experimental parameters are:</p>
+
+<ul>
+  <li><strong>Models:</strong> EleutherAI Pythia family (8-bit quantized): 70 M, 160 M, 410 M, 1 B, 1.4 B parameters</li>
+  <li><strong>Checkpoints:</strong> 1 k, 8 k, 32 k, 128 k, 143 k training steps</li>
+  <li><strong>Chunking:</strong>
+    <ul>
+      <li><strong>CHUNK_SIZE:</strong> 2048 bytes</li>
+      <li><strong>NUM_CHUNKS:</strong> 2048 per dataset</li>
+    </ul>
+  </li>
+  <li><strong>Compression pipeline:</strong>
+    <ol>
+      <li>Raw bytes → ASCII via <code class="language-plaintext highlighter-rouge">chr(b % 128)</code></li>
+      <li>Tokenize (max_length = 1024)</li>
+      <li>Arithmetic coding on LLM probabilities</li>
+      <li><strong>CR</strong> = compressed_bits / original_bits</li>
+    </ol>
+  </li>
+  <li><strong>Datasets &amp; Preprocessing:</strong>
+    <ul>
+      <li><strong>Text:</strong> enwik8 (Wikipedia XML)</li>
+      <li><strong>Image:</strong> ImageNet-1k validation → 32 × 64 grayscale patches (uint8 bytes)</li>
+      <li><strong>Speech:</strong> LibriSpeech “clean” train.100 → 16 kHz PCM → int16 bytes</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="results-text-compression">Results: Text Compression</h2>
+
+<div style="overflow-x:auto;width:100%;">
+<table style="width:100%;border:1px solid #444;border-collapse:collapse;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #444;padding:4px;text-align:left;">Model</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">1 k</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">8 k</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">32 k</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">128 k</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">143 k</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-70M</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.22</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.18</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.17</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.17</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.17</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-160M</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.22</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.16</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.15</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.15</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.15</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-410M</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.22</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.15</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.14</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.13</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.13</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-1 B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.21</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.14</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.13</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.12</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.12</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-1.4 B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.21</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.14</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.12</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.11</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="text-scaling-law-fit">Text scaling-law fit</h3>
+
+<p>We fit a Kaplan-style power law<br />
+\(\mathrm{CR}(P,S)
+= a + b\,P^{-\alpha} + c\,S^{-\beta}.\)<br />
+For <strong>text</strong>, the best-fit coefficients are:<br />
+\(\mathrm{CR}_{\text{text}}
+= 0.10 + 60\,P^{-0.38} + 10\,S^{-0.75}.\)</p>
+
+<hr />
+
+<h2 id="compression-on-non-text-modalities">Compression on Non-Text Modalities</h2>
+
+<p>The “Language Modeling Is Compression” paper shows that an LLM trained only on text can compress arbitrary byte streams <a href="https://arxiv.org/abs/2309.10668">Language Modeling Is Compression</a>. I applied the same pipeline to ImageNet-1k patches and LibriSpeech audio.</p>
+
+<h3 id="image-results">Image Results</h3>
+
+<div style="overflow-x:auto;width:100%;">
+<table style="width:100%;border:1px solid #444;border-collapse:collapse;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #444;padding:4px;text-align:left;">Model</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">1 k</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">8 k</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">32 k</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">128 k</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">143 k</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-70M</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.60</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.50</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.49</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.50</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.51</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-160M</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.61</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.48</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.48</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.49</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-410M</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.67</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.51</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.46</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.45</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-1 B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.60</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.46</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-1.4 B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.64</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.48</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.43</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="image-scaling-law-fit">Image scaling-law fit</h3>
+
+\[\mathrm{CR}_{\text{image}}
+= 0.38 + 2\,P^{-0.15} + 60\,S^{-0.86}.\]
+
+<h3 id="speech-results">Speech Results</h3>
+
+<div style="overflow-x:auto;width:100%;">
+<table style="width:100%;border:1px solid #444;border-collapse:collapse;">
+  <thead>
+    <tr>
+      <th style="border:1px solid #444;padding:4px;text-align:left;">Model</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">1 k</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">8 k</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">32 k</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">128 k</th>
+      <th style="border:1px solid #444;padding:4px;text-align:right;">143 k</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-70M</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.69</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.46</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-160M</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.68</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.43</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.43</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.46</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-410M</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.77</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.51</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.40</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.38</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.39</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-1 B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.68</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.42</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.38</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.38</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-1.4 B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.75</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.38</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.39</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<h3 id="speech-scaling-law-fit">Speech scaling-law fit</h3>
+
+\[\mathrm{CR}_{\text{speech}}
+= 0.39 + 8\times10^{3}\,P^{-0.68} + 1\times10^{2}\,S^{-0.85}.\]
+
+<hr />
+
+<h2 id="combined-scaling-curves">Combined Scaling Curves</h2>
+<p>The below plot shows the overall scaling laws plots across all the three modalities, While the scaling law trend is present in non-textual modalities, the compression is not as strong in text.</p>
+<div style="text-align:center;">
+  <img src="/assets/scaling_laws_for_compression.png" alt="Scaling curves for text, image, speech" style="width:100%; height:auto;" />
+</div>
+
+<hr />
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>It has been argued that LLMs trained only on text can form <a href="https://bmk.sh/2021/06/02/Thoughts-on-the-Alignment-Implications-of-Scaling-Language-Models/">world models for proto-AGI</a>. These compression results reinforce that claim: despite text-only pretraining, LLMs compress images and speech following clear power laws.</p>
+
+<p>We hypothesize two primary mechanisms responsible for this:</p>
+
+<ol>
+  <li>
+    <p><strong>In-Context Learning (ICL)</strong><br />
+Within a given token window, self-attention adapts on-the-fly to file-specific patterns (repeating pixels, periodic audio cycles), shaving off most of the entropy.</p>
+  </li>
+  <li>
+    <p><strong>Universal Sequence Prior (USP)</strong><br />
+Pretraining internalizes bursty repetitions, Zipf’s law, heavy tails, and long-range autocorrelations—statistics shared by all byte streams. Even without context, compression ratio should be far below uniform-noise rates.</p>
+  </li>
+</ol>
+
+<p>Future work should quantify each component’s contribution and trace how they emerge during pretraining.</p>
+
+<hr />
+
+<h2 id="references">References</h2>
+
+<ul>
+  <li>Kaplan, J.; McCandlish, S.; Henighan, T.; Brown, T.; Chess, B.; Child, R.; Gray, S.; Radford, A.; Wu, J.; Amodei, D. “Scaling Laws for Neural Language Models.” <em>arXiv</em> 2001.08361 (2020). <a href="https://arxiv.org/abs/2001.08361">https://arxiv.org/abs/2001.08361</a></li>
+  <li>The Intricate Link Between Compression and Prediction. Mindful Modeler Substack (2024). <a href="https://mindfulmodeler.substack.com/p/the-intricate-link-between-compression">https://mindfulmodeler.substack.com/p/the-intricate-link-between-compression</a></li>
+  <li>Delétang, G.; Ruoss, A.; Duquenne, P.-A.; Catt, E.; Genewein, T.; Mattern, C.; Grau-Moya, J.; Wenliang, L.K.; Aitchison, M.; Orseau, L.; Hutter, M.; Veness, J. “Language Modeling Is Compression.” <em>arXiv</em> 2309.10668 (2023). <a href="https://arxiv.org/abs/2309.10668">https://arxiv.org/abs/2309.10668</a></li>
+  <li>Gao, Leo. “Thoughts on the Alignment Implications of Scaling Language Models.” BMK.sh Blog (2021). <a href="https://bmk.sh/2021/06/02/Thoughts-on-the-Alignment-Implications-of-Scaling-Language-Models/">https://bmk.sh/2021/06/02/Thoughts-on-the-Alignment-Implications-of-Scaling-Language-Models/</a></li>
+  <li>Tao, T. “Benford’s Law, Zipf’s Law and the Pareto Distribution.” Terence Tao’s Blog (2009). <a href="https://terrytao.wordpress.com/2009/07/03/benfords-law-zipfs-law-and-the-pareto-distribution/">https://terrytao.wordpress.com/2009/07/03/benfords-law-zipfs-law-and-the-pareto-distribution/</a></li>
+</ul>
+
+
+  </article>
+
+  <!-- mathjax -->
+  
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+  
+  <!-- disqus comments -->
+ 
+  
+</div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrap">
+
+    <!-- <h2 class="footer-heading">Full Wrong</h2> -->
+
+    <div class="footer-col-1 column">
+      <ul>
+        <li>Full Wrong</li>
+        <!-- <li><a href="mailto:"></a></li> -->
+      </ul>
+    </div>
+
+    <div class="footer-col-2 column">
+      <ul>
+        <li>
+          <a href="https://github.com/rokosbasilisk">
+            <span class="icon github">
+              <svg version="1.1" class="github-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
+                <path fill-rule="evenodd" clip-rule="evenodd" fill="#C2C2C2" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761
+                c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32
+                c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472
+                c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037
+                C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65
+                c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261
+                c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082
+                c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129
+                c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            <span class="username">rokosbasilisk</span>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+
+    <div class="footer-col-3 column">
+      <p class="text"></p>
+    </div>
+
+  </div>
+
+</footer>
+
+
+    </body>
+</html>

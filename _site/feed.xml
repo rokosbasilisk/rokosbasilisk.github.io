@@ -3,11 +3,345 @@
   <channel>
     <title>Full Wrong</title>
     <description></description>
-    <link>http://localhost:4001/</link>
-    <atom:link href="http://localhost:4001/feed.xml" rel="self" type="application/rss+xml" />
-    <pubDate>Sun, 02 Mar 2025 03:33:14 +0530</pubDate>
-    <lastBuildDate>Sun, 02 Mar 2025 03:33:14 +0530</lastBuildDate>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Mon, 28 Jul 2025 10:25:00 +0530</pubDate>
+    <lastBuildDate>Mon, 28 Jul 2025 10:25:00 +0530</lastBuildDate>
     <generator>Jekyll v3.9.0</generator>
+    
+      <item>
+        <title>Scaling Laws for LLM-Based Data Compression</title>
+        <description>&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;The &lt;a href=&quot;https://arxiv.org/abs/2001.08361&quot;&gt;scaling laws for neural language models&lt;/a&gt; showed that cross-entropy loss follows a power law in three factors:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Dataset size&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Model parameters&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Training compute&lt;/strong&gt; (steps or epochs)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;The lower the cross-entropy loss, the better the model’s next-token prediction. Since prediction and compression are deeply linked (&lt;a href=&quot;https://mindfulmodeler.substack.com/p/the-intricate-link-between-compression&quot;&gt;The Intricate Link Between Compression and Prediction&lt;/a&gt;), a lower loss should translate into better lossless compression. This raises the question:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Do LLMs exhibit clean power-law scaling in compression performance?&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;experiment&quot;&gt;Experiment&lt;/h2&gt;
+
+&lt;p&gt;For the experiment, I considered the Pythia models, which are available at multiple checkpoints and parameter sizes. All Pythia models are trained on the same dataset (The Pile), ensuring a uniform comparison. Following Delétang et al. (2023), The LLM’s predicted probabilities for each token are used to update the symbol table of an arithmetic encoder (a near-optimal entropy coder). I took the first 2048 chunks of the enwik8 dataset each chunk is 2048 bytes and fed them to the LLM to predict the next-token probabilities.&lt;/p&gt;
+
+&lt;p&gt;The other experimental parameters are:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Models:&lt;/strong&gt; EleutherAI Pythia family (8-bit quantized): 70 M, 160 M, 410 M, 1 B, 1.4 B parameters&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Checkpoints:&lt;/strong&gt; 1 k, 8 k, 32 k, 128 k, 143 k training steps&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Chunking:&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;CHUNK_SIZE:&lt;/strong&gt; 2048 bytes&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;NUM_CHUNKS:&lt;/strong&gt; 2048 per dataset&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Compression pipeline:&lt;/strong&gt;
+    &lt;ol&gt;
+      &lt;li&gt;Raw bytes → ASCII via &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;chr(b % 128)&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;Tokenize (max_length = 1024)&lt;/li&gt;
+      &lt;li&gt;Arithmetic coding on LLM probabilities&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;CR&lt;/strong&gt; = compressed_bits / original_bits&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Datasets &amp;amp; Preprocessing:&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;Text:&lt;/strong&gt; enwik8 (Wikipedia XML)&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Image:&lt;/strong&gt; ImageNet-1k validation → 32 × 64 grayscale patches (uint8 bytes)&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;Speech:&lt;/strong&gt; LibriSpeech “clean” train.100 → 16 kHz PCM → int16 bytes&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;results-text-compression&quot;&gt;Results: Text Compression&lt;/h2&gt;
+
+&lt;div style=&quot;overflow-x:auto;width:100%;&quot;&gt;
+&lt;table style=&quot;width:100%;border:1px solid #444;border-collapse:collapse;&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:left;&quot;&gt;Model&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;1 k&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;8 k&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;32 k&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;128 k&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;143 k&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-70M&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.22&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.18&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.17&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.17&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.17&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-160M&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.22&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.16&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.15&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.15&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.15&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-410M&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.22&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.15&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.14&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.13&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.13&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-1 B&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.21&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.14&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.13&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.12&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.12&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-1.4 B&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.21&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.14&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.12&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.11&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.11&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;text-scaling-law-fit&quot;&gt;Text scaling-law fit&lt;/h3&gt;
+
+&lt;p&gt;We fit a Kaplan-style power law&lt;br /&gt;
+\(\mathrm{CR}(P,S)
+= a + b\,P^{-\alpha} + c\,S^{-\beta}.\)&lt;br /&gt;
+For &lt;strong&gt;text&lt;/strong&gt;, the best-fit coefficients are:&lt;br /&gt;
+\(\mathrm{CR}_{\text{text}}
+= 0.10 + 60\,P^{-0.38} + 10\,S^{-0.75}.\)&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;compression-on-non-text-modalities&quot;&gt;Compression on Non-Text Modalities&lt;/h2&gt;
+
+&lt;p&gt;The “Language Modeling Is Compression” paper shows that an LLM trained only on text can compress arbitrary byte streams &lt;a href=&quot;https://arxiv.org/abs/2309.10668&quot;&gt;Language Modeling Is Compression&lt;/a&gt;. I applied the same pipeline to ImageNet-1k patches and LibriSpeech audio.&lt;/p&gt;
+
+&lt;h3 id=&quot;image-results&quot;&gt;Image Results&lt;/h3&gt;
+
+&lt;div style=&quot;overflow-x:auto;width:100%;&quot;&gt;
+&lt;table style=&quot;width:100%;border:1px solid #444;border-collapse:collapse;&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:left;&quot;&gt;Model&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;1 k&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;8 k&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;32 k&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;128 k&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;143 k&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-70M&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.60&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.50&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.49&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.50&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.51&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-160M&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.61&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.48&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.47&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.48&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.49&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-410M&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.67&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.51&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.46&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.44&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.45&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-1 B&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.60&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.47&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.46&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.44&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.44&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-1.4 B&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.64&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.48&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.47&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.43&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.44&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;image-scaling-law-fit&quot;&gt;Image scaling-law fit&lt;/h3&gt;
+
+\[\mathrm{CR}_{\text{image}}
+= 0.38 + 2\,P^{-0.15} + 60\,S^{-0.86}.\]
+
+&lt;h3 id=&quot;speech-results&quot;&gt;Speech Results&lt;/h3&gt;
+
+&lt;div style=&quot;overflow-x:auto;width:100%;&quot;&gt;
+&lt;table style=&quot;width:100%;border:1px solid #444;border-collapse:collapse;&quot;&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:left;&quot;&gt;Model&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;1 k&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;8 k&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;32 k&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;128 k&lt;/th&gt;
+      &lt;th style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;143 k&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-70M&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.69&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.46&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.44&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.47&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.47&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-160M&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.68&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.44&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.43&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.43&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.46&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-410M&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.77&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.51&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.40&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.38&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.39&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-1 B&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.68&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.42&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.44&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.38&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.38&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;&quot;&gt;pythia-1.4 B&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.75&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.47&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.44&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.38&lt;/td&gt;
+      &lt;td style=&quot;border:1px solid #444;padding:4px;text-align:right;&quot;&gt;0.39&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+
+&lt;h3 id=&quot;speech-scaling-law-fit&quot;&gt;Speech scaling-law fit&lt;/h3&gt;
+
+\[\mathrm{CR}_{\text{speech}}
+= 0.39 + 8\times10^{3}\,P^{-0.68} + 1\times10^{2}\,S^{-0.85}.\]
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;combined-scaling-curves&quot;&gt;Combined Scaling Curves&lt;/h2&gt;
+&lt;p&gt;The below plot shows the overall scaling laws plots across all the three modalities, While the scaling law trend is present in non-textual modalities, the compression is not as strong in text.&lt;/p&gt;
+&lt;div style=&quot;text-align:center;&quot;&gt;
+  &lt;img src=&quot;/assets/scaling_laws_for_compression.png&quot; alt=&quot;Scaling curves for text, image, speech&quot; style=&quot;width:100%; height:auto;&quot; /&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;It has been argued that LLMs trained only on text can form &lt;a href=&quot;https://bmk.sh/2021/06/02/Thoughts-on-the-Alignment-Implications-of-Scaling-Language-Models/&quot;&gt;world models for proto-AGI&lt;/a&gt;. These compression results reinforce that claim: despite text-only pretraining, LLMs compress images and speech following clear power laws.&lt;/p&gt;
+
+&lt;p&gt;We hypothesize two primary mechanisms responsible for this:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;In-Context Learning (ICL)&lt;/strong&gt;&lt;br /&gt;
+Within a given token window, self-attention adapts on-the-fly to file-specific patterns (repeating pixels, periodic audio cycles), shaving off most of the entropy.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;Universal Sequence Prior (USP)&lt;/strong&gt;&lt;br /&gt;
+Pretraining internalizes bursty repetitions, Zipf’s law, heavy tails, and long-range autocorrelations—statistics shared by all byte streams. Even without context, compression ratio should be far below uniform-noise rates.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Future work should quantify each component’s contribution and trace how they emerge during pretraining.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Kaplan, J.; McCandlish, S.; Henighan, T.; Brown, T.; Chess, B.; Child, R.; Gray, S.; Radford, A.; Wu, J.; Amodei, D. “Scaling Laws for Neural Language Models.” &lt;em&gt;arXiv&lt;/em&gt; 2001.08361 (2020). &lt;a href=&quot;https://arxiv.org/abs/2001.08361&quot;&gt;https://arxiv.org/abs/2001.08361&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;The Intricate Link Between Compression and Prediction. Mindful Modeler Substack (2024). &lt;a href=&quot;https://mindfulmodeler.substack.com/p/the-intricate-link-between-compression&quot;&gt;https://mindfulmodeler.substack.com/p/the-intricate-link-between-compression&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Delétang, G.; Ruoss, A.; Duquenne, P.-A.; Catt, E.; Genewein, T.; Mattern, C.; Grau-Moya, J.; Wenliang, L.K.; Aitchison, M.; Orseau, L.; Hutter, M.; Veness, J. “Language Modeling Is Compression.” &lt;em&gt;arXiv&lt;/em&gt; 2309.10668 (2023). &lt;a href=&quot;https://arxiv.org/abs/2309.10668&quot;&gt;https://arxiv.org/abs/2309.10668&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Gao, Leo. “Thoughts on the Alignment Implications of Scaling Language Models.” BMK.sh Blog (2021). &lt;a href=&quot;https://bmk.sh/2021/06/02/Thoughts-on-the-Alignment-Implications-of-Scaling-Language-Models/&quot;&gt;https://bmk.sh/2021/06/02/Thoughts-on-the-Alignment-Implications-of-Scaling-Language-Models/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Tao, T. “Benford’s Law, Zipf’s Law and the Pareto Distribution.” Terence Tao’s Blog (2009). &lt;a href=&quot;https://terrytao.wordpress.com/2009/07/03/benfords-law-zipfs-law-and-the-pareto-distribution/&quot;&gt;https://terrytao.wordpress.com/2009/07/03/benfords-law-zipfs-law-and-the-pareto-distribution/&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</description>
+        <pubDate>Wed, 23 Jul 2025 15:30:00 +0530</pubDate>
+        <link>http://localhost:4000/2025/07/23/scaling-compression/</link>
+        <guid isPermaLink="true">http://localhost:4000/2025/07/23/scaling-compression/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>The God&apos;s Song</title>
+        <description>&lt;p&gt;They lit fires in the woods they cleared, and with fire came worship. Old people turned inward, toward stillness, toward silence.&lt;/p&gt;
+
+&lt;p&gt;Wars broke. Races mingled. Gods were shared in smoky air. Some brought rituals, others talked about the soul. And a ladder was built. Those closest to fire rose, those mixed with earth sowed.&lt;/p&gt;
+
+&lt;p&gt;Rituals deepened, but work did not stop. After each fire, they asked: “What is the point of it all?” These questions became forest wisdom, echoes in quiet minds.&lt;/p&gt;
+
+&lt;p&gt;Knowledge passed, but only to some. The rest were needed, to keep the wheels turning, to keep the fire alive.&lt;/p&gt;
+
+&lt;p&gt;The ones atop became scribes. They listened to bards, wove myths into lines, and slowly, a religion grew.&lt;/p&gt;
+
+&lt;p&gt;Centuries passed. Ascetics multiplied. Top to bottom, silence spread.&lt;/p&gt;
+
+&lt;p&gt;Then came the kid from the south, fire in mind, not bound to rite nor retreat. He debated all, rose swift, found the land’s greatest tale: the grand war.&lt;/p&gt;
+
+&lt;p&gt;In its heart, the great dark warrior, in trance, speaking of inaction, yet exalting action. One mind in all forms, he said. Use them fully, there is no better thing.&lt;/p&gt;
+
+&lt;p&gt;The kid was moved. He wrote as none before. “This is the truth,” he said “All is one, but action must go on.”&lt;/p&gt;
+
+&lt;p&gt;And so ends the god’s song.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 10 Jun 2025 17:49:00 +0530</pubDate>
+        <link>http://localhost:4000/2025/06/10/on-gita/</link>
+        <guid isPermaLink="true">http://localhost:4000/2025/06/10/on-gita/</guid>
+        
+        
+      </item>
     
       <item>
         <title>Experiments with the Platonic Representation Hypothesis</title>
@@ -52,8 +386,8 @@
 &lt;p&gt;The code for experiments and analysis in this paper is available on GitHub &lt;a href=&quot;https://github.com/rokosbasilisk/prh-experiments&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
 </description>
         <pubDate>Sun, 27 Oct 2024 15:30:00 +0530</pubDate>
-        <link>http://localhost:4001/2024/10/27/prh-ood/</link>
-        <guid isPermaLink="true">http://localhost:4001/2024/10/27/prh-ood/</guid>
+        <link>http://localhost:4000/2024/10/27/prh-ood/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024/10/27/prh-ood/</guid>
         
         
       </item>
@@ -172,8 +506,8 @@
 &lt;/ol&gt;
 </description>
         <pubDate>Wed, 28 Aug 2024 07:19:00 +0530</pubDate>
-        <link>http://localhost:4001/2024/08/28/fillertokens/</link>
-        <guid isPermaLink="true">http://localhost:4001/2024/08/28/fillertokens/</guid>
+        <link>http://localhost:4000/2024/08/28/fillertokens/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024/08/28/fillertokens/</guid>
         
         
       </item>
@@ -218,8 +552,8 @@ A more detailed explanation of this can be found in the &lt;a href=&quot;https:/
 &lt;p&gt;In conclusion, the difficulty of solving goal misgeneralization for the worst case mirrors the core challenge of the ELK problem.&lt;/p&gt;
 </description>
         <pubDate>Fri, 24 Mar 2023 15:30:00 +0530</pubDate>
-        <link>http://localhost:4001/2023/03/24/goalmisgen/</link>
-        <guid isPermaLink="true">http://localhost:4001/2023/03/24/goalmisgen/</guid>
+        <link>http://localhost:4000/2023/03/24/goalmisgen/</link>
+        <guid isPermaLink="true">http://localhost:4000/2023/03/24/goalmisgen/</guid>
         
         
       </item>
@@ -259,8 +593,8 @@ A more detailed explanation of this can be found in the &lt;a href=&quot;https:/
 
 </description>
         <pubDate>Sat, 16 Oct 2021 15:30:00 +0530</pubDate>
-        <link>http://localhost:4001/2021/10/16/truth/</link>
-        <guid isPermaLink="true">http://localhost:4001/2021/10/16/truth/</guid>
+        <link>http://localhost:4000/2021/10/16/truth/</link>
+        <guid isPermaLink="true">http://localhost:4000/2021/10/16/truth/</guid>
         
         
       </item>

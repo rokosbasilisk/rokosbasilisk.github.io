@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Scaling Laws for LLM-Based Compression</title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="">
+    <link rel="canonical" href="http://localhost:4000/2025-07-23-scaling-compression/">
+    <link href="/feed.xml" type="application/atom+xml" rel="alternate" title="Full Wrong posts" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+
+    <!-- Google Analytics -->
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create', 'UA-3698471-23', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+</head>
+
+
+    <body>
+
+    <header class="site-header">
+
+  <div class="wrap">
+
+    <div style="float:left; margin-top:10px; margin-right:10px;">
+    </div>
+
+    <a class="site-title" href="/">Full Wrong</a>
+    
+    <nav class="site-nav">
+      <a href="#" class="menu-icon">
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+           viewBox="0 0 18 15" enable-background="new 0 0 18 15" xml:space="preserve">
+          <path fill="#505050" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0
+            h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
+          <path fill="#505050" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484
+            h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
+          <path fill="#505050" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0
+            c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
+        </svg>
+      </a>
+      <div class="trigger">
+        
+          
+        
+          <a class="page-link" href="/about/">About</a>
+        
+          
+        
+          
+        
+      </div>
+    </nav>
+  </div>
+
+</header>
+
+
+    <div class="page-content">
+      <div class="wrap">
+      <div class="post">
+
+  <header class="post-header">
+    <h1>Scaling Laws for LLM-Based Compression</h1>
+    <p class="meta">Jul 28, 2025</p>
+  </header>
+
+  <article class="post-content">
+  <h3 id="introduction">Introduction</h3>
+
+<p>The classic paper on <a href="https://arxiv.org/abs/2001.08361">scaling laws for neural language models</a> showed that a model’s cross-entropy loss can be predicted from a power-law function of three quantities:</p>
+<ol>
+  <li>The dataset size</li>
+  <li>The number of model parameters</li>
+  <li>The training steps or compute budget</li>
+</ol>
+
+<p>But if a model is very good at predicting the next token, it should also be very good at <strong>compressing</strong> the input. In fact, prediction and compression are mathematically equivalent via arithmetic coding. This is the core idea behind the Hutter Prize and AIXI — that intelligence is compression.</p>
+
+<p>So I set out to ask a simple question:</p>
+
+<blockquote>
+  <p><strong>Can we find clean scaling laws for data compression using large language models, across multiple modalities?</strong></p>
+</blockquote>
+
+<hr />
+
+<h3 id="experiment-setup">Experiment Setup</h3>
+
+<p>I used the <a href="https://arxiv.org/abs/2304.01373">Pythia suite</a> of open-source language models, which offer multiple checkpoints across sizes (from 70M to 1.4B parameters), all trained on the same dataset (The Pile) — ideal for controlled comparisons.</p>
+
+<p>To measure compression:</p>
+<ul>
+  <li>I took the first 2048 chunks (each of 2048 bytes) from the <code class="language-plaintext highlighter-rouge">enwik8</code> dataset.</li>
+  <li>For each chunk, I fed it into a Pythia model and used the predicted next-token probabilities as a <strong>symbol table</strong> for an arithmetic encoder.</li>
+  <li>Since arithmetic encoding is near-optimal given predicted probabilities, the resulting byte size reflects how well the LLM “understands” the data.</li>
+</ul>
+
+<hr />
+
+<h3 id="results-text-compression">Results: Text Compression</h3>
+
+<p>I fit a Kaplan-style scaling law of the form:</p>
+
+<p>[
+\text{CR}(P, S) = a + b \cdot P^{-\alpha} + c \cdot S^{-\beta}
+]</p>
+
+<p>where:</p>
+<ul>
+  <li><strong>P</strong> = number of parameters</li>
+  <li><strong>S</strong> = training step</li>
+  <li><strong>CR</strong> = compression ratio</li>
+  <li><strong>α</strong>, <strong>β</strong> are fitted exponents</li>
+</ul>
+
+<p>From the paper:</p>
+
+<ul>
+  <li><strong>Text scaling fit coefficients</strong>:
+    <ul>
+      <li>( a = 1.00 )</li>
+      <li>( b = 0.44 ), ( \alpha = 0.38 )</li>
+      <li>( c = 0.14 ), ( \beta = 0.75 )</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/rokosbasilisk/prh-experiments/main/assets/text_scaling.png" alt="Text Compression Scaling" />
+<em>Figure 1: Compression ratio vs model size and training step for text (enwik8).</em></p>
+
+<hr />
+
+<h3 id="compression-beyond-text-images-and-speech">Compression Beyond Text: Images and Speech</h3>
+
+<p>Inspired by the <a href="https://arxiv.org/abs/2306.03061">“Language Modeling is Compression”</a> paper, I extended this experiment to <strong>raw image and speech bytes</strong>, without any modality-specific preprocessing.</p>
+
+<p>The catch? These models were <strong>never trained on image or audio data</strong> — only text.</p>
+
+<p>So I encoded RGB images and PCM waveforms into byte streams (e.g., ASCII) and passed them through the same compression pipeline.</p>
+
+<h4 id="image-compression">Image Compression</h4>
+
+<ul>
+  <li><strong>Image scaling fit coefficients</strong>:
+    <ul>
+      <li>( a = 1.00 )</li>
+      <li>( b = 0.20 ), ( \alpha = 0.15 )</li>
+      <li>( c = 0.20 ), ( \beta = 0.61 )</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/rokosbasilisk/prh-experiments/main/assets/image_scaling.png" alt="Image Compression Scaling" />
+<em>Figure 2: Compression ratio vs model size and training step for image byte streams (ImageNet).</em></p>
+
+<h4 id="speech-compression">Speech Compression</h4>
+
+<ul>
+  <li><strong>Speech scaling fit coefficients</strong>:
+    <ul>
+      <li>( a = 1.00 )</li>
+      <li>( b = 0.17 ), ( \alpha = 0.17 )</li>
+      <li>( c = 0.11 ), ( \beta = 0.45 )</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="https://raw.githubusercontent.com/rokosbasilisk/prh-experiments/main/assets/speech_scaling.png" alt="Speech Compression Scaling" />
+<em>Figure 3: Compression ratio vs model size and training step for speech byte streams (LibriSpeech).</em></p>
+
+<hr />
+
+<h3 id="combined-scaling-laws">Combined Scaling Laws</h3>
+
+<p>Below is a unified plot showing the scaling laws for text, image, and speech compression using LLMs:</p>
+
+<p><img src="https://raw.githubusercontent.com/rokosbasilisk/prh-experiments/main/assets/combined_scaling.png" alt="Combined Compression Scaling" />
+<em>Figure 4: Comparison of scaling laws for text, image, and speech compression.</em></p>
+
+<p>We observe that:</p>
+<ul>
+  <li>Text has the strongest scaling behavior (steepest (\alpha) and (\beta))</li>
+  <li>Image and speech still show clear trends, even without modality-specific training</li>
+  <li>All curves follow a power-law decay in</li>
+</ul>
+
+
+  </article>
+
+  <!-- mathjax -->
+  
+  
+  <!-- disqus comments -->
+ 
+  
+</div>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+
+  <div class="wrap">
+
+    <!-- <h2 class="footer-heading">Full Wrong</h2> -->
+
+    <div class="footer-col-1 column">
+      <ul>
+        <li>Full Wrong</li>
+        <!-- <li><a href="mailto:"></a></li> -->
+      </ul>
+    </div>
+
+    <div class="footer-col-2 column">
+      <ul>
+        <li>
+          <a href="https://github.com/rokosbasilisk">
+            <span class="icon github">
+              <svg version="1.1" class="github-icon-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
+                <path fill-rule="evenodd" clip-rule="evenodd" fill="#C2C2C2" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761
+                c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32
+                c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472
+                c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037
+                C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65
+                c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261
+                c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082
+                c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129
+                c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"/>
+              </svg>
+            </span>
+            <span class="username">rokosbasilisk</span>
+          </a>
+        </li>
+        
+      </ul>
+    </div>
+
+    <div class="footer-col-3 column">
+      <p class="text"></p>
+    </div>
+
+  </div>
+
+</footer>
+
+
+    </body>
+</html>
