@@ -145,7 +145,38 @@ The “Language Modeling Is Compression” paper shows that an LLM trained only 
       <td style="border:1px solid #444;padding:4px;text-align:right;">0.50</td>
       <td style="border:1px solid #444;padding:4px;text-align:right;">0.51</td>
     </tr>
-    <!-- additional rows identical to above -->
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-160M</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.61</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.48</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.48</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.49</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-410M</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.67</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.51</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.46</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.45</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-1 B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.60</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.46</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-1.4 B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.64</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.48</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.43</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -180,7 +211,38 @@ $$
       <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
       <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
     </tr>
-    <!-- additional rows identical to above -->
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-160M</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.68</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.43</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.43</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.46</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-410M</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.77</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.51</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.40</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.38</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.39</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-1 B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.68</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.42</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.38</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.38</td>
+    </tr>
+    <tr>
+      <td style="border:1px solid #444;padding:4px;">pythia-1.4 B</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.75</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.47</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.44</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.38</td>
+      <td style="border:1px solid #444;padding:4px;text-align:right;">0.39</td>
+    </tr>
   </tbody>
 </table>
 </div>
@@ -195,7 +257,7 @@ $$
 ---
 
 ## Combined Scaling Curves
-
+The below plot shows the overall scaling laws plots across all the three modalities, While the scaling law trend is present in non-textual modalities, the compression is not as strong in text.
 <div style="text-align:center;">
   <img src="/assets/scaling_laws_for_compression.png"
        alt="Scaling curves for text, image, speech"
@@ -206,9 +268,9 @@ $$
 
 ## Conclusion
 
-It has been argued that LLMs trained only on text can form proto-AGI world models [Thoughts on the Alignment Implications of Scaling Language Models](https://bmk.sh/2021/06/02/Thoughts-on-the-Alignment-Implications-of-Scaling-Language-Models/). These compression results reinforce that claim: despite text-only pretraining, LLMs compress images and speech following clear power laws.
+It has been argued that LLMs trained only on text can form [world models for proto-AGI](https://bmk.sh/2021/06/02/Thoughts-on-the-Alignment-Implications-of-Scaling-Language-Models/). These compression results reinforce that claim: despite text-only pretraining, LLMs compress images and speech following clear power laws.
 
-We hypothesize two primary mechanisms:
+We hypothesize two primary mechanisms responsible for this:
 
 1. **In-Context Learning (ICL)**  
    Within a given token window, self-attention adapts on-the-fly to file-specific patterns (repeating pixels, periodic audio cycles), shaving off most of the entropy.
