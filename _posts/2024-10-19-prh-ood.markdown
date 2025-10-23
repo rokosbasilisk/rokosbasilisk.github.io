@@ -43,4 +43,4 @@ To evaluate PRH beyond in-distribution data, I extended experiments to three sce
 
 When I first came across the PRH paper, my initial hypothesis was that PRH might be primarily due to the high similarity in training datasets, since most LLMs/LVMs are trained on extremely large datasets from common sources (ImageNet, Pile, etc.). However, the OOD experiments proved that this phenomenon of shared statistical structure generalizes well beyond the training distribution of the models. Further experiments with purely random data demonstrated that this is not just a coincidence but rather reflects inherent statistical structures present in "useful" data across all modalities.
 
-The code for experiments and analysis in this paper is available on GitHub [here](https://github.com/rokosbasilisk/prh-experiments).
+The code for experiments and analysis in this paper is available on GitHub [here]([https://github.com/rokosbasilisk/prh-experiments](https://github.com/rokosbasilisk/platonic-rep/)).
